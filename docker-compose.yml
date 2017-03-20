@@ -1,0 +1,46 @@
+
+version: '2'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    command: ./bin/rails s -p 3000 -b '0.0.0.0'
+    depends_on:
+      - database
+      - redis
+      - elasticsearch
+      - mailcatcher
+      # - sidekiq
+  # sidekiq:
+  #   build:
+  #     context: .
+  #   volumes:
+  #     - .:/app
+  #   command: sidekiq
+  #   depends_on:
+  #     - redis
+  database:
+    image: postgres:9.6.2
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: trackr_development
+  redis:
+    image: redis:3.0-alpine
+    ports:
+      - "6379:6379"
+  elasticsearch:
+    image: elasticsearch:2.4.4
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  mailcatcher:
+    image: schickling/mailcatcher:latest
+    ports:
+      - "1080:1080"
+      - "1025:1025"
