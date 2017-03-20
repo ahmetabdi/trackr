@@ -15,6 +15,7 @@ services:
       - redis
       - elasticsearch
       - maildev
+      - logstash
       # - sidekiq
   # sidekiq:
   #   build:
@@ -24,6 +25,31 @@ services:
   #   command: sidekiq
   #   depends_on:
   #     - redis
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
+    environment:
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  logstash:
+    image: docker.elastic.co/logstash/logstash:5.2.2
+    volumes:
+      - ./.logstash.yml:/usr/share/kibana/config/logstash.yml
+    ports:
+      - "5228:5228"
+    depends_on:
+      - elasticsearch
+  kibana:
+    image: docker.elastic.co/kibana/kibana:5.2.2
+    ports:
+      - "5601:5601"
+    volumes:
+      - ./.kibana.yml:/usr/share/kibana/config/kibana.yml
+    depends_on:
+      - elasticsearch
+      - logstash
   database:
     image: postgres:9.6.2
     ports:
@@ -34,11 +60,6 @@ services:
     image: redis:3.0-alpine
     ports:
       - "6379:6379"
-  elasticsearch:
-    image: elasticsearch:2.4.4
-    ports:
-      - "9200:9200"
-      - "9300:9300"
   maildev:
     image: djfarrelly/maildev
     ports:
