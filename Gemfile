@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'coffee-rails', '~> 4.2'
+gem 'dotenv-rails', '~> 2.2.0'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'pg', '~> 0.18'
@@ -17,7 +18,10 @@ gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'codeclimate-test-reporter'
   gem 'rspec-rails'
+  gem 'rubocop', require: false
+  gem 'simplecov', require: false
 end
 
 group :development do

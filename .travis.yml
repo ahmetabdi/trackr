@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+  - 2.4.0
+services:
+  - postgresql
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - RAILS_ENV=test bin/setup
+script:
+  - bin/rubocop
+  - bin/rspec spec
+after_success:
+  - bundle exec codeclimate-test-reporter
