@@ -14,7 +14,7 @@ services:
       - database
       - redis
       - elasticsearch
-      - mailcatcher
+      - maildev
       # - sidekiq
   # sidekiq:
   #   build:
@@ -39,8 +39,8 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-  mailcatcher:
-    image: schickling/mailcatcher:latest
+  maildev:
+    image: djfarrelly/maildev
     ports:
-      - "1080:1080"
-      - "1025:1025"
+      - "1080:80"
+      - "1025:25"

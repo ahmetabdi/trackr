@@ -48,6 +48,16 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
+  config.web_console.whiny_requests = false
+
+  config.action_mailer.default_url_options = { host: ENV.fetch('APP_HOST'), port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port: ENV.fetch('SMTP_PORT'),
+    address: ENV.fetch('SMTP_ADDRESS'),
+    openssl_verify_mode: 'none'
+  }
+
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
