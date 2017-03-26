@@ -71,6 +71,5 @@ module Amazon::ProductAdvertisingApi::Parsers
         }
       end
     end
-
   end
 end
