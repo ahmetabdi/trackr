@@ -1,10 +1,27 @@
 require 'rails_helper'
 
 RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
+  let(:asin) { 'B01AX72ZTI' }
+  let(:item_lookup) { Amazon::ProductAdvertisingApi::Operator.item_lookup(asin) }
+
   describe '.new' do
     describe 'initializes with a xml string' do
       it 'is a pending example'
     end
+  end
+
+  describe '.errors?' do
+    # describe 'with a response with errors' do
+    #   it 'returns true' do
+    #     expect(item_lookup.errors?).to eq(true)
+    #   end
+    # end
+
+    # describe 'with a response without errors' do
+    #   it 'returns false' do
+    #     expect(item_lookup.errors?).to eq(false)
+    #   end
+    # end
   end
 
   describe '.valid?' do

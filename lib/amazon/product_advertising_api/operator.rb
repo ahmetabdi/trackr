@@ -4,7 +4,7 @@ class Amazon::ProductAdvertisingApi::Operator
 
   class << self
     def item_search
-      operation = { 'Operation' => 'ItemSearch' }
+      { 'Operation' => 'ItemSearch' }
     end
 
     def item_lookup(item_id, id_type = 'ASIN')

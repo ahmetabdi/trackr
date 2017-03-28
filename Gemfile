@@ -7,16 +7,16 @@ end
 
 gem 'coffee-rails', '~> 4.2'
 gem 'dotenv-rails', '~> 2.2.0'
+gem 'http'
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'oga'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem 'oga'
-gem 'http'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -24,6 +24,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'simplecov', require: false
+end
+
+group :test do
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development do

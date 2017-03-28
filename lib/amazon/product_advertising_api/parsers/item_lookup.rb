@@ -6,8 +6,21 @@ module Amazon::ProductAdvertisingApi::Parsers
       @xml_body = Oga.parse_xml(xml_body)
     end
 
+    def errors?
+      raise xml_body.at_xpath('ItemLookupErrorResponse/Error').text.inspect
+      xml_body.at_xpath('ItemLookupErrorResponse/Error').text.present?
+    end
+
+    def error_messages
+      return nil unless errors?
+      {
+        code: xml_body.at_xpath('ItemLookupErrorResponse/Error/Code').text,
+        message: xml_body.at_xpath('ItemLookupErrorResponse/Error/Message').text
+      }
+    end
+
     def valid?
-      xml_body.at_xpath('ItemLookupResponse/Items/Request/IsValid').text == 'True'
+      xml_body.at_xpath('ItemLookupResponse/Items/Request/IsValid').try(:text) == 'True'
     end
 
     def title
