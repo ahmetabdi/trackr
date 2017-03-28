@@ -6,9 +6,17 @@ VCR.configure do |config|
     match_requests_on: []
   }
 
-  config.filter_sensitive_data('<AMAZON_ACCESS_KEY_ID>') { ENV.fetch('AMAZON_ACCESS_KEY_ID') }
-  config.filter_sensitive_data('<AMAZON_SECRET_KEY>') { ENV.fetch('AMAZON_SECRET_KEY') }
-  config.filter_sensitive_data('<AMAZON_AFFILIATE_ID>') { ENV.fetch('AMAZON_AFFILIATE_ID') }
+  config.filter_sensitive_data('<AMAZON_ACCESS_KEY_ID>') do
+    ENV.fetch('AMAZON_ACCESS_KEY_ID')
+  end
+
+  config.filter_sensitive_data('<AMAZON_SECRET_KEY>') do
+    ENV.fetch('AMAZON_SECRET_KEY')
+  end
+
+  config.filter_sensitive_data('<AMAZON_AFFILIATE_ID>') do
+    ENV.fetch('AMAZON_AFFILIATE_ID')
+  end
 
   # Only want VCR to intercept requests to external URLs.
   config.ignore_localhost = true

@@ -11,17 +11,17 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
   end
 
   describe '.errors?' do
-    # describe 'with a response with errors' do
-    #   it 'returns true' do
-    #     expect(item_lookup.errors?).to eq(true)
-    #   end
-    # end
+    describe 'with a response with errors' do
+      it 'returns true' do
+        expect(item_lookup.errors?).to eq(true)
+      end
+    end
 
-    # describe 'with a response without errors' do
-    #   it 'returns false' do
-    #     expect(item_lookup.errors?).to eq(false)
-    #   end
-    # end
+    describe 'with a response without errors' do
+      it 'returns false' do
+        expect(item_lookup.errors?).to eq(false)
+      end
+    end
   end
 
   describe '.valid?' do

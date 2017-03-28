@@ -7,7 +7,6 @@ module Amazon::ProductAdvertisingApi::Parsers
     end
 
     def errors?
-      raise xml_body.at_xpath('ItemLookupErrorResponse/Error').text.inspect
       xml_body.at_xpath('ItemLookupErrorResponse/Error').text.present?
     end
 
@@ -20,69 +19,90 @@ module Amazon::ProductAdvertisingApi::Parsers
     end
 
     def valid?
-      xml_body.at_xpath('ItemLookupResponse/Items/Request/IsValid').try(:text) == 'True'
+      find_single('ItemLookupResponse/Items/Request/IsValid').try(:text) == 'True'
     end
 
     def title
-      xml_body.at_xpath('ItemLookupResponse/Items/Item/ItemAttributes/Title').text
+      find_single("#{item_path}/ItemAttributes/Title").text
     end
 
     def product_group
-      xml_body.at_xpath('ItemLookupResponse/Items/Item/ItemAttributes/ProductGroup').text
+      find_single("#{item_path}/ItemAttributes/ProductGroup").text
     end
 
     def manufacturer
-      xml_body.at_xpath('ItemLookupResponse/Items/Item/ItemAttributes/Manufacturer').text
+      find_single("#{item_path}/ItemAttributes/Manufacturer").text
     end
 
     def asin
-      xml_body.at_xpath('ItemLookupResponse/Items/Item/ASIN').text
+      find_single("#{item_path}/ASIN").text
     end
 
     def parent_asin
-      xml_body.at_xpath('ItemLookupResponse/Items/Item/ParentASIN').text
+      find_single("#{item_path}/ParentASIN").text
     end
 
     def detail_page_url
-      xml_body.at_xpath('ItemLookupResponse/Items/Item/DetailPageURL').text
+      find_single("#{item_path}/DetailPageURL").text
     end
 
     def sales_rank
-      xml_body.at_xpath('ItemLookupResponse/Items/Item/SalesRank').text
+      find_single("#{item_path}/SalesRank").text
     end
 
     def main_image
       {
-        large:  xml_body.at_xpath('ItemLookupResponse/Items/Item/LargeImage/URL').text,
-        medium: xml_body.at_xpath('ItemLookupResponse/Items/Item/MediumImage/URL').text,
-        small:  xml_body.at_xpath('ItemLookupResponse/Items/Item/SmallImage/URL').text
+        large:  find_single("#{item_path}/LargeImage/URL").text,
+        medium: find_single("#{item_path}/MediumImage/URL").text,
+        small:  find_single("#{item_path}/SmallImage/URL").text
       }
     end
 
-    def share_urls
-      {
-        add_to_wishlist:  xml_body.xpath('ItemLookupResponse/Items/Item/ItemLinks/ItemLink')[0].at_xpath('URL').text,
-        tell_a_friend:    xml_body.xpath('ItemLookupResponse/Items/Item/ItemLinks/ItemLink')[1].at_xpath('URL').text,
-        customer_reviews: xml_body.xpath('ItemLookupResponse/Items/Item/ItemLinks/ItemLink')[2].at_xpath('URL').text,
-        all_offers:       xml_body.xpath('ItemLookupResponse/Items/Item/ItemLinks/ItemLink')[3].at_xpath('URL').text
-      }
+    def add_to_wishlist_url
+      find_multiple("#{item_path}/ItemLinks/ItemLink")[0].at_xpath('URL').text
+    end
+
+    def tell_a_friend_url
+      find_multiple("#{item_path}/ItemLinks/ItemLink")[1].at_xpath('URL').text
+    end
+
+    def customer_reviews_url
+      find_multiple("#{item_path}/ItemLinks/ItemLink")[2].at_xpath('URL').text
+    end
+
+    def all_offers_url
+      find_multiple("#{item_path}/ItemLinks/ItemLink")[3].at_xpath('URL').text
     end
 
     def list_price
       {
-        amount:           xml_body.at_xpath('ItemLookupResponse/Items/Item/ItemAttributes/Manufacturer/ListPrice/Amount').text,
-        currency_code:    xml_body.at_xpath('ItemLookupResponse/Items/Item/ItemAttributes/Manufacturer/ListPrice/CurrencyCode').text,
-        formatted_price:  xml_body.at_xpath('ItemLookupResponse/Items/Item/ItemAttributes/Manufacturer/ListPrice/FormattedPrice').text
+        amount:           find_single("#{item_path}/ItemAttributes/Manufacturer/ListPrice/Amount").text,
+        currency_code:    find_single("#{item_path}/ItemAttributes/Manufacturer/ListPrice/CurrencyCode").text,
+        formatted_price:  find_single("#{item_path}/ItemAttributes/Manufacturer/ListPrice/FormattedPrice").text
       }
     end
 
     def similar_products
-      xml_body.xpath('ItemLookupResponse/Items/Item/SimilarProducts/SimilarProduct').map do |product|
+      find_multiple("#{item_path}/SimilarProducts/SimilarProduct").map do |product|
         {
-          title: product.at_xpath('Title').text,
-          asin:  product.at_xpath('ASIN').text
+          title: find_single('Title', product).text,
+          asin:  find_single('ASIN', product).text
         }
       end
+    end
+
+    private
+
+    def item_path
+      'ItemLookupResponse/Items/Item'
+    end
+
+    def find_single(element, xml = xml_body)
+      xml.at_xpath(element)
+    end
+
+    def find_multiple(elements, xml = xml_body)
+      xml.xpath(elements)
     end
   end
 end
