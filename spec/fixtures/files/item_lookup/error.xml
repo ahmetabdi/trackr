@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ItemLookupErrorResponse
+    xmlns="http://ecs.amazonaws.com/doc/2005-10-05/">
+    <Error>
+        <Code>MissingClientTokenId</Code>
+        <Message>Request must contain AWSAccessKeyId or X.509 certificate.</Message>
+    </Error>
+    <RequestId>b4752088-a070-4950-b9f9-219b6639438c</RequestId>
+</ItemLookupErrorResponse>

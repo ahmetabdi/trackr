@@ -7,7 +7,7 @@ module Amazon::ProductAdvertisingApi::Parsers
     end
 
     def errors?
-      xml_body.at_xpath('ItemLookupErrorResponse/Error').text.present?
+      xml_body.at_xpath('ItemLookupErrorResponse/Error').try(:text).try(:present?) || false
     end
 
     def error_messages
@@ -76,9 +76,9 @@ module Amazon::ProductAdvertisingApi::Parsers
 
     def list_price
       {
-        amount:           find_single("#{item_path}/ItemAttributes/Manufacturer/ListPrice/Amount").text,
-        currency_code:    find_single("#{item_path}/ItemAttributes/Manufacturer/ListPrice/CurrencyCode").text,
-        formatted_price:  find_single("#{item_path}/ItemAttributes/Manufacturer/ListPrice/FormattedPrice").text
+        amount:           find_single("#{item_path}/ItemAttributes/ListPrice/Amount").text,
+        currency_code:    find_single("#{item_path}/ItemAttributes/ListPrice/CurrencyCode").text,
+        formatted_price:  find_single("#{item_path}/ItemAttributes/ListPrice/FormattedPrice").text
       }
     end
 
