@@ -1,9 +1,13 @@
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/support/vcr/cassettes'
   config.hook_into :webmock
-
+  config.configure_rspec_metadata!
+  config.ignore_localhost = true
   config.default_cassette_options = {
-    match_requests_on: []
+    match_requests_on: [VCR.request_matchers.uri_without_param(
+      'AWSAccessKeyId', 'AssociateTag', 'Signature', 'Timestamp', 'Version'
+    )],
+    record: :new_episodes
   }
 
   config.filter_sensitive_data('<AMAZON_ACCESS_KEY_ID>') do
@@ -17,7 +21,4 @@ VCR.configure do |config|
   config.filter_sensitive_data('<AMAZON_AFFILIATE_ID>') do
     ENV.fetch('AMAZON_AFFILIATE_ID')
   end
-
-  # Only want VCR to intercept requests to external URLs.
-  config.ignore_localhost = true
 end

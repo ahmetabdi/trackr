@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
+RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup, :vcr do
   let(:asin) { 'B01AX72ZTI' }
   let(:item_lookup) { Amazon::ProductAdvertisingApi::Operator.item_lookup(asin) }
 
