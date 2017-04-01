@@ -20,10 +20,30 @@ class Amazon::ProductAdvertisingApi::Operator
 
     def default_response_groups
       %w(
-        ItemAttributes
-        SalesRank
-        Images
-        Similarities
+          Accessories
+          AlternateVersions
+          BrowseNodes
+          EditorialReview
+          Images
+          ItemAttributes
+          ItemIds
+          Large
+          Medium
+          OfferFull
+          OfferListings
+          Offers
+          OfferSummary
+          PromotionSummary
+          Reviews
+          SalesRank
+          Similarities
+          Small
+          Tracks
+          Variations
+          VariationImages
+          VariationMatrix
+          VariationOffers
+          VariationSummary
       ).join(',')
     end
 

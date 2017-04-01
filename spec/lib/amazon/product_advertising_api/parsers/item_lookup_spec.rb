@@ -61,15 +61,132 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
     end
   end
 
+  describe '.manufacturer' do
+    it 'returns the manufacturer' do
+      expect(item_lookup.manufacturer).to eq('Cellucor')
+    end
+  end
+
+  describe '.binding' do
+    it 'returns the binding' do
+      expect(item_lookup.binding).to eq('Personal Care')
+    end
+  end
+
+  describe '.adult_product' do
+    it 'returns the adult_product' do
+      expect(item_lookup.adult_product).to eq(false)
+    end
+  end
+
+  describe '.model' do
+    it 'returns the model' do
+      expect(item_lookup.model).to eq('CLC1027/101/102')
+    end
+  end
+
+  describe '.ean' do
+    it 'returns the ean' do
+      expect(item_lookup.ean).to eq('0810390026425')
+    end
+  end
+
+  describe '.upc' do
+    it 'returns the upc' do
+      expect(item_lookup.upc).to eq('810390026425')
+    end
+  end
+
+  describe '.brand' do
+    it 'returns the brand' do
+      expect(item_lookup.brand).to eq('Cellucor')
+    end
+  end
+
   describe '.product_group' do
     it 'returns the product_group' do
       expect(item_lookup.product_group).to eq('Health and Beauty')
     end
   end
 
-  describe '.manufacturer' do
-    it 'returns the manufacturer' do
-      expect(item_lookup.manufacturer).to eq('Cellucor')
+  describe '.product_type_name' do
+    it 'returns the product_type_name' do
+      expect(item_lookup.product_type_name).to eq('HEALTH_PERSONAL_CARE')
+    end
+  end
+
+  describe '.features' do
+    it 'returns the features' do
+      expect(item_lookup.features).to eq([
+        "Stronger than C4 by 50%",
+        "Contains 50% more of what you love",
+        "The hardest hitting preworkout Cellucor has ever made",
+        "Nicotine Free, 0mg Nicotine"
+      ])
+    end
+  end
+
+  describe '.total_new' do
+    it 'returns the total of new items' do
+      expect(item_lookup.total_new).to eq(4)
+    end
+  end
+
+  describe '.total_used' do
+    it 'returns the total of used items' do
+      expect(item_lookup.total_used).to eq(0)
+    end
+  end
+
+  describe '.total_collectible' do
+    it 'returns the total of collectible items' do
+      expect(item_lookup.total_collectible).to eq(0)
+    end
+  end
+
+  describe '.total_refurbished' do
+    it 'returns the total of refurbished items' do
+      expect(item_lookup.total_refurbished).to eq(0)
+    end
+  end
+
+  describe '.package_quantity' do
+    it 'returns the package quantity' do
+      expect(item_lookup.package_quantity).to eq(1)
+    end
+  end
+
+  describe '.part_number' do
+    it 'returns the part number' do
+      expect(item_lookup.part_number).to eq('CLC1027/101/102')
+    end
+  end
+
+  describe '.size_of_item' do
+    it 'returns the size' do
+      expect(item_lookup.size_of_item).to eq('45 Servings')
+    end
+  end
+
+  describe '.studio' do
+    it 'returns the studio' do
+      expect(item_lookup.studio).to eq('Cellucor')
+    end
+  end
+
+  describe '.similar_products' do
+    it 'returns the similar_products' do
+      expect(item_lookup.similar_products).to eq([
+        "B01M0OOHQO", "B016O9LR4I", "B01AB1QIB2", "B01B8JX7DI",
+        "B01B8K14GO", "B00U4621CA", "B00T7L20EC", "B01ARRW2UG",
+        "B01M323RW7", "B00QYZ6MLG"
+      ])
+    end
+  end
+
+  describe '.tags' do
+    it 'returns the tags' do
+      expect(item_lookup.tags).to eq(["Sports Supplements", "Health & Personal Care: Amazon Global Delivery Available"])
     end
   end
 
@@ -87,13 +204,13 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
 
   describe '.detail_page_url' do
     it 'returns the detail_page_url' do
-      expect(item_lookup.detail_page_url).to eq('https://www.amazon.co.uk/Cellucor-Workout-Powder-Extreme-Servings/dp/B01AX72ZTI%3Fpsc%3D1%26SubscriptionId%3DAKIAJBQEK2NZ32S5X62Q%26tag%3Dohgizmo-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D165953%26creativeASIN%3DB01AX72ZTI')
+      expect(item_lookup.detail_page_url).to eq('https://www.amazon.co.uk/Cellucor-Workout-Powder-Extreme-Servings/dp/B01AX72ZTI?psc=1&SubscriptionId=AKIAJBQEK2NZ32S5X62Q&tag=ohgizmo-21&linkCode=xm2&camp=2025&creative=165953&creativeASIN=B01AX72ZTI')
     end
   end
 
   describe '.sales_rank' do
     it 'returns the sales_rank' do
-      expect(item_lookup.sales_rank).to eq('3704')
+      expect(item_lookup.sales_rank).to eq('3187')
     end
   end
 
@@ -107,36 +224,67 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
     end
   end
 
+  describe '.variant_images' do
+    it 'returns the variant images' do
+      expect(item_lookup.variant_images).to eq([
+        {
+          swatch_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL30_.jpg",
+          small_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg",
+          thumbnail_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg",
+          tiny_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL110_.jpg",
+          medium_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL160_.jpg",
+          large_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL.jpg"
+        },
+        {
+          swatch_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL30_.jpg",
+          small_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL75_.jpg",
+          thumbnail_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL75_.jpg",
+          tiny_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL110_.jpg",
+          medium_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL160_.jpg",
+          large_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL.jpg"
+        },
+        {
+          swatch_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL30_.jpg",
+          small_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg",
+          thumbnail_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg",
+          tiny_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL110_.jpg",
+          medium_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL160_.jpg",
+          large_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L.jpg"
+        }
+      ])
+    end
+  end
+
   describe '.add_to_wishlist_url' do
     it 'returns the add_to_wishlist_url' do
-      expect(item_lookup.add_to_wishlist_url).to eq('https://www.amazon.co.uk/gp/registry/wishlist/add-item.html%3Fasin.0%3DB01AX72ZTI%26SubscriptionId%3DAKIAJBQEK2NZ32S5X62Q%26tag%3Dohgizmo-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D12734%26creativeASIN%3DB01AX72ZTI')
+      expect(item_lookup.add_to_wishlist_url).to eq('https://www.amazon.co.uk/gp/registry/wishlist/add-item.html?asin.0=B01AX72ZTI&SubscriptionId=AKIAJBQEK2NZ32S5X62Q&tag=ohgizmo-21&linkCode=xm2&camp=2025&creative=12734&creativeASIN=B01AX72ZTI')
     end
   end
 
   describe '.tell_a_friend_url' do
     it 'returns the tell_a_friend_url' do
-      expect(item_lookup.tell_a_friend_url).to eq('https://www.amazon.co.uk/gp/pdp/taf/B01AX72ZTI%3FSubscriptionId%3DAKIAJBQEK2NZ32S5X62Q%26tag%3Dohgizmo-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D12734%26creativeASIN%3DB01AX72ZTI')
+      expect(item_lookup.tell_a_friend_url).to eq('https://www.amazon.co.uk/gp/pdp/taf/B01AX72ZTI?SubscriptionId=AKIAJBQEK2NZ32S5X62Q&tag=ohgizmo-21&linkCode=xm2&camp=2025&creative=12734&creativeASIN=B01AX72ZTI')
     end
   end
 
   describe '.customer_reviews_url' do
     it 'returns the customer_reviews_url' do
-      expect(item_lookup.customer_reviews_url).to eq('https://www.amazon.co.uk/review/product/B01AX72ZTI%3FSubscriptionId%3DAKIAJBQEK2NZ32S5X62Q%26tag%3Dohgizmo-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D12734%26creativeASIN%3DB01AX72ZTI')
+      expect(item_lookup.customer_reviews_url).to eq('https://www.amazon.co.uk/review/product/B01AX72ZTI?SubscriptionId=AKIAJBQEK2NZ32S5X62Q&tag=ohgizmo-21&linkCode=xm2&camp=2025&creative=12734&creativeASIN=B01AX72ZTI')
     end
   end
 
   describe '.all_offers_url' do
     it 'returns the all_offers_url' do
-      expect(item_lookup.all_offers_url).to eq('https://www.amazon.co.uk/gp/offer-listing/B01AX72ZTI%3FSubscriptionId%3DAKIAJBQEK2NZ32S5X62Q%26tag%3Dohgizmo-21%26linkCode%3Dxm2%26camp%3D2025%26creative%3D12734%26creativeASIN%3DB01AX72ZTI')
+      expect(item_lookup.all_offers_url).to eq('https://www.amazon.co.uk/gp/offer-listing/B01AX72ZTI?SubscriptionId=AKIAJBQEK2NZ32S5X62Q&tag=ohgizmo-21&linkCode=xm2&camp=2025&creative=12734&creativeASIN=B01AX72ZTI')
     end
   end
 
   describe '.list_price' do
     it 'returns the list_price' do
       expect(item_lookup.list_price).to eq({
-        amount: '3294',
+        amount: '3390',
         currency_code: 'GBP',
-        formatted_price: '£32.94'
+        formatted_price: '£33.90'
       })
     end
   end
