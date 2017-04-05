@@ -7,15 +7,15 @@
         </HTTPHeaders>
         <RequestId>394598a8-cde3-4a65-b270-1f9afd088c50</RequestId>
         <Arguments>
-            <Argument Name="AWSAccessKeyId" Value="x"></Argument>
-            <Argument Name="AssociateTag" Value="x"></Argument>
+            <Argument Name="AWSAccessKeyId" Value=""></Argument>
+            <Argument Name="AssociateTag" Value=""></Argument>
             <Argument Name="IdType" Value="ASIN"></Argument>
             <Argument Name="ItemId" Value="B01AX72ZTI"></Argument>
             <Argument Name="Operation" Value="ItemLookup"></Argument>
             <Argument Name="ResponseGroup" Value="Images,ItemAttributes,SalesRank,Similarities"></Argument>
             <Argument Name="Service" Value="AWSECommerceService"></Argument>
             <Argument Name="Timestamp" Value="2017-03-29T18:00:50.000Z"></Argument>
-            <Argument Name="Signature" Value="x"></Argument>
+            <Argument Name="Signature" Value=""></Argument>
         </Arguments>
         <RequestProcessingTime>0.0559693720000000</RequestProcessingTime>
     </OperationRequest>

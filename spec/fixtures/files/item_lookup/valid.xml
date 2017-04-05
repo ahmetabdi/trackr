@@ -7,15 +7,15 @@
         </HTTPHeaders>
         <RequestId>f39ab71c-8499-4df6-9397-a3d9cf767f16</RequestId>
         <Arguments>
-            <Argument Name="AWSAccessKeyId" Value="AKIAJBQEK2NZ32S5X62Q"></Argument>
-            <Argument Name="AssociateTag" Value="ohgizmo-21"></Argument>
+            <Argument Name="AWSAccessKeyId" Value=""></Argument>
+            <Argument Name="AssociateTag" Value=""></Argument>
             <Argument Name="IdType" Value="ASIN"></Argument>
             <Argument Name="ItemId" Value="B01AX72ZTI"></Argument>
             <Argument Name="Operation" Value="ItemLookup"></Argument>
             <Argument Name="ResponseGroup" Value="Accessories,AlternateVersions,BrowseNodes,EditorialReview,Images,ItemAttributes,ItemIds,Large,Medium,OfferFull,OfferListings,Offers,OfferSummary,PromotionSummary,Reviews,SalesRank,Similarities,Small,Tracks,Variations,VariationImages,VariationMatrix,VariationOffers,VariationSummary"></Argument>
             <Argument Name="Service" Value="AWSECommerceService"></Argument>
             <Argument Name="Timestamp" Value="2017-04-01T18:29:58.000Z"></Argument>
-            <Argument Name="Signature" Value="1zTxEPHUhEx95/DBFLayH8ddvO2nxTaSHT6Lt4hnsT4="></Argument>
+            <Argument Name="Signature" Value=""></Argument>
         </Arguments>
         <RequestProcessingTime>0.0273725670000000</RequestProcessingTime>
     </OperationRequest>
