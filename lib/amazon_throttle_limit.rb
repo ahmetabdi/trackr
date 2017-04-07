@@ -1,0 +1,2 @@
+class AmazonThrottleLimit < StandardError
+end

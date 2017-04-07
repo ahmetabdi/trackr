@@ -1,5 +1,11 @@
 Documentation:
   Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+Metrics/LineLength:
+  Exclude:
+    - 'spec/**/*'
 AllCops:
   Exclude:
     - 'vendor/**/*'
@@ -9,3 +15,4 @@ AllCops:
     - 'db/schema.rb'
     - 'spec/spec_helper.rb'
     - 'spec/rails_helper.rb'
+    - 'db/migrate/*'

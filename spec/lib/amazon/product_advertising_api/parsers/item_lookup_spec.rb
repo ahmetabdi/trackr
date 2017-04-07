@@ -36,15 +36,13 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
     end
   end
 
-  describe '.error_messages?' do
+  describe '.error_messages' do
     describe 'with a response with error_messages' do
       let(:xml) { file_fixture('item_lookup/error.xml') }
 
       it 'returns true' do
-        expect(item_lookup.error_messages).to eq({
-          code: 'MissingClientTokenId',
-          message: 'Request must contain AWSAccessKeyId or X.509 certificate.'
-        })
+        expect(item_lookup.error_messages).to eq(code: 'MissingClientTokenId',
+                                                 message: 'Request must contain AWSAccessKeyId or X.509 certificate.')
       end
     end
 
@@ -118,11 +116,11 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
   describe '.features' do
     it 'returns the features' do
       expect(item_lookup.features).to eq([
-        "Stronger than C4 by 50%",
-        "Contains 50% more of what you love",
-        "The hardest hitting preworkout Cellucor has ever made",
-        "Nicotine Free, 0mg Nicotine"
-      ])
+                                           'Stronger than C4 by 50%',
+                                           'Contains 50% more of what you love',
+                                           'The hardest hitting preworkout Cellucor has ever made',
+                                           'Nicotine Free, 0mg Nicotine'
+                                         ])
     end
   end
 
@@ -176,17 +174,19 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
 
   describe '.similar_products' do
     it 'returns the similar_products' do
-      expect(item_lookup.similar_products).to eq([
-        "B01M0OOHQO", "B016O9LR4I", "B01AB1QIB2", "B01B8JX7DI",
-        "B01B8K14GO", "B00U4621CA", "B00T7L20EC", "B01ARRW2UG",
-        "B01M323RW7", "B00QYZ6MLG"
-      ])
+      expect(item_lookup.similar_products).to eq(%w(
+                                                   B01M0OOHQO B016O9LR4I
+                                                   B01AB1QIB2 B01B8JX7DI
+                                                   B01B8K14GO B00U4621CA
+                                                   B00T7L20EC B01ARRW2UG
+                                                   B01M323RW7 B00QYZ6MLG
+                                                 ))
     end
   end
 
   describe '.tags' do
     it 'returns the tags' do
-      expect(item_lookup.tags).to eq(["Sports Supplements", "Health & Personal Care: Amazon Global Delivery Available"])
+      expect(item_lookup.tags).to include('Sports Supplements')
     end
   end
 
@@ -216,42 +216,22 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
 
   describe '.main_image' do
     it 'returns the main_image' do
-      expect(item_lookup.main_image).to eq({
-        large: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L.jpg",
-        medium: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL160_.jpg",
-        small: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg"
-      })
+      expect(item_lookup.main_image).to eq(large: 'https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L.jpg',
+                                           medium: 'https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL160_.jpg',
+                                           small: 'https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg')
     end
   end
 
   describe '.variant_images' do
     it 'returns the variant images' do
-      expect(item_lookup.variant_images).to eq([
-        {
-          swatch_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL30_.jpg",
-          small_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg",
-          thumbnail_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg",
-          tiny_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL110_.jpg",
-          medium_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL160_.jpg",
-          large_image: "https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL.jpg"
-        },
-        {
-          swatch_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL30_.jpg",
-          small_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL75_.jpg",
-          thumbnail_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL75_.jpg",
-          tiny_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL110_.jpg",
-          medium_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL160_.jpg",
-          large_image: "https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL.jpg"
-        },
-        {
-          swatch_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL30_.jpg",
-          small_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg",
-          thumbnail_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg",
-          tiny_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL110_.jpg",
-          medium_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL160_.jpg",
-          large_image: "https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L.jpg"
-        }
-      ])
+      expect(item_lookup.variant_images).to include(
+        swatch: 'https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL30_.jpg',
+        small: 'https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg',
+        thumbnail: 'https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg',
+        tiny: 'https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL110_.jpg',
+        medium: 'https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL160_.jpg',
+        large: 'https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL.jpg'
+      )
     end
   end
 
@@ -281,11 +261,9 @@ RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
 
   describe '.list_price' do
     it 'returns the list_price' do
-      expect(item_lookup.list_price).to eq({
-        amount: '3390',
-        currency_code: 'GBP',
-        formatted_price: '£33.90'
-      })
+      expect(item_lookup.list_price).to eq(amount: '3390',
+                                           currency_code: 'GBP',
+                                           formatted_price: '£33.90')
     end
   end
 end

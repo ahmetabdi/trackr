@@ -1,0 +1,156 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://webservices.amazon.co.uk/onca/xml?AWSAccessKeyId=<AMAZON_ACCESS_KEY_ID>&AssociateTag=<AMAZON_AFFILIATE_ID>&IdType=ASIN&ItemId=B01AX72ZTI&Operation=ItemLookup&ResponseGroup=Accessories,AlternateVersions,BrowseNodes,EditorialReview,Images,ItemAttributes,ItemIds,Large,Medium,OfferFull,OfferListings,Offers,OfferSummary,PromotionSummary,Reviews,SalesRank,Similarities,Small,Tracks,Variations,VariationImages,VariationMatrix,VariationOffers,VariationSummary&Service=AWSECommerceService&Signature=uqUJhWHuPA7nmej8WfEFV3UIXia6ER%2B7E22YBa9qg88=&Timestamp=2017-04-07T08:02:02Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Connection:
+      - close
+      Host:
+      - webservices.amazon.co.uk
+      User-Agent:
+      - http.rb/2.2.1
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Fri, 07 Apr 2017 08:02:02 GMT
+      Server:
+      - Apache-Coyote/1.1
+      Content-Type:
+      - text/xml;charset=UTF-8
+      Vary:
+      - Accept-Encoding,User-Agent
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: UTF-8
+      string: "<?xml version=\"1.0\" ?><ItemLookupResponse xmlns=\"http://webservices.amazon.com/AWSECommerceService/2011-08-01\"><OperationRequest><HTTPHeaders><Header
+        Name=\"UserAgent\" Value=\"http.rb/2.2.1\"></Header></HTTPHeaders><RequestId>f5fd1b03-9bae-4917-8ee1-eba7af2b6bfd</RequestId><Arguments><Argument
+        Name=\"AWSAccessKeyId\" Value=\"<AMAZON_ACCESS_KEY_ID>\"></Argument><Argument
+        Name=\"AssociateTag\" Value=\"<AMAZON_AFFILIATE_ID>\"></Argument><Argument
+        Name=\"IdType\" Value=\"ASIN\"></Argument><Argument Name=\"ItemId\" Value=\"B01AX72ZTI\"></Argument><Argument
+        Name=\"Operation\" Value=\"ItemLookup\"></Argument><Argument Name=\"ResponseGroup\"
+        Value=\"Accessories,AlternateVersions,BrowseNodes,EditorialReview,Images,ItemAttributes,ItemIds,Large,Medium,OfferFull,OfferListings,Offers,OfferSummary,PromotionSummary,Reviews,SalesRank,Similarities,Small,Tracks,Variations,VariationImages,VariationMatrix,VariationOffers,VariationSummary\"></Argument><Argument
+        Name=\"Service\" Value=\"AWSECommerceService\"></Argument><Argument Name=\"Timestamp\"
+        Value=\"2017-04-07T08:02:02Z\"></Argument><Argument Name=\"Signature\" Value=\"uqUJhWHuPA7nmej8WfEFV3UIXia6ER+7E22YBa9qg88=\"></Argument></Arguments><RequestProcessingTime>0.0485744850000000</RequestProcessingTime></OperationRequest><Items><Request><IsValid>True</IsValid><ItemLookupRequest><IdType>ASIN</IdType><ItemId>B01AX72ZTI</ItemId><ResponseGroup>Accessories</ResponseGroup><ResponseGroup>AlternateVersions</ResponseGroup><ResponseGroup>BrowseNodes</ResponseGroup><ResponseGroup>EditorialReview</ResponseGroup><ResponseGroup>Images</ResponseGroup><ResponseGroup>ItemAttributes</ResponseGroup><ResponseGroup>ItemIds</ResponseGroup><ResponseGroup>Large</ResponseGroup><ResponseGroup>Medium</ResponseGroup><ResponseGroup>OfferFull</ResponseGroup><ResponseGroup>OfferListings</ResponseGroup><ResponseGroup>Offers</ResponseGroup><ResponseGroup>OfferSummary</ResponseGroup><ResponseGroup>PromotionSummary</ResponseGroup><ResponseGroup>Reviews</ResponseGroup><ResponseGroup>SalesRank</ResponseGroup><ResponseGroup>Similarities</ResponseGroup><ResponseGroup>Small</ResponseGroup><ResponseGroup>Tracks</ResponseGroup><ResponseGroup>Variations</ResponseGroup><ResponseGroup>VariationImages</ResponseGroup><ResponseGroup>VariationMatrix</ResponseGroup><ResponseGroup>VariationOffers</ResponseGroup><ResponseGroup>VariationSummary</ResponseGroup><VariationPage>All</VariationPage></ItemLookupRequest></Request><Item><ASIN>B01AX72ZTI</ASIN><ParentASIN>B01DCY526W</ParentASIN><DetailPageURL>https://www.amazon.co.uk/Cellucor-Workout-Powder-Extreme-Servings/dp/B01AX72ZTI?psc=1&amp;SubscriptionId=<AMAZON_ACCESS_KEY_ID>&amp;tag=<AMAZON_AFFILIATE_ID>&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B01AX72ZTI</DetailPageURL><ItemLinks><ItemLink><Description>Add
+        To Wishlist</Description><URL>https://www.amazon.co.uk/gp/registry/wishlist/add-item.html?asin.0=B01AX72ZTI&amp;SubscriptionId=<AMAZON_ACCESS_KEY_ID>&amp;tag=<AMAZON_AFFILIATE_ID>&amp;linkCode=xm2&amp;camp=2025&amp;creative=12734&amp;creativeASIN=B01AX72ZTI</URL></ItemLink><ItemLink><Description>Tell
+        A Friend</Description><URL>https://www.amazon.co.uk/gp/pdp/taf/B01AX72ZTI?SubscriptionId=<AMAZON_ACCESS_KEY_ID>&amp;tag=<AMAZON_AFFILIATE_ID>&amp;linkCode=xm2&amp;camp=2025&amp;creative=12734&amp;creativeASIN=B01AX72ZTI</URL></ItemLink><ItemLink><Description>All
+        Customer Reviews</Description><URL>https://www.amazon.co.uk/review/product/B01AX72ZTI?SubscriptionId=<AMAZON_ACCESS_KEY_ID>&amp;tag=<AMAZON_AFFILIATE_ID>&amp;linkCode=xm2&amp;camp=2025&amp;creative=12734&amp;creativeASIN=B01AX72ZTI</URL></ItemLink><ItemLink><Description>All
+        Offers</Description><URL>https://www.amazon.co.uk/gp/offer-listing/B01AX72ZTI?SubscriptionId=<AMAZON_ACCESS_KEY_ID>&amp;tag=<AMAZON_AFFILIATE_ID>&amp;linkCode=xm2&amp;camp=2025&amp;creative=12734&amp;creativeASIN=B01AX72ZTI</URL></ItemLink></ItemLinks><SalesRank>3792</SalesRank><SmallImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg</URL><Height
+        Units=\"pixels\">75</Height><Width Units=\"pixels\">73</Width></SmallImage><MediumImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL160_.jpg</URL><Height
+        Units=\"pixels\">160</Height><Width Units=\"pixels\">155</Width></MediumImage><LargeImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L.jpg</URL><Height
+        Units=\"pixels\">500</Height><Width Units=\"pixels\">485</Width></LargeImage><ImageSets><ImageSet
+        Category=\"variant\"><SwatchImage><URL>https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL30_.jpg</URL><Height
+        Units=\"pixels\">30</Height><Width Units=\"pixels\">23</Width></SwatchImage><SmallImage><URL>https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg</URL><Height
+        Units=\"pixels\">75</Height><Width Units=\"pixels\">57</Width></SmallImage><ThumbnailImage><URL>https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL75_.jpg</URL><Height
+        Units=\"pixels\">75</Height><Width Units=\"pixels\">57</Width></ThumbnailImage><TinyImage><URL>https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL110_.jpg</URL><Height
+        Units=\"pixels\">110</Height><Width Units=\"pixels\">84</Width></TinyImage><MediumImage><URL>https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL._SL160_.jpg</URL><Height
+        Units=\"pixels\">160</Height><Width Units=\"pixels\">122</Width></MediumImage><LargeImage><URL>https://images-eu.ssl-images-amazon.com/images/I/616sHSrTyKL.jpg</URL><Height
+        Units=\"pixels\">500</Height><Width Units=\"pixels\">382</Width></LargeImage></ImageSet><ImageSet
+        Category=\"variant\"><SwatchImage><URL>https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL30_.jpg</URL><Height
+        Units=\"pixels\">30</Height><Width Units=\"pixels\">23</Width></SwatchImage><SmallImage><URL>https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL75_.jpg</URL><Height
+        Units=\"pixels\">75</Height><Width Units=\"pixels\">57</Width></SmallImage><ThumbnailImage><URL>https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL75_.jpg</URL><Height
+        Units=\"pixels\">75</Height><Width Units=\"pixels\">57</Width></ThumbnailImage><TinyImage><URL>https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL110_.jpg</URL><Height
+        Units=\"pixels\">110</Height><Width Units=\"pixels\">84</Width></TinyImage><MediumImage><URL>https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL._SL160_.jpg</URL><Height
+        Units=\"pixels\">160</Height><Width Units=\"pixels\">122</Width></MediumImage><LargeImage><URL>https://images-eu.ssl-images-amazon.com/images/I/61jIKaBcxmL.jpg</URL><Height
+        Units=\"pixels\">500</Height><Width Units=\"pixels\">382</Width></LargeImage></ImageSet><ImageSet
+        Category=\"primary\"><SwatchImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL30_.jpg</URL><Height
+        Units=\"pixels\">30</Height><Width Units=\"pixels\">29</Width></SwatchImage><SmallImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg</URL><Height
+        Units=\"pixels\">75</Height><Width Units=\"pixels\">73</Width></SmallImage><ThumbnailImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL75_.jpg</URL><Height
+        Units=\"pixels\">75</Height><Width Units=\"pixels\">73</Width></ThumbnailImage><TinyImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL110_.jpg</URL><Height
+        Units=\"pixels\">110</Height><Width Units=\"pixels\">107</Width></TinyImage><MediumImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L._SL160_.jpg</URL><Height
+        Units=\"pixels\">160</Height><Width Units=\"pixels\">155</Width></MediumImage><LargeImage><URL>https://images-eu.ssl-images-amazon.com/images/I/512NZT0uI9L.jpg</URL><Height
+        Units=\"pixels\">500</Height><Width Units=\"pixels\">485</Width></LargeImage></ImageSet></ImageSets><ItemAttributes><Binding>Personal
+        Care</Binding><Brand>Cellucor</Brand><CatalogNumberList><CatalogNumberListElement>810390026425</CatalogNumberListElement></CatalogNumberList><EAN>0810390026425</EAN><EANList><EANListElement>0810390026425</EANListElement></EANList><Feature>Stronger
+        than C4 by 50%</Feature><Feature>Contains 50% more of what you love</Feature><Feature>The
+        hardest hitting preworkout Cellucor has ever made</Feature><Feature>Nicotine
+        Free, 0mg Nicotine</Feature><IsAdultProduct>0</IsAdultProduct><ItemDimensions><Height
+        Units=\"hundredths-inches\">457</Height><Length Units=\"hundredths-inches\">402</Length><Weight
+        Units=\"hundredths-pounds\">110</Weight><Width Units=\"hundredths-inches\">402</Width></ItemDimensions><Label>Cellucor</Label><LegalDisclaimer>Warnings:
+          &amp;#x0D;Do not exceed the recommended daily dosage. &amp;#x0D;Use only
+        as directed. &amp;#x0D;May cause a harmless prickling/tingling/flushing sensation
+        in some users. &amp;#x0D;Product use should be strictly limited to healthy
+        adults above the age of 18. &amp;#x0D;Do not take if you are pregnant or nursing.
+        &amp;#x0D;Do not take if you are currently taking nitrates for chest pain
+        or if you are taking medication used to treat erectile dysfunction such as
+        PDE-5 inhibitors. &amp;#x0D;Do not use if you are pregnant, contemplating
+        pregnancy or lactating, using any (MAOI) Monoamine oxidase inhibitor, selective
+        serotonin reuptaku inhibitor (SSRI), if you have been treated for or diagnosed
+        with or have a family history of, any medical condition including, but not
+        limited to: high blood pressure, heart disease, liver disease, kidney disease,
+        peptic and gastric ulcers, cardio arrythmia, renal disease, hyperthyroidism,
+        spasms, glaucoma, psychiatric disease, psychological conditions, anxiety,
+        depression, nervousness, seizure disorder, stroke, angina, diabetes, asthma,
+        suffer from migraines, or are sensitive to the effects of caffeine. &amp;#x0D;Consult
+        a medical doctor if you have been treated for or diagnosed with or have family
+        history of any medical condition, or if you are using any prescription or
+        over-the-counter drug(s), including blood thinners. &amp;#x0D;Do not consume
+        synephrine, caffeine or thyroid-boosting compounds from other sources, including
+        but not limited to, coffee, tea, soda, and other dietary supplements or medications
+        containing phenylephrine or caffeine. &amp;#x0D;Discontinue use 2 weeks prior
+        to any medical surgery. &amp;#x0D;Discontinue use and consult your doctor
+        if any adverse reactions occur. &amp;#x0D;Do not exceed the recommended daily
+        dosage. &amp;#x0D;Use only as directed. &amp;#x0D;Do not use if safety seal
+        is broken or missing. &amp;#x0D;Store in a cool, dry place. &amp;#x0D;Keep
+        out of reach of children. &amp;#x0D;This product is not intended to diagnose,
+        treat, cure, or prevent any disease. &amp;#x0D;</LegalDisclaimer><ListPrice><Amount>3490</Amount><CurrencyCode>GBP</CurrencyCode><FormattedPrice>£34.90</FormattedPrice></ListPrice><Manufacturer>Cellucor</Manufacturer><Model>CLC1027/101/102</Model><MPN>CLC1027/101/102</MPN><NumberOfItems>1</NumberOfItems><PackageDimensions><Height
+        Units=\"hundredths-inches\">400</Height><Length Units=\"hundredths-inches\">500</Length><Weight
+        Units=\"hundredths-pounds\">110</Weight><Width Units=\"hundredths-inches\">400</Width></PackageDimensions><PackageQuantity>1</PackageQuantity><PartNumber>CLC1027/101/102</PartNumber><ProductGroup>Health
+        and Beauty</ProductGroup><ProductTypeName>HEALTH_PERSONAL_CARE</ProductTypeName><Publisher>Cellucor</Publisher><Size>45
+        Servings</Size><Studio>Cellucor</Studio><Title>Cellucor C4 50x Pre Workout
+        Powder, Extreme Energy, Icy Blue Razz 45 Servings (405g)</Title><UPC>810390026425</UPC><UPCList><UPCListElement>810390026425</UPCListElement></UPCList></ItemAttributes><OfferSummary><LowestNewPrice><Amount>3388</Amount><CurrencyCode>GBP</CurrencyCode><FormattedPrice>£33.88</FormattedPrice></LowestNewPrice><TotalNew>3</TotalNew><TotalUsed>0</TotalUsed><TotalCollectible>0</TotalCollectible><TotalRefurbished>0</TotalRefurbished></OfferSummary><Offers><TotalOffers>1</TotalOffers><TotalOfferPages>1</TotalOfferPages><MoreOffersUrl>https://www.amazon.co.uk/gp/offer-listing/B01AX72ZTI?SubscriptionId=<AMAZON_ACCESS_KEY_ID>&amp;tag=<AMAZON_AFFILIATE_ID>&amp;linkCode=xm2&amp;camp=2025&amp;creative=12734&amp;creativeASIN=B01AX72ZTI</MoreOffersUrl><Offer><Merchant><Name>MarvelSupplements</Name></Merchant><OfferAttributes><Condition>New</Condition></OfferAttributes><OfferListing><OfferListingId>YgDq47WrO7PUPy1KrCbj%2F13GskVftSqkSSmNV8hvHI1y9VpPNIMhvAyocmjQmh5UbgOP9EJUB0FgEywNUdxLBitsn8X9V3bNF0W55OeXfgUcyx9uut90Hs5PxjWoAQlyAC9FlGJOdgYMc8%2BsfHSdZ%2Bs5u%2BHVmful</OfferListingId><Price><Amount>3499</Amount><CurrencyCode>GBP</CurrencyCode><FormattedPrice>£34.99</FormattedPrice></Price><Availability>Usually
+        dispatched within 24 hours</Availability><AvailabilityAttributes><AvailabilityType>now</AvailabilityType><MinimumHours>0</MinimumHours><MaximumHours>0</MaximumHours></AvailabilityAttributes><IsEligibleForSuperSaverShipping>1</IsEligibleForSuperSaverShipping><IsEligibleForPrime>1</IsEligibleForPrime></OfferListing></Offer></Offers><CustomerReviews><IFrameURL>https://www.amazon.co.uk/reviews/iframe?akid=<AMAZON_ACCESS_KEY_ID>&amp;alinkCode=xm2&amp;asin=B01AX72ZTI&amp;atag=<AMAZON_AFFILIATE_ID>&amp;exp=2017-04-08T08%3A02%3A02Z&amp;v=2&amp;sig=XOsROW56Cemy%252FypE42tCuYKh0xLF9XRe5SbRbHznuJs%253D</IFrameURL><HasReviews>true</HasReviews></CustomerReviews><EditorialReviews><EditorialReview><Source>Product
+        Description</Source><Content>C4 50X is the next step for fans of C4. Its formula
+        features approximately 50% more of the active ingredients per scoop that were
+        key to power of the original C4 Extreme. C4 50X also has two new ingredients:
+        TeaCor--an integral part of C4, and XCELICOR, the latest innovation in energy
+        and-the X-factor ingredient in C4 50X. INGREDIENTS: Beta Alanine, Creatine
+        Nitrate (NO3-T), Arginine AKG, C4 50x Explosive Blend (L-Tyrosine, Caffeine
+        Anhydrous, XCELICOR Caffeine Pterostibene Cocrystal, TeaCor Tetramethyluric
+        acid), Vitamin C (as Ascorbic Acid), Niacinamide, Vitamin B6 (as Pyridoxal-5-Phosphate),
+        Folate (as Folic Acid), Vitamin B12 (as Methylcobalamin) DIRECTIONS Take one
+        serving (1 scoop) Cellucor C4 50x, mixed with 4-6 fl. oz. of water 20-30 minutes
+        before training. Once tolerance has been assessed and you are looking for
+        an additional boost of energy, take 1 additional serving (1 scoop) mixed with
+        additional 4-6 fl. oz. of water with serving taken before training. Some individuals
+        may experience a harmless tingling sensation, which is attributed to beta
+        alanine. DO NOT EXCEED 2 SCOOPS PER DAY. USE ONLY AS DIRECTED. LEGAL DISCLAIMER
+        Always refer to and follow label instructions before taking C4. Actual product
+        packaging and materials may contain more and different information than what
+        is shown on our website. We recommend that you do not rely solely on the information
+        presented and that you always read labels, warnings, and directions before
+        using or consuming a product.</Content><IsLinkSuppressed>0</IsLinkSuppressed></EditorialReview></EditorialReviews><SimilarProducts><SimilarProduct><ASIN>B01M0OOHQO</ASIN><Title>Cellucor
+        C4 PRE-WORKOUT Explosive Energy with Creatine Nitrate 60 servings + FREE SAMPLE
+        (Icy Blue Razz)</Title></SimilarProduct><SimilarProduct><ASIN>B016O9LR4I</ASIN><Title>Cellucor
+        C4 Pre Workout Powder with Creatine, G4, Icy Blue Razz 30 Servings (195g)</Title></SimilarProduct><SimilarProduct><ASIN>B01AB1QIB2</ASIN><Title>Cellucor
+        180 g C4 Ripped Cherry Limeade</Title></SimilarProduct><SimilarProduct><ASIN>B06XCXD7B9</ASIN><Title>Cellucor
+        C4 Pre Workout Powder with Creatine, G4, Icy Blue Razz 60 Servings (390g)</Title></SimilarProduct><SimilarProduct><ASIN>B01B8JX7DI</ASIN><Title>Cellucor
+        C4 Pre Workout Powder with Creatine, G4, Watermelon 60 Servings (390g)</Title></SimilarProduct><SimilarProduct><ASIN>B002QZN8JW</ASIN><Title>Optimum
+        Nutrition Platinum Hydro Whey Protein Powder, 1.60 kg - Chocolate</Title></SimilarProduct><SimilarProduct><ASIN>B01ARRW2UG</ASIN><Title>Betancourt
+        Nutrition\tB-NOX Androrush (Bullnox), Blue Raspberry - 633 grams</Title></SimilarProduct><SimilarProduct><ASIN>B01B8K14GO</ASIN><Title>Cellucor
+        C4 Pre Workout Powder with Creatine, G4, Fruit Punch 60 Servings (390g)</Title></SimilarProduct><SimilarProduct><ASIN>B00U4621CA</ASIN><Title>Cellucor
+        C4 Pre Workout Powder with Creatine, G4, Icy Blue Razz 60 Servings (390g)</Title></SimilarProduct><SimilarProduct><ASIN>B018SP5U0S</ASIN><Title>Cellucor
+        C4 Pre Workout Powder with Creatine, G4, Orange Dreamsicle 60 Servings (390g)</Title></SimilarProduct></SimilarProducts><BrowseNodes><BrowseNode><BrowseNodeId>2826478031</BrowseNodeId><Name>Sports
+        Supplements</Name><Children><BrowseNode><BrowseNodeId>5977731031</BrowseNodeId><Name>7
+        Keto</Name></BrowseNode><BrowseNode><BrowseNodeId>5977685031</BrowseNodeId><Name>Amino
+        Acids</Name></BrowseNode><BrowseNode><BrowseNodeId>2826487031</BrowseNodeId><Name>Carbohydrate
+        Supplements</Name></BrowseNode><BrowseNode><BrowseNodeId>5977733031</BrowseNodeId><Name>CLA</Name></BrowseNode><BrowseNode><BrowseNodeId>5977737031</BrowseNodeId><Name>Fat
+        Burners</Name></BrowseNode><BrowseNode><BrowseNodeId>2826466031</BrowseNodeId><Name>Nutrition
+        Bars &amp; Drinks</Name></BrowseNode><BrowseNode><BrowseNodeId>2826510031</BrowseNodeId><Name>Protein
+        Supplements</Name></BrowseNode><BrowseNode><BrowseNodeId>2826482031</BrowseNodeId><Name>Supplement
+        Shakers</Name></BrowseNode><BrowseNode><BrowseNodeId>6008226031</BrowseNodeId><Name>Testosterone</Name></BrowseNode><BrowseNode><BrowseNodeId>6008227031</BrowseNodeId><Name>Testosterone
+        Boosters</Name></BrowseNode></Children><Ancestors><BrowseNode><BrowseNodeId>2826465031</BrowseNodeId><Name>Diet
+        &amp; Nutrition</Name><Ancestors><BrowseNode><BrowseNodeId>66280031</BrowseNodeId><Name>Categories</Name><IsCategoryRoot>1</IsCategoryRoot><Ancestors><BrowseNode><BrowseNodeId>65801031</BrowseNodeId><Name>Health
+        &amp; Personal Care</Name></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode><BrowseNode><BrowseNodeId>1403033031</BrowseNodeId><Name>Health
+        &amp; Personal Care: Amazon Global Delivery Available</Name><Ancestors><BrowseNode><BrowseNodeId>72004031</BrowseNodeId><Name>Regular
+        Stores</Name><Ancestors><BrowseNode><BrowseNodeId>66285031</BrowseNodeId><Name>Substores</Name><Ancestors><BrowseNode><BrowseNodeId>65801031</BrowseNodeId><Name>Health
+        &amp; Personal Care</Name></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></Ancestors></BrowseNode></BrowseNodes></Item></Items></ItemLookupResponse>"
+    http_version: 
+  recorded_at: Fri, 07 Apr 2017 08:02:03 GMT
+recorded_with: VCR 3.0.3

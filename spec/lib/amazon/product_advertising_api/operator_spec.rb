@@ -6,9 +6,15 @@ RSpec.describe Amazon::ProductAdvertisingApi::Operator, :vcr do
       let(:asin) { 'B01AX72ZTI' }
       let(:item_lookup) { described_class.item_lookup(asin) }
 
-      it 'should return a ItemLookup object' do
+      it 'returns a ItemLookup object' do
         expect(item_lookup).to be_a_kind_of(Amazon::ProductAdvertisingApi::Parsers::ItemLookup)
       end
+    end
+  end
+
+  describe '.item_search' do
+    it 'uses the correct operation' do
+      expect(described_class.item_search).to eq('Operation' => 'ItemSearch')
     end
   end
 end

@@ -1,0 +1,2 @@
+class AmazonProduct < ApplicationRecord
+end
