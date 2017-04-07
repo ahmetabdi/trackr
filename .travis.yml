@@ -11,3 +11,7 @@ script:
   - bin/rspec spec
 after_success:
   - bundle exec codeclimate-test-reporter
+branches:
+  only:
+  - master
+  - staging
