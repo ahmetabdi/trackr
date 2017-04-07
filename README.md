@@ -1,5 +1,7 @@
 # Trackr
 
+[![CircleCI](https://circleci.com/gh/ahmetabdi/trackr/tree/master.svg?style=svg)](https://circleci.com/gh/ahmetabdi/trackr/tree/master)
+
 `docker-compose build`
 
 `docker-compose run web bin/setup`
