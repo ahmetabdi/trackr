@@ -1,5 +1,7 @@
 # Trackr
 
+[![CircleCI](https://circleci.com/gh/ahmetabdi/trackr/tree/master.svg?style=svg)](https://circleci.com/gh/ahmetabdi/trackr/tree/master)
+
 `docker-compose build`
 
 `docker-compose run web bin/setup`
@@ -11,4 +13,5 @@
 By default the EOF for windows is set to CRLF but we need to use LF as the files are run under Docker which use linux.
 
 `git config --global core.autocrlf false`
+
 `git config --global core.eol lf`
