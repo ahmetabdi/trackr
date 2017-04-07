@@ -14,12 +14,13 @@ class ProductImporterJob < ApplicationJob
 
   private
 
+  # rubocop:disable Metrics/LineLength
   def throttle_limit_check(item)
     return unless item.errors? && item.error_messages[:code] == 'RequestThrottled'
     raise AmazonThrottleLimit
   end
 
-  # rubocop:disable Metrics/BlockLength, Metrics/MethodLength
+  # rubocop:disable Metrics/BlockLength, Metrics/MethodLength, Metrics/AbcSize
   def create_amazon_product(item)
     ap = AmazonProduct.find_or_create_by(asin: item.asin) do |p|
       p.title = item.title

@@ -6,6 +6,10 @@ Metrics/BlockLength:
 Metrics/LineLength:
   Exclude:
     - 'spec/**/*'
+    - 'lib/amazon/product_advertising_api/parsers/item_lookup.rb'
+Metrics/ClassLength:
+  Exclude:
+    - 'lib/amazon/product_advertising_api/parsers/item_lookup.rb'
 AllCops:
   Exclude:
     - 'vendor/**/*'
