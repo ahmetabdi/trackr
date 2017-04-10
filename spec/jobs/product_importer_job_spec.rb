@@ -12,4 +12,14 @@ RSpec.describe ProductImporterJob, :vcr, type: :job do
 
     expect(StandardError).to have_received(:new).with(error)
   end
+
+  describe '.perform' do
+    before do
+      ProductImporterJob.perform_now('B01AX72ZTI')
+    end
+
+    it '' do
+      expect(AmazonProduct.count).to eq(1)
+    end
+  end
 end

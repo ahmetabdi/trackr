@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/doabit/semantic-ui-sass.git
+  revision: 308d74a16d9acad903cd20f829634aa92d68699c
+  specs:
+    semantic-ui-sass (2.2.9.3)
+      sass (>= 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -47,6 +54,8 @@ GEM
     ansi (1.5.0)
     arel (7.1.4)
     ast (2.3.0)
+    autoprefixer-rails (6.7.7.1)
+      execjs
     builder (3.2.3)
     byebug (9.0.6)
     codeclimate-test-reporter (1.0.7)
@@ -120,6 +129,7 @@ GEM
     nio4r (2.0.0)
     nokogiri (1.7.1)
       mini_portile2 (~> 2.1.0)
+    normalize-rails (4.1.1)
     oga (2.9)
       ast
       ruby-ll (~> 2.1)
@@ -250,6 +260,7 @@ PLATFORMS
 
 DEPENDENCIES
   activejob-traffic_control
+  autoprefixer-rails
   byebug
   codeclimate-test-reporter
   coffee-rails (~> 4.2)
@@ -261,6 +272,7 @@ DEPENDENCIES
   lograge
   logstash-event
   logstash-logger
+  normalize-rails
   oga
   pg (~> 0.18)
   puma (~> 3.0)
@@ -268,6 +280,7 @@ DEPENDENCIES
   rspec-rails
   rubocop
   sass-rails (~> 5.0)
+  semantic-ui-sass!
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
