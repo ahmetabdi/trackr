@@ -11,6 +11,7 @@ Metrics/ClassLength:
   Exclude:
     - 'lib/amazon/product_advertising_api/parsers/item_lookup.rb'
 AllCops:
+  TargetRubyVersion: 2.4
   Exclude:
     - 'vendor/**/*'
     - 'tmp/**/*'

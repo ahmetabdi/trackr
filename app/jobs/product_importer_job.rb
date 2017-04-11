@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ProductImporterJob < ApplicationJob
   queue_as :default
   throttle threshold: 1, period: 1.second

@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 module Amazon
   module ProductAdvertisingApi
     class Operator
-      ENDPOINT = 'webservices.amazon.co.uk'.freeze
-      REQUEST_URI = '/onca/xml'.freeze
+      ENDPOINT = 'webservices.amazon.co.uk'
+      REQUEST_URI = '/onca/xml'
 
       class << self
         def item_search

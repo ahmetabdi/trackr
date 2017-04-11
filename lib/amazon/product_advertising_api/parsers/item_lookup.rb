@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Amazon
   module ProductAdvertisingApi
     module Parsers
@@ -9,8 +10,8 @@ module Amazon
         end
 
         def errors?
-          xml_body.at_xpath("#{item_error}/Error").try(:text).try(:present?) ||
-            xml_body.at_xpath('Errors/Error/Code').try(:text).try(:present?) ||
+          xml_body.at_xpath("#{item_error}/Error")&.text&.present? ||
+            xml_body.at_xpath('Errors/Error/Code')&.text&.present? ||
             false
         end
 
@@ -23,23 +24,23 @@ module Amazon
         end
 
         def valid?
-          find_single('ItemLookupResponse/Items/Request/IsValid').try(:text) == 'True'
+          find_single('ItemLookupResponse/Items/Request/IsValid')&.text == 'True'
         end
 
         def title
-          find_single("#{attr_path}/Title").text
+          find_single("#{attr_path}/Title")&.text
         end
 
         def product_group
-          find_single("#{attr_path}/ProductGroup").text
+          find_single("#{attr_path}/ProductGroup")&.text
         end
 
         def manufacturer
-          find_single("#{attr_path}/Manufacturer").text
+          find_single("#{attr_path}/Manufacturer")&.text
         end
 
         def brand
-          find_single("#{attr_path}/Brand").text
+          find_single("#{attr_path}/Brand")&.text
         end
 
         def features
@@ -47,78 +48,81 @@ module Amazon
         end
 
         def product_type_name
-          find_single("#{attr_path}/ProductTypeName").text
+          find_single("#{attr_path}/ProductTypeName")&.text
         end
 
         def binding
-          find_single("#{attr_path}/Binding").text
+          find_single("#{attr_path}/Binding")&.text
         end
 
         def adult_product
-          find_single("#{attr_path}/IsAdultProduct").text == '1'
+          find_single("#{attr_path}/IsAdultProduct")&.text == '1'
         end
 
         def model
-          find_single("#{attr_path}/model").text
+          find_single("#{attr_path}/model")&.text
         end
 
         def ean
-          find_single("#{attr_path}/ean").text
+          find_single("#{attr_path}/ean")&.text
         end
 
         def upc
-          find_single("#{attr_path}/upc").text
+          find_single("#{attr_path}/upc")&.text
         end
 
         def studio
-          find_single("#{attr_path}/Studio").text
+          find_single("#{attr_path}/Studio")&.text
         end
 
         def size_of_item
-          find_single("#{attr_path}/Size").text
+          find_single("#{attr_path}/Size")&.text
         end
 
         def total_new
-          find_single("#{item_path}/OfferSummary/TotalNew").text.to_i
+          find_single("#{item_path}/OfferSummary/TotalNew")&.text&.to_i
         end
 
         def total_used
-          find_single("#{item_path}/OfferSummary/TotalUsed").text.to_i
+          find_single("#{item_path}/OfferSummary/TotalUsed")&.text&.to_i
         end
 
         def total_collectible
-          find_single("#{item_path}/OfferSummary/TotalCollectible").text.to_i
+          find_single("#{item_path}/OfferSummary/TotalCollectible")&.text&.to_i
         end
 
         def total_refurbished
-          find_single("#{item_path}/OfferSummary/TotalRefurbished").text.to_i
+          find_single("#{item_path}/OfferSummary/TotalRefurbished")&.text&.to_i
         end
 
         def package_quantity
-          find_single("#{attr_path}/PackageQuantity").text.to_i
+          find_single("#{attr_path}/PackageQuantity")&.text&.to_i
         end
 
         def part_number
-          find_single("#{attr_path}/PartNumber").text
+          find_single("#{attr_path}/PartNumber")&.text
         end
 
         def asin
-          find_single("#{item_path}/ASIN").text
+          find_single("#{item_path}/ASIN")&.text
         end
 
         def parent_asin
-          find_single("#{item_path}/ParentASIN").text
+          find_single("#{item_path}/ParentASIN")&.text
         end
 
         def detail_page_url
-          find_single("#{item_path}/DetailPageURL").text
+          find_single("#{item_path}/DetailPageURL")&.text
         end
 
         def sales_rank
-          find_single("#{item_path}/SalesRank").text
+          find_single("#{item_path}/SalesRank")&.text
         end
 
         def main_image
+          return {} if find_single("#{item_path}/LargeImage").nil? ||
+                       find_single("#{item_path}/MediumImage").nil? ||
+                       find_single("#{item_path}/SmallImage").nil?
           {
             large:  find_single("#{item_path}/LargeImage/URL").text,
             medium: find_single("#{item_path}/MediumImage/URL").text,
@@ -156,11 +160,20 @@ module Amazon
         end
 
         def list_price
-          {
-            amount: find_single("#{attr_path}/ListPrice/Amount").text,
-            currency_code: find_single("#{attr_path}/ListPrice/CurrencyCode").text,
-            formatted_price: find_single("#{attr_path}/ListPrice/FormattedPrice").text
-          }
+          if find_single("#{attr_path}/ListPrice").nil?
+            return {} if find_single("#{item_path}/OfferSummary/LowestNewPrice").nil?
+            {
+              amount: find_single("#{item_path}/OfferSummary/LowestNewPrice/Amount").text,
+              currency_code: find_single("#{item_path}/OfferSummary/LowestNewPrice/CurrencyCode").text,
+              formatted_price: find_single("#{item_path}/OfferSummary/LowestNewPrice/FormattedPrice").text
+            }
+          else
+            {
+              amount: find_single("#{attr_path}/ListPrice/Amount").text,
+              currency_code: find_single("#{attr_path}/ListPrice/CurrencyCode").text,
+              formatted_price: find_single("#{attr_path}/ListPrice/FormattedPrice").text
+            }
+          end
         end
 
         def similar_products
