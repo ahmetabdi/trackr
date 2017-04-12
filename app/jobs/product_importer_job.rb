@@ -1,17 +1,27 @@
 # frozen_string_literal: true
 class ProductImporterJob < ApplicationJob
-  queue_as :default
+  queue_as :low_priority
+  throttle threshold: 2, period: 1.second
 
   rescue_from(AmazonThrottleLimit) do |_|
     retry_job wait: 1.seconds, queue: :default
   end
 
   def perform(asin)
+    return if product_scanned_today?(asin)
     item = Amazon::ProductAdvertisingApi::Operator.item_lookup(asin)
+    item.similar_products.each do |similar_product_asin|
+      next if product_scanned_today?(similar_product_asin)
+      ProductImporterJob.perform_later(similar_product_asin)
+    end
     create_amazon_product(item) if item.valid?
   end
 
   private
+
+  def product_scanned_today?(asin)
+    AmazonProduct.select(:scanned_at).find_by_asin(asin)&.scanned_at&.to_date == Date.today
+  end
 
   # rubocop:disable Metrics/BlockLength, Metrics/MethodLength, Metrics/AbcSize
   def create_amazon_product(item)

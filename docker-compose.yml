@@ -65,6 +65,6 @@ services:
       context: .
     volumes:
       - .:/app
-    command: sidekiq -q default -q mailers
+    command: sidekiq -q default -q mailers -q low_priority,1 -q high_priority,2
     depends_on:
       - redis
