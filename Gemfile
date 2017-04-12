@@ -6,7 +6,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'activejob-traffic_control'
 gem 'autoprefixer-rails'
 gem 'coffee-rails', '~> 4.2'
 gem 'dotenv-rails', '~> 2.2.0'
@@ -20,6 +19,7 @@ gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
 gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
+gem 'sidekiq'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 

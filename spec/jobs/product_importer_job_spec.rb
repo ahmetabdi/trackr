@@ -48,7 +48,7 @@ RSpec.describe ProductImporterJob, type: :job do
 
     perform_enqueued_jobs do
       expect_any_instance_of(ProductImporterJob)
-        .to receive(:retry_job).with(wait: 5.seconds, queue: :default)
+        .to receive(:retry_job).with(wait: 1.seconds, queue: :default)
 
       job
     end
