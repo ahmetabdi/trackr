@@ -7,6 +7,7 @@ module Amazon
 
         def initialize(xml_body)
           @xml_body = Oga.parse_xml(xml_body)
+          raise AmazonThrottleLimit if errors? && error_messages[:code] == 'RequestThrottled'
         end
 
         def errors?

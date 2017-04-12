@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe ProductImporterJob, :vcr, type: :job do
+RSpec.describe ProductImporterJob, type: :job do
   include ActiveJob::TestHelper
 
   subject(:job) { described_class.perform_later('B01AX72ZTI') }
@@ -16,17 +16,11 @@ RSpec.describe ProductImporterJob, :vcr, type: :job do
   end
 
   it 'queues the job' do
-    expect { job }
-      .to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
+    expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
   end
 
   it 'is in the default queue' do
     expect(subject.queue_name).to eq('default')
-  end
-
-  it 'executes perform' do
-    expect(Amazon::ProductAdvertisingApi::Operator).to receive(:item_lookup).with('B01AX72ZTI')
-    perform_enqueued_jobs { job }
   end
 
   it 'enques the correct job class' do
@@ -49,10 +43,29 @@ RSpec.describe ProductImporterJob, :vcr, type: :job do
     end.to have_enqueued_job.on_queue('default')
   end
 
-  it 'reports errors' do
-    allow_any_instance_of(ProductImporterJob).to receive(:perform).and_raise(AmazonThrottleLimit)
-    allow(StandardError).to receive(:new)
-    ProductImporterJob.perform_later('B01AX72ZTI')
-    expect(StandardError).to have_received(:new).with(AmazonThrottleLimit)
+  it 'handles amazons 1 second throttle limit' do
+    allow(Amazon::ProductAdvertisingApi::Operator).to receive(:item_lookup).and_raise(AmazonThrottleLimit)
+
+    perform_enqueued_jobs do
+      expect_any_instance_of(ProductImporterJob)
+        .to receive(:retry_job).with(wait: 5.seconds, queue: :default)
+
+      job
+    end
+  end
+
+  context 'with a valid response' do
+    let(:xml) { file_fixture('item_lookup/valid.xml') }
+    let(:item_lookup) { Amazon::ProductAdvertisingApi::Parsers::ItemLookup.new(xml) }
+
+    before do
+      allow(Amazon::ProductAdvertisingApi::Operator).to receive(:item_lookup).and_return(item_lookup)
+      perform_enqueued_jobs { job }
+    end
+
+    it 'creates an amazon product' do
+      expect(AmazonProduct.count).to eq(1)
+      expect(AmazonProduct.first.title).to eq('Cellucor C4 50x Pre Workout Powder, Extreme Energy, Icy Blue Razz 45 Servings (405g)')
+    end
   end
 end

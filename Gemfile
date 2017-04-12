@@ -32,6 +32,7 @@ end
 
 group :test do
   gem 'codeclimate-test-reporter'
+  gem 'database_cleaner'
   gem 'vcr'
   gem 'webmock'
 end

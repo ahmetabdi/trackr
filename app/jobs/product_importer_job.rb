@@ -3,23 +3,16 @@ class ProductImporterJob < ApplicationJob
   queue_as :default
   throttle threshold: 1, period: 1.second
 
-  rescue_from(AmazonThrottleLimit) do |exception|
-    StandardError.new(exception)
+  rescue_from(AmazonThrottleLimit) do |_|
+    retry_job wait: 5.seconds, queue: :default
   end
 
   def perform(asin)
     item = Amazon::ProductAdvertisingApi::Operator.item_lookup(asin)
-    throttle_limit_check(item)
     create_amazon_product(item) if item.valid?
   end
 
   private
-
-  # rubocop:disable Metrics/LineLength
-  def throttle_limit_check(item)
-    return unless item.errors? && item.error_messages[:code] == 'RequestThrottled'
-    raise AmazonThrottleLimit
-  end
 
   # rubocop:disable Metrics/BlockLength, Metrics/MethodLength, Metrics/AbcSize
   def create_amazon_product(item)
