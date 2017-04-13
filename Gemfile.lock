@@ -282,6 +282,7 @@ DEPENDENCIES
   lograge
   logstash-event
   logstash-logger
+  nokogiri (~> 1.7, >= 1.7.1)
   normalize-rails
   oga
   pg (~> 0.18)

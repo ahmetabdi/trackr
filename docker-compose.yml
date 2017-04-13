@@ -14,7 +14,7 @@ services:
       - database
       - redis
       - maildev
-      - sidekiq
+      # - sidekiq
 
   # elasticsearch:
   #   image: docker.elastic.co/elasticsearch/elasticsearch:5.2.2
@@ -60,11 +60,11 @@ services:
       - "1080:80"
       - "1025:25"
 
-  sidekiq:
-    build:
-      context: .
-    volumes:
-      - .:/app
-    command: sidekiq -q default -q mailers -q low_priority,1 -q high_priority,2
-    depends_on:
-      - redis
+  # sidekiq:
+  #   build:
+  #     context: .
+  #   volumes:
+  #     - .:/app
+  #   command: sidekiq -q default -q mailers -q low_priority,1 -q high_priority,2
+  #   depends_on:
+  #     - redis

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'rails_helper'
 
-RSpec.describe Amazon::ProductAdvertisingApi::Parsers::ItemLookup do
+RSpec.describe Amazon::ProductAdvertisingApi::ItemLookup, :vcr do
   let(:xml) { file_fixture('item_lookup/valid.xml') }
   let(:item_lookup) { described_class.new(xml) }
 

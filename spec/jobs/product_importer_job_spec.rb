@@ -19,8 +19,8 @@ RSpec.describe ProductImporterJob, type: :job do
     expect { job }.to change(ActiveJob::Base.queue_adapter.enqueued_jobs, :size).by(1)
   end
 
-  it 'is in the default queue' do
-    expect(subject.queue_name).to eq('default')
+  it 'is in the low_priority queue' do
+    expect(subject.queue_name).to eq('low_priority')
   end
 
   it 'enques the correct job class' do
@@ -40,7 +40,7 @@ RSpec.describe ProductImporterJob, type: :job do
   it 'enques to the correct queue' do
     expect do
       ProductImporterJob.perform_later
-    end.to have_enqueued_job.on_queue('default')
+    end.to have_enqueued_job.on_queue('low_priority')
   end
 
   it 'handles amazons 1 second throttle limit' do
@@ -48,7 +48,7 @@ RSpec.describe ProductImporterJob, type: :job do
 
     perform_enqueued_jobs do
       expect_any_instance_of(ProductImporterJob)
-        .to receive(:retry_job).with(wait: 1.seconds, queue: :default)
+        .to receive(:retry_job).with(wait: 1.seconds, queue: :low_priority)
 
       job
     end
@@ -56,7 +56,7 @@ RSpec.describe ProductImporterJob, type: :job do
 
   context 'with a valid response' do
     let(:xml) { file_fixture('item_lookup/valid.xml') }
-    let(:item_lookup) { Amazon::ProductAdvertisingApi::Parsers::ItemLookup.new(xml) }
+    let(:item_lookup) { Amazon::ProductAdvertisingApi::ItemLookup.new(xml) }
 
     before do
       allow(Amazon::ProductAdvertisingApi::Operator).to receive(:item_lookup).and_return(item_lookup)

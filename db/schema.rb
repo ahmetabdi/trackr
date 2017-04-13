@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(version: 20170401181944) do
   create_table "amazon_product_histories", force: :cascade do |t|
     t.integer  "price"
     t.integer  "sales_rank"
+    t.integer  "total_new"
+    t.integer  "total_used"
+    t.integer  "total_collectible"
+    t.integer  "total_refurbished"
     t.integer  "amazon_product_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
