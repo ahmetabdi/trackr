@@ -161,6 +161,7 @@ module Amazon
 
       def list_price
         offer = find_single("#{item_path}/Offers/Offer")
+        return {} if offer.nil?
         price = find_single("OfferListing/Price", offer)
         return {} if price.nil?
         {

@@ -7,8 +7,6 @@ class CreateAmazonProducts < ActiveRecord::Migration[5.0]
       # <Manufacturer>Cellucor</Manufacturer>
       t.string :brand
       # <Brand>Cellucor</Brand>
-      t.string :product_group
-      # <ProductGroup>Health and Beauty</ProductGroup>
       t.string :features, array: true
       # <Feature>Stronger than C4 by 50%</Feature>
       # <Feature>Contains 50% more of what you love</Feature>
@@ -63,6 +61,7 @@ class CreateAmazonProducts < ActiveRecord::Migration[5.0]
       # BrowseNodes (Use these as tags)
 
       t.datetime :scanned_at
+      t.references :amazon_product_group, foreign_key: true
       t.timestamps
     end
   end

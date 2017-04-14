@@ -22,8 +22,7 @@ module Amazon
           #   next if product_scanned_today?(similar_product_asin)
           #   ProductImporterJob.perform_later(similar_product_asin)
           # end
-          ap = create_amazon_product(item)
-          create_amazon_product_history(ap, item)
+          create_amazon_product(item)
         end
 
         private
@@ -32,13 +31,17 @@ module Amazon
           AmazonProduct.select(:scanned_at).find_by_asin(asin)&.scanned_at&.to_date == Date.current
         end
 
+        def create_amazon_product_group(product_group)
+          AmazonProductGroup.find_or_create_by(name: product_group)
+        end
+
         # rubocop:disable Metrics/BlockLength, Metrics/MethodLength, Metrics/AbcSize
         def create_amazon_product(item)
           ap = AmazonProduct.find_or_create_by(asin: item.asin) do |p|
+            p.amazon_product_group = create_amazon_product_group(item.product_group)
             p.title = item.title
             p.manufacturer = item.manufacturer
             p.brand = item.brand
-            p.product_group = item.product_group
             p.features = item.features
             p.product_type_name = item.product_type_name
             p.binding = item.binding
@@ -73,7 +76,7 @@ module Amazon
             p.tags = item.tags
           end
           ap.touch(:scanned_at)
-          ap
+          create_amazon_product_history(ap, item)
         end
 
         def create_amazon_product_history(amazon_product, item)

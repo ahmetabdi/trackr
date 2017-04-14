@@ -15,6 +15,10 @@ ActiveRecord::Schema.define(version: 20170401181944) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "amazon_product_groups", force: :cascade do |t|
+    t.string "name"
+  end
+
   create_table "amazon_product_histories", force: :cascade do |t|
     t.integer  "price"
     t.string   "availability"
@@ -37,11 +41,10 @@ ActiveRecord::Schema.define(version: 20170401181944) do
     t.string   "title"
     t.string   "manufacturer"
     t.string   "brand"
-    t.string   "product_group"
-    t.string   "features",                                           array: true
+    t.string   "features",                                             array: true
     t.string   "product_type_name"
     t.string   "binding"
-    t.boolean  "adult_product",         default: false
+    t.boolean  "adult_product",           default: false
     t.string   "model"
     t.string   "ean"
     t.string   "upc"
@@ -65,15 +68,18 @@ ActiveRecord::Schema.define(version: 20170401181944) do
     t.string   "main_large_image"
     t.string   "main_medium_image"
     t.string   "main_small_image"
-    t.string   "variant_large_images",                               array: true
-    t.string   "variant_medium_images",                              array: true
-    t.string   "variant_small_images",                               array: true
-    t.string   "similar_products",                                   array: true
-    t.string   "tags",                                               array: true
+    t.string   "variant_large_images",                                 array: true
+    t.string   "variant_medium_images",                                array: true
+    t.string   "variant_small_images",                                 array: true
+    t.string   "similar_products",                                     array: true
+    t.string   "tags",                                                 array: true
     t.datetime "scanned_at"
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.integer  "amazon_product_group_id"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["amazon_product_group_id"], name: "index_amazon_products_on_amazon_product_group_id", using: :btree
   end
 
   add_foreign_key "amazon_product_histories", "amazon_products"
+  add_foreign_key "amazon_products", "amazon_product_groups"
 end
