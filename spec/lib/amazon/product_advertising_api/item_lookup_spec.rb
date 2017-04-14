@@ -262,9 +262,13 @@ RSpec.describe Amazon::ProductAdvertisingApi::ItemLookup, :vcr do
 
   describe '.list_price' do
     it 'returns the list_price' do
-      expect(item_lookup.list_price).to eq(amount: '3390',
-                                           currency_code: 'GBP',
-                                           formatted_price: '£33.90')
+      expect(item_lookup.list_price).to eq(amount: "3390",
+                                           availability: "Usually dispatched within 24 hours",
+                                           condition: "New",
+                                           currency_code: "GBP",
+                                           formatted_price: "£33.90",
+                                           prime: "1",
+                                           super_saver: "1")
     end
   end
 end

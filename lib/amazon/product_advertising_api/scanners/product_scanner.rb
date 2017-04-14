@@ -77,9 +77,14 @@ module Amazon
         end
 
         def create_amazon_product_history(amazon_product, item)
-          AmazonProductHistory.create_by(amazon_product: amazon_product) do |p|
-            p.price = item.current_price
-            p.sales_rank = item.current_sales_rank
+          AmazonProductHistory.create(amazon_product: amazon_product) do |p|
+            p.price = item.list_price[:amount]
+            p.availability = item.list_price[:availability]
+            p.condition = item.list_price[:condition]
+            p.currency_code = item.list_price[:currency_code]
+            p.prime = item.list_price[:prime]
+            p.super_saver = item.list_price[:super_saver]
+            p.sales_rank = item.sales_rank
             p.total_new = item.total_new
             p.total_used = item.total_used
             p.total_collectible = item.total_collectible

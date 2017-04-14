@@ -160,27 +160,18 @@ module Amazon
       end
 
       def list_price
-        price = find_single("#{item_path}/Offers/Offer/OfferListing/Price")
+        offer = find_single("#{item_path}/Offers/Offer")
+        price = find_single("OfferListing/Price", offer)
         return {} if price.nil?
         {
           amount: find_single('Amount', price).text,
           currency_code: find_single('CurrencyCode', price).text,
-          formatted_price: find_single('FormattedPrice', price).text
+          formatted_price: find_single('FormattedPrice', price).text,
+          condition: find_single("OfferAttributes/Condition", offer).text,
+          availability: find_single("OfferListing/Availability", offer).text,
+          super_saver: find_single("OfferListing/IsEligibleForSuperSaverShipping", offer).text,
+          prime: find_single("OfferListing/IsEligibleForPrime", offer).text
         }
-        # if find_single("#{attr_path}/ListPrice").nil?
-        #   return {} if find_single("#{item_path}/OfferSummary/LowestNewPrice").nil?
-        #   {
-        #     amount: find_single("#{item_path}/OfferSummary/LowestNewPrice/Amount").text,
-        #     currency_code: find_single("#{item_path}/OfferSummary/LowestNewPrice/CurrencyCode").text,
-        #     formatted_price: find_single("#{item_path}/OfferSummary/LowestNewPrice/FormattedPrice").text
-        #   }
-        # else
-        #   {
-        #     amount: find_single("#{attr_path}/ListPrice/Amount").text,
-        #     currency_code: find_single("#{attr_path}/ListPrice/CurrencyCode").text,
-        #     formatted_price: find_single("#{attr_path}/ListPrice/FormattedPrice").text
-        #   }
-        # end
       end
 
       def similar_products

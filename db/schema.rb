@@ -17,14 +17,19 @@ ActiveRecord::Schema.define(version: 20170401181944) do
 
   create_table "amazon_product_histories", force: :cascade do |t|
     t.integer  "price"
+    t.string   "availability"
+    t.string   "condition"
+    t.string   "currency_code"
+    t.boolean  "prime",             default: false
+    t.boolean  "super_saver",       default: false
     t.integer  "sales_rank"
     t.integer  "total_new"
     t.integer  "total_used"
     t.integer  "total_collectible"
     t.integer  "total_refurbished"
     t.integer  "amazon_product_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["amazon_product_id"], name: "index_amazon_product_histories_on_amazon_product_id", using: :btree
   end
 
