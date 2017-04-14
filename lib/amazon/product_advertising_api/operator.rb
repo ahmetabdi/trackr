@@ -16,7 +16,7 @@ module Amazon
                               'IdType' => id_type,
                               'ResponseGroup' => default_response_groups)
 
-          ItemLookup.new(HTTP.get(url).to_s)
+          Amazon::ProductAdvertisingApi::ItemLookup.new(HTTP.get(url).to_s)
         end
 
         private
