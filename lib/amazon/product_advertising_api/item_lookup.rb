@@ -168,10 +168,10 @@ module Amazon
           amount: find_single('Amount', price).text,
           currency_code: find_single('CurrencyCode', price).text,
           formatted_price: find_single('FormattedPrice', price).text,
-          condition: find_single("OfferAttributes/Condition", offer).text,
-          availability: find_single("OfferListing/Availability", offer).text,
-          super_saver: find_single("OfferListing/IsEligibleForSuperSaverShipping", offer).text,
-          prime: find_single("OfferListing/IsEligibleForPrime", offer).text
+          condition: find_single("OfferAttributes/Condition", offer)&.text,
+          availability: find_single("OfferListing/Availability", offer)&.text,
+          super_saver: find_single("OfferListing/IsEligibleForSuperSaverShipping", offer)&.text,
+          prime: find_single("OfferListing/IsEligibleForPrime", offer)&.text
         }
       end
 

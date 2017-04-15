@@ -15,7 +15,7 @@ module Amazon
         end
 
         def scan
-          return if product_scanned_today?
+          return if product_scanned_today?(asin)
           item = Amazon::ProductAdvertisingApi::Operator.item_lookup(asin)
           return unless item.valid?
           # item.similar_products.each do |similar_product_asin|
@@ -27,7 +27,7 @@ module Amazon
 
         private
 
-        def product_scanned_today?
+        def product_scanned_today?(asin)
           AmazonProduct.select(:scanned_at).find_by_asin(asin)&.scanned_at&.to_date == Date.current
         end
 
