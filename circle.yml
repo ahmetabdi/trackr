@@ -1,6 +1,7 @@
 machine:
   services:
     - postgresql
+    - redis
   ruby:
     version: 2.4.0
 database:
