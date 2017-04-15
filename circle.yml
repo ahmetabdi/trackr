@@ -1,0 +1,13 @@
+machine:
+  services:
+    - postgresql
+  ruby:
+    version: 2.4.0
+database:
+  override:
+    - cp config/database.yml.circle config/database.yml
+    - RAILS_ENV=test bin/setup
+test:
+  post:
+    - bin/rubocop
+    - bin/rspec spec
