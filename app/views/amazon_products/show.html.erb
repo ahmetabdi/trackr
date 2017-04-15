@@ -9,10 +9,10 @@
     var scatterChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: <%= raw data.keys %>,
+        labels: <%= raw [''] + data.keys %>,
         datasets: [{
             label: "Amazon",
-            data: <%= raw data.values %>,
+            data: <%= raw [0] + data.values %>,
             fill: true,
             lineTension: 0,
             backgroundColor: "rgba(75,192,192,0.4)",
