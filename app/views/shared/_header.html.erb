@@ -1,15 +1,16 @@
-<div class="ui fixed menu">
+<div class="ui menu">
   <div class="ui container">
-    <a href="#" class="header item">
-      <img class="logo" src="assets/images/logo.png">
+    <a href="<%= root_path %>" class="header item">
+      <%= image_tag('fire.png') %>
       Trackr
     </a>
-    <a href="#" class="item active">Home</a>
+    <a href="<%= root_path %>" class="item active">Home</a>
+    <a class="item" href="<%= amazon_products_path %>">Products</a>
+    <a class="item" href="<%= amazon_product_groups_path %>">Groups</a>
+    <a class="item" href="<%= amazon_product_categories_path %>">Categories</a>
     <div class="ui simple dropdown item">
       Dropdown <i class="dropdown icon"></i>
       <div class="menu">
-        <a class="item" href="#">Link Item</a>
-        <a class="item" href="#">Link Item</a>
         <div class="divider"></div>
         <div class="header">Header Item</div>
         <div class="item">

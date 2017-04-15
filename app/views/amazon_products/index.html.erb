@@ -1,0 +1,8 @@
+<div class="ui main text container">
+  <h1>Products</h1>
+  <div>
+    <% @amazon_products.each do |p| %>
+      <%= link_to p.title, amazon_product_path(p) %>
+    <% end %>
+  </div>
+</div>

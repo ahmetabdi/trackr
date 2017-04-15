@@ -1,30 +1,17 @@
 <div class="ui main text container">
-  <h1 class="ui header">Semantic UI</h1>
-  <p>This is a basic fixed menu template using fixed size containers.</p>
-  <p>A text container is used for the main container, which is useful for single column layouts</p>
-
   <div class="ui grid">
-    <table class="ui celled table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Price</th>
-          <th>Sales Rank</th>
-          <th>Scanned At</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% AmazonProduct.all.limit(50).each do |ap| %>
-        <tr>
-          <td><%= image_tag(ap.main_small_image) if ap.main_small_image %></td>
-          <td><%= ap.title %></td>
-          <td><%= ap.current_price %></td>
-          <td><%= ap.current_sales_rank %></td>
-          <td><%= ap.scanned_at %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
+    <h2>Groups</h2>
+    <div>
+      <% @amazon_product_groups.each do |p| %>
+        <%= link_to p.name, amazon_product_group_path(p) %>
+      <% end %>
+    </div>
+
+    <h2>Categories</h2>
+    <div>
+      <% @amazon_product_categories.each do |p| %>
+        <%= link_to p.name, amazon_product_category_path(p) %>
+      <% end %>
+    </div>
   </div>
 </div>

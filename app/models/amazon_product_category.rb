@@ -1,4 +1,4 @@
-class AmazonProductGroup < ApplicationRecord
+class AmazonProductCategory < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged
 

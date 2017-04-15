@@ -14,8 +14,6 @@ class CreateAmazonProducts < ActiveRecord::Migration[5.0]
       # <Feature>Nicotine Free, 0mg Nicotine</Feature>
       t.string :product_type_name
       # <ProductTypeName>HEALTH_PERSONAL_CARE</ProductTypeName>
-      t.string :binding
-      # <Binding>Personal Care</Binding>
       t.boolean :adult_product, default: false
       # <IsAdultProduct>0</IsAdultProduct>
       t.string :model

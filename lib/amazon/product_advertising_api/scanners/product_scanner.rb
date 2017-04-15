@@ -15,7 +15,7 @@ module Amazon
         end
 
         def scan
-          return if product_scanned_today?(asin)
+          # return if product_scanned_today?(asin)
           item = Amazon::ProductAdvertisingApi::Operator.item_lookup(asin)
           return unless item.valid?
           # item.similar_products.each do |similar_product_asin|
@@ -35,16 +35,20 @@ module Amazon
           AmazonProductGroup.find_or_create_by(name: product_group)
         end
 
+        def create_amazon_product_category(product_category)
+          AmazonProductCategory.find_or_create_by(name: product_category)
+        end
+
         # rubocop:disable Metrics/BlockLength, Metrics/MethodLength, Metrics/AbcSize
         def create_amazon_product(item)
           ap = AmazonProduct.find_or_create_by(asin: item.asin) do |p|
             p.amazon_product_group = create_amazon_product_group(item.product_group)
+            p.amazon_product_category = create_amazon_product_category(item.binding)
             p.title = item.title
             p.manufacturer = item.manufacturer
             p.brand = item.brand
             p.features = item.features
             p.product_type_name = item.product_type_name
-            p.binding = item.binding
             p.adult_product = item.adult_product
             p.model = item.model
             p.ean = item.ean
@@ -56,12 +60,6 @@ module Amazon
             p.tell_a_friend_url = item.tell_a_friend_url
             p.customer_reviews_url = item.customer_reviews_url
             p.all_offers_url = item.all_offers_url
-            p.current_price = item.list_price[:amount]
-            p.current_sales_rank = item.sales_rank
-            p.total_new = item.total_new
-            p.total_used = item.total_used
-            p.total_collectible = item.total_collectible
-            p.total_refurbished = item.total_refurbished
             p.package_quantity = item.package_quantity
             p.part_number = item.part_number
             p.size_of_item = item.size_of_item
@@ -75,6 +73,14 @@ module Amazon
             p.similar_products = item.similar_products
             p.tags = item.tags
           end
+          ap.update({
+            current_price: item.list_price[:amount],
+            current_sales_rank: item.sales_rank,
+            total_new: item.total_new,
+            total_used: item.total_used,
+            total_collectible: item.total_collectible,
+            total_refurbished: item.total_refurbished
+          })
           ap.touch(:scanned_at)
           create_amazon_product_history(ap, item)
         end

@@ -10,13 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170401181944) do
+ActiveRecord::Schema.define(version: 20170415154332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "amazon_product_categories", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
+    t.index ["slug"], name: "index_amazon_product_categories_on_slug", unique: true, using: :btree
+  end
+
   create_table "amazon_product_groups", force: :cascade do |t|
     t.string "name"
+    t.string "slug"
+    t.index ["slug"], name: "index_amazon_product_groups_on_slug", unique: true, using: :btree
   end
 
   create_table "amazon_product_histories", force: :cascade do |t|
@@ -41,10 +49,9 @@ ActiveRecord::Schema.define(version: 20170401181944) do
     t.string   "title"
     t.string   "manufacturer"
     t.string   "brand"
-    t.string   "features",                                             array: true
+    t.string   "features",                                                array: true
     t.string   "product_type_name"
-    t.string   "binding"
-    t.boolean  "adult_product",           default: false
+    t.boolean  "adult_product",              default: false
     t.string   "model"
     t.string   "ean"
     t.string   "upc"
@@ -68,18 +75,35 @@ ActiveRecord::Schema.define(version: 20170401181944) do
     t.string   "main_large_image"
     t.string   "main_medium_image"
     t.string   "main_small_image"
-    t.string   "variant_large_images",                                 array: true
-    t.string   "variant_medium_images",                                array: true
-    t.string   "variant_small_images",                                 array: true
-    t.string   "similar_products",                                     array: true
-    t.string   "tags",                                                 array: true
+    t.string   "variant_large_images",                                    array: true
+    t.string   "variant_medium_images",                                   array: true
+    t.string   "variant_small_images",                                    array: true
+    t.string   "similar_products",                                        array: true
+    t.string   "tags",                                                    array: true
     t.datetime "scanned_at"
     t.integer  "amazon_product_group_id"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.string   "slug"
+    t.integer  "amazon_product_category_id"
+    t.index ["amazon_product_category_id"], name: "index_amazon_products_on_amazon_product_category_id", using: :btree
     t.index ["amazon_product_group_id"], name: "index_amazon_products_on_amazon_product_group_id", using: :btree
+    t.index ["slug"], name: "index_amazon_products_on_slug", unique: true, using: :btree
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
 
   add_foreign_key "amazon_product_histories", "amazon_products"
+  add_foreign_key "amazon_products", "amazon_product_categories"
   add_foreign_key "amazon_products", "amazon_product_groups"
 end
