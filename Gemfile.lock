@@ -84,6 +84,7 @@ GEM
       railties (>= 3.2, < 5.1)
     erubis (2.7.0)
     execjs (2.7.0)
+    fast_blank (1.0.0)
     ffi (1.9.18)
     friendly_id (5.2.1)
       activerecord (>= 4.0.0)
@@ -279,9 +280,10 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   database_cleaner
   dotenv-rails (~> 2.2.0)
+  fast_blank (~> 1.0)
   friendly_id (~> 5.2, >= 5.2.1)
   groupdate (~> 3.2)
-  http
+  http (~> 2.2, >= 2.2.1)
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -290,7 +292,7 @@ DEPENDENCIES
   logstash-logger
   nokogiri (~> 1.7, >= 1.7.1)
   normalize-rails
-  oga
+  oga (~> 2.9)
   pg (~> 0.18)
   puma (~> 3.0)
   rails (~> 5.0.2)
@@ -298,7 +300,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   semantic-ui-sass!
-  sidekiq
+  sidekiq (~> 4.2, >= 4.2.10)
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -13,5 +13,15 @@
         <%= link_to p.name, amazon_product_category_path(p) %>
       <% end %>
     </div>
+
+    <% 5.times.each do |i| %>
+    <%= render partial: 'shared/spark_line_graph',
+               locals: { id: "sparkey_#{i}",
+                         labels: ["January","February","March","April","May","June","July"],
+                         data: [65, 59, 80, 81, 56, 55, 40] } %>
+                         <% end %>
   </div>
 </div>
+
+
+

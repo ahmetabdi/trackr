@@ -7,25 +7,27 @@ git_source(:github) do |repo_name|
 end
 
 gem 'activejob-traffic_control'
-gem 'autoprefixer-rails'
-gem 'coffee-rails', '~> 4.2'
 gem 'dotenv-rails', '~> 2.2.0'
+gem 'fast_blank', '~> 1.0'
 gem 'friendly_id', '~> 5.2', '>= 5.2.1'
 gem 'groupdate', '~> 3.2'
-gem 'http'
+gem 'http', '~> 2.2', '>= 2.2.1'
 gem 'jbuilder', '~> 2.5'
-gem 'jquery-rails'
 gem 'nokogiri', '~> 1.7', '>= 1.7.1'
-gem 'normalize-rails'
-gem 'oga'
+gem 'oga', '~> 2.9'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
-gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-gem 'sidekiq'
-gem 'turbolinks', '~> 5'
+gem 'sidekiq', '~> 4.2', '>= 4.2.10'
 gem 'uglifier', '>= 1.3.0'
+
+gem 'autoprefixer-rails'
+gem 'coffee-rails', '~> 4.2'
+gem 'jquery-rails'
+gem 'normalize-rails'
+gem 'sass-rails', '~> 5.0'
+gem 'turbolinks', '~> 5'
 
 group :development, :test do
   gem 'byebug', platform: :mri

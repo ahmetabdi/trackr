@@ -1,9 +1,25 @@
+<style>
+  .item {
+    position:relative;
+  }
+  .graph {
+    position:absolute;
+    bottom:0;
+    right:0;
+    z-index: -1;
+  }
+</style>
+<script>
+  Chart.defaults.global.legend.display = false;
+  Chart.defaults.global.tooltips.enabled = false;
+</script>
+
 <div class="ui main text container">
   <h1>Products</h1>
 
   <div>
     <div class="ui divided items">
-    <% @amazon_products.each do |p| %>
+    <% @amazon_products.limit(10).each do |p| %>
       <div class="item">
         <div class="ui small image">
           <a href="<%= amazon_product_path(p) %>">
@@ -23,7 +39,13 @@
             <% p.tags.each do |tag| %>
               <div class="ui label"><i class="tag icon"></i> <%= tag %></div>
             <% end %>
-
+          </div>
+          <div class="graph">
+            <% data = p.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
+            <%= render partial: 'shared/spark_line_graph',
+                       locals: { id: "sparkey_#{p.id}",
+                                 labels: data.keys,
+                                 data: data.values } %>
           </div>
         </div>
       </div>
