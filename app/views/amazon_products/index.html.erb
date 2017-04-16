@@ -1,8 +1,33 @@
 <div class="ui main text container">
   <h1>Products</h1>
+
   <div>
+    <div class="ui divided items">
     <% @amazon_products.each do |p| %>
-      <%= link_to p.title, amazon_product_path(p) %>
+      <div class="item">
+        <div class="ui small image">
+          <a href="<%= amazon_product_path(p) %>">
+            <img src="<%= image_path(p.presenter.main_image) %>">
+          </a>
+        </div>
+        <div class="content">
+          <a class="header"><%= link_to p.title.truncate(60), amazon_product_path(p) %></a>
+          <div class="meta">
+            <i class="red fire icon"></i>
+            121 Heat
+          </div>
+          <div class="description">
+            <p><%= p.features.first %></p>
+          </div>
+          <div class="extra">
+            <% p.tags.each do |tag| %>
+              <div class="ui label"><i class="tag icon"></i> <%= tag %></div>
+            <% end %>
+
+          </div>
+        </div>
+      </div>
     <% end %>
+    </div>
   </div>
 </div>

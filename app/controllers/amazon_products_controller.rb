@@ -9,5 +9,6 @@ class AmazonProductsController < ApplicationController
 
   def set_amazon_product
     @amazon_product = AmazonProduct.friendly.find(params[:id])
+    @presenter = AmazonProductPresenter.new(@amazon_product)
   end
 end
