@@ -121,8 +121,8 @@ module Amazon
 
       def main_image
         return {} if find_single("#{item_path}/LargeImage").nil? ||
-                      find_single("#{item_path}/MediumImage").nil? ||
-                      find_single("#{item_path}/SmallImage").nil?
+                     find_single("#{item_path}/MediumImage").nil? ||
+                     find_single("#{item_path}/SmallImage").nil?
         {
           large:  find_single("#{item_path}/LargeImage/URL").text,
           medium: find_single("#{item_path}/MediumImage/URL").text,
@@ -162,16 +162,16 @@ module Amazon
       def list_price
         offer = find_single("#{item_path}/Offers/Offer")
         return {} if offer.nil?
-        price = find_single("OfferListing/Price", offer)
+        price = find_single('OfferListing/Price', offer)
         return {} if price.nil?
         {
           amount: find_single('Amount', price).text,
           currency_code: find_single('CurrencyCode', price).text,
           formatted_price: find_single('FormattedPrice', price).text,
-          condition: find_single("OfferAttributes/Condition", offer)&.text,
-          availability: find_single("OfferListing/Availability", offer)&.text,
-          super_saver: find_single("OfferListing/IsEligibleForSuperSaverShipping", offer)&.text,
-          prime: find_single("OfferListing/IsEligibleForPrime", offer)&.text
+          condition: find_single('OfferAttributes/Condition', offer)&.text,
+          availability: find_single('OfferListing/Availability', offer)&.text,
+          super_saver: find_single('OfferListing/IsEligibleForSuperSaverShipping', offer)&.text,
+          prime: find_single('OfferListing/IsEligibleForPrime', offer)&.text
         }
       end
 

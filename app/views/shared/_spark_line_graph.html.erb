@@ -1,3 +1,5 @@
+<% data = product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
+
 <canvas id="<%= id %>" width="100" height="50"></canvas>
 
 <script>
@@ -6,7 +8,7 @@ $(document).ready(function() {
   var scatterChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels : <%= raw labels %>,
+        labels : <%= raw data.keys %>,
         datasets : [
           {
             fill: true,
@@ -26,7 +28,7 @@ $(document).ready(function() {
             pointHoverBorderWidth: 2,
             pointRadius: 1,
             pointHitRadius: 10,
-            data: <%= raw data %>,
+            data: <%= raw data.values %>,
             spanGaps: false,
           }
         ]

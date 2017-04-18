@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # Given an ASIN this class scans for a product
 # Skips if the product was already scanned today
 module Amazon
@@ -39,7 +40,6 @@ module Amazon
           AmazonProductCategory.find_or_create_by(name: product_category)
         end
 
-        # rubocop:disable Metrics/BlockLength, Metrics/MethodLength, Metrics/AbcSize
         def create_amazon_product(item)
           ap = AmazonProduct.find_or_create_by(asin: item.asin) do |p|
             p.amazon_product_group = create_amazon_product_group(item.product_group)
@@ -73,14 +73,12 @@ module Amazon
             p.similar_products = item.similar_products
             p.tags = item.tags
           end
-          ap.update({
-            current_price: item.list_price[:amount],
-            current_sales_rank: item.sales_rank,
-            total_new: item.total_new,
-            total_used: item.total_used,
-            total_collectible: item.total_collectible,
-            total_refurbished: item.total_refurbished
-          })
+          ap.update(current_price: item.list_price[:amount],
+                    current_sales_rank: item.sales_rank,
+                    total_new: item.total_new,
+                    total_used: item.total_used,
+                    total_collectible: item.total_collectible,
+                    total_refurbished: item.total_refurbished)
           ap.touch(:scanned_at)
           create_amazon_product_history(ap, item)
         end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 namespace :delete do
   desc 'Deletes all data'
   task all: :environment do

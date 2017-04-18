@@ -18,6 +18,9 @@ gem 'oga', '~> 2.9'
 gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.0.2'
+# TODO: Change cache_store to redis
+# config.cache_store = :redis_store, "redis://localhost:6379/0/cache", { expires_in: 90.minutes }
+gem 'redis-rails'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'sidekiq', '~> 4.2', '>= 4.2.10'
 gem 'uglifier', '>= 1.3.0'

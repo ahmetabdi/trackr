@@ -19,36 +19,37 @@
 
   <div>
     <div class="ui divided items">
-    <% @amazon_products.limit(10).each do |p| %>
+    <% @amazon_products.limit(10).each do |product| %>
+      <% cache product do %>
       <div class="item">
         <div class="ui small image">
-          <a href="<%= amazon_product_path(p) %>">
-            <img src="<%= image_path(p.presenter.main_image) %>">
+          <a href="<%= amazon_product_path(product) %>">
+            <img src="<%= image_path(product.presenter.main_image) %>">
           </a>
         </div>
         <div class="content">
-          <a class="header"><%= link_to p.title.truncate(60), amazon_product_path(p) %></a>
+          <a class="header"><%= link_to product.title.truncate(60), amazon_product_path(product) %></a>
           <div class="meta">
             <i class="red fire icon"></i>
             121 Heat
           </div>
           <div class="description">
-            <p><%= p.features.first %></p>
+            <p><%= product.features.first %></p>
           </div>
           <div class="extra">
-            <% p.tags.each do |tag| %>
+            <% product.tags.each do |tag| %>
               <div class="ui label"><i class="tag icon"></i> <%= tag %></div>
             <% end %>
           </div>
           <div class="graph">
-            <% data = p.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
             <%= render partial: 'shared/spark_line_graph',
-                       locals: { id: "sparkey_#{p.id}",
-                                 labels: data.keys,
-                                 data: data.values } %>
+                       locals: { id: "sparkey_#{product.id}",
+                                 product: product },
+                       cached: true %>
           </div>
         </div>
       </div>
+      <% end %>
     <% end %>
     </div>
   </div>

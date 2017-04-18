@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AmazonProductsController < ApplicationController
   before_action :set_amazon_product, only: [:show]
 

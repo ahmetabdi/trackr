@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 # CURRENTLY NOT USED
 # # TODO: Parse individual prices from Amazon offers page and store against a
 # # product for looking up different prices.

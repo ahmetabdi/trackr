@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AmazonProductCategoriesController < ApplicationController
   before_action :set_amazon_product_category, only: [:show]
 
