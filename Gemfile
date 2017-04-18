@@ -33,7 +33,9 @@ gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 
 group :development, :test do
+  gem 'bullet'
   gem 'byebug', platform: :mri
+  gem 'factory_girl_rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'simplecov', require: false
@@ -42,6 +44,8 @@ end
 group :test do
   gem 'codeclimate-test-reporter'
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
+  gem 'timecop'
   gem 'vcr'
   gem 'webmock'
 end
