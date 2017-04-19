@@ -20,7 +20,6 @@
   <div>
     <div class="ui divided items">
     <% @amazon_products.limit(10).each do |product| %>
-      <% cache product do %>
       <div class="item">
         <div class="ui small image">
           <a href="<%= amazon_product_path(product) %>">
@@ -44,12 +43,10 @@
           <div class="graph">
             <%= render partial: 'shared/spark_line_graph',
                        locals: { id: "sparkey_#{product.id}",
-                                 product: product },
-                       cached: true %>
+                                 product: product } %>
           </div>
         </div>
       </div>
-      <% end %>
     <% end %>
     </div>
   </div>

@@ -11,7 +11,9 @@
     <div class="right menu">
       <div class="item">
         <div class="ui icon input">
-          <input type="text" placeholder="Search...">
+          <%= form_tag search_path do %>
+            <% text_field_tag :query, nil, placeholder: 'Search...' %>
+          <% end %>
           <i class="search link icon"></i>
         </div>
       </div>

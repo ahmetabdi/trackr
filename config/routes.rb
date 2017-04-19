@@ -10,5 +10,7 @@ Rails.application.routes.draw do
     resources :amazon_products, only: [:show], path: 'products'
   end
 
+  post '/search', to: 'pages#search'
+
   root to: 'pages#home'
 end

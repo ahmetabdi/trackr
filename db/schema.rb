@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170415154332) do
     t.string   "brand"
     t.string   "features",                                                array: true
     t.string   "product_type_name"
+    t.string   "binding"
     t.boolean  "adult_product",              default: false
     t.string   "model"
     t.string   "ean"
