@@ -1,6 +1,14 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.lograge.enabled = true
+  config.lograge.custom_options = lambda do |event|
+    options = {}
+    if event.payload[:searchkick_runtime].to_f > 0
+      options[:search] = event.payload[:searchkick_runtime]
+    end
+    options[:params] = event.payload[:params].except('controller', 'action')
+    options
+  end
   # config.lograge.formatter = Lograge::Formatters::Logstash.new
   # config.lograge.logger = LogStashLogger.new(type: :udp, host: 'logstash', port: 5228)
 

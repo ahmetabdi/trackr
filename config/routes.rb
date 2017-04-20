@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
 
   post '/search', to: 'pages#search'
+  get '/results', to: 'pages#results'
 
   root to: 'pages#home'
 end

@@ -6,27 +6,20 @@ class PagesController < ApplicationController
   end
 
   def search
-    url = params[:query]
-
+    query = params[:query]
+    asin = fetch_asin(query)
 
     # Check if entered string is a URL
-    # if url.start_with?('http') ||
-    #    url.start_with?('https') ||
-    #    url.start_with?('www') ||
-    #    url.start_with?('amazon')
-# raise regexs.map {|x| url.match(x) }.compact.first[1].inspect
-    if asin = fetch_asin(url)
-      raise asin.inspect
-      Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
+    if asin
+      amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
+      redirect_to amazon_product_path(amazon_product)
     else
-
+      redirect_to results_path(query: query)
     end
-      #  raise url.match("/([a-zA-Z0-9]{10})(?:[/?]|$)").inspect
-    # else
-    #   raise 'Not a URL'.inspect
-    # end
+  end
 
-    redirect_to root_path
+  def results
+    @amazon_products = AmazonProduct.search(params[:query])
   end
 
   private
@@ -44,11 +37,9 @@ class PagesController < ApplicationController
       /d\/.*?\/.*?\/([A-Z0-9]{10,13})(\/|$|\?|\%|\ )?/i
     ]
 
-    match = regexs.each do |regex|
+    regexs.each do |regex|
       query = string.match(regex)
-      if query
-        return query[1]
-      end
+      return query[1] if query
     end
     nil
   end

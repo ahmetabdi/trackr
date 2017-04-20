@@ -3,6 +3,8 @@ class AmazonProduct < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
+  searchkick word: [:title]
+
   has_many :amazon_product_histories
   belongs_to :amazon_product_group
   belongs_to :amazon_product_category

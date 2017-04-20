@@ -81,6 +81,7 @@ module Amazon
                     total_refurbished: item.total_refurbished)
           ap.touch(:scanned_at)
           create_amazon_product_history(ap, item)
+          ap
         end
 
         def create_amazon_product_history(amazon_product, item)
