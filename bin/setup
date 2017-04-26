@@ -12,6 +12,9 @@ def system!(*args)
 end
 
 chdir APP_ROOT do
+  puts "\n== Copying .env_sample to .env =="
+  system! 'cp .env_sample .env'
+
   puts '== Installing dependencies =='
   system! 'gem install bundler --conservative'
   system('bundle check') || system!('bundle install')
@@ -21,9 +24,6 @@ chdir APP_ROOT do
 
   puts "\n== Removing old logs and tempfiles =="
   system! 'bin/rails log:clear tmp:clear'
-
-  puts "\n== Copying .env_sample to .env =="
-  system! 'cp .env_sample .env'
 
   puts "\n== Restarting application server =="
   system! 'bin/rails restart'
