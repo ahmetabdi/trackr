@@ -30,6 +30,7 @@ RSpec.configure do |config|
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
+    Searchkick.disable_callbacks
   end
 
   config.around(:each) do |example|
