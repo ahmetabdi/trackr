@@ -22,13 +22,25 @@
   <div class="column row">
     <div class="column">
       <div class="ui big breadcrumb">
-        <a class="section"><%= @amazon_product.amazon_product_group.name %></a>
+        <a class="section"><%= link_to @amazon_product.amazon_product_group.name, amazon_product_group_path(@amazon_product.amazon_product_group) %></a>
         <i class="right chevron icon divider"></i>
         <a class="section"><%= @amazon_product.manufacturer %></a>
       </div>
     </div>
   </div>
 </div>
+
+<div class="ui tiny images container">
+  <div id="lightgallery">
+  <% @amazon_product.variant_large_images.reverse.each do |image| %>
+    <a href="<%= image %>">
+      <img class="ui image" src="<%= image %>" />
+    </a>
+  <% end %>
+  </div>
+</div>
+
+<button class="ui orange button">Buy</button>
 
 <% data = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
 
@@ -45,7 +57,7 @@
           <th>Price</th>
         </tr></thead>
         <tbody>
-          <% data.each do |date, price| %>
+          <% data.first(4).each do |date, price| %>
           <tr>
             <td><%= date %></td>
             <td><%= number_to_currency(price / 100.to_f) %></td>
@@ -109,16 +121,6 @@
     }
   });
 </script>
-
-<div class="ui tiny images container">
-  <div id="lightgallery">
-  <% @amazon_product.variant_large_images[0..6].each do |image| %>
-    <a href="<%= image %>">
-      <img class="ui image" src="<%= image %>" />
-    </a>
-  <% end %>
-  </div>
-</div>
 
 <div class="ui segment">
   <p><%= @amazon_product.features.to_sentence %></p>
