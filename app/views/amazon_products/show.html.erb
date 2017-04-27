@@ -1,200 +1,198 @@
-<div class="ui main text container">
-  <h1><%= @amazon_product.title %></h1>
+<h1><%= @amazon_product.title %></h1>
 
-  <%= data = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
-  <canvas id="myChart" width="400" height="200"></canvas>
+<%= data = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
+<canvas id="myChart" width="400" height="200"></canvas>
 
-  <script>
-    var ctx = document.getElementById("myChart");
-    var scatterChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: <%= raw [''] + data.keys %>,
-        datasets: [{
-            label: "Amazon",
-            data: <%= raw [0] + data.values %>,
-            fill: true,
-            lineTension: 0,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: 'butt',
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 5,
-            pointRadius: 5,
-            pointHitRadius: 10,
+<script>
+  var ctx = document.getElementById("myChart");
+  var scatterChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: <%= raw [''] + data.keys %>,
+      datasets: [{
+          label: "Amazon",
+          data: <%= raw [0] + data.values %>,
+          fill: true,
+          lineTension: 0,
+          backgroundColor: "rgba(75,192,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 5,
+          pointRadius: 5,
+          pointHitRadius: 10,
+        }
+      ]
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              callback: function(label, index, labels) {
+                var currency = parseFloat(label * 0.01);
+                return " £" + Number(currency).toFixed(2);
+              }
+            }
           }
         ]
       },
-      options: {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                callback: function(label, index, labels) {
-                  var currency = parseFloat(label * 0.01);
-                  return " £" + Number(currency).toFixed(2);
-                }
-              }
-            }
-          ]
-        },
-        tooltips: {
-          callbacks: {
-            label: function(tooltipItem, data) {
-              var currency = parseFloat(tooltipItem.yLabel * 0.01);
-              return " £" + Number(currency).toFixed(2);
-            }
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var currency = parseFloat(tooltipItem.yLabel * 0.01);
+            return " £" + Number(currency).toFixed(2);
           }
         }
       }
-    });
-  </script>
+    }
+  });
+</script>
 
-  <table class="ui definition table">
-    <tbody>
-      <tr>
-        <td>Manufacturer</td>
-        <td><%= @amazon_product.manufacturer %></td>
-      </tr>
-      <tr>
-        <td>Brand</td>
-        <td><%= @amazon_product.brand %></td>
-      </tr>
-      <tr>
-        <td>Features</td>
-        <td><%= @amazon_product.features.to_sentence %></td>
-      </tr>
-      <tr>
-        <td>product_type_name CONST?</td>
-        <td><%= @amazon_product.product_type_name %></td>
-      </tr>
-      <tr>
-        <td>Adult</td>
-        <td><%= @amazon_product.adult_product ? 'Yes' : 'No' %></td>
-      </tr>
-      <tr>
-        <td>Model</td>
-        <td><%= @amazon_product.model %></td>
-      </tr>
-      <tr>
-        <td>EAN</td>
-        <td><%= @amazon_product.ean %></td>
-      </tr>
-      <tr>
-        <td>UPC</td>
-        <td><%= @amazon_product.upc %></td>
-      </tr>
-      <tr>
-        <td>ASIN</td>
-        <td><%= @amazon_product.asin %></td>
-      </tr>
-      <tr>
-        <td>Parent ASIN</td>
-        <td><%= @amazon_product.parent_asin %></td>
-      </tr>
-      <tr>
-        <td>Detail URL</td>
-        <td><%= @amazon_product.detail_page_url %></td>
-      </tr>
-      <tr>
-        <td>Wishlist URL</td>
-        <td><%= @amazon_product.add_to_wishlist_url %></td>
-      </tr>
-      <tr>
-        <td>Tell a Friend URL</td>
-        <td><%= @amazon_product.tell_a_friend_url %></td>
-      </tr>
-      <tr>
-        <td>Customer Reviews URL</td>
-        <td><%= @amazon_product.customer_reviews_url %></td>
-      </tr>
-      <tr>
-        <td>All Offers URL</td>
-        <td><%= @amazon_product.all_offers_url %></td>
-      </tr>
-      <tr>
-        <td>Current Price</td>
-        <td><%= @amazon_product.current_price %></td>
-      </tr>
-      <tr>
-        <td>Current sales rank</td>
-        <td><%= @amazon_product.current_sales_rank %></td>
-      </tr>
-      <tr>
-        <td>Total New</td>
-        <td><%= @amazon_product.total_new %></td>
-      </tr>
-      <tr>
-        <td>Total Used</td>
-        <td><%= @amazon_product.total_used %></td>
-      </tr>
-      <tr>
-        <td>Total Collectible</td>
-        <td><%= @amazon_product.total_collectible %></td>
-      </tr>
-      <tr>
-        <td>Total Refurbished</td>
-        <td><%= @amazon_product.total_refurbished %></td>
-      </tr>
-      <tr>
-        <td>Package Quantity</td>
-        <td><%= @amazon_product.package_quantity %></td>
-      </tr>
-      <tr>
-        <td>Part Number</td>
-        <td><%= @amazon_product.part_number %></td>
-      </tr>
-      <tr>
-        <td>Size of Item</td>
-        <td><%= @amazon_product.size_of_item %></td>
-      </tr>
-      <tr>
-        <td>Studio</td>
-        <td><%= @amazon_product.studio %></td>
-      </tr>
-      <tr>
-        <td>Main Large Image</td>
-        <td><%= @amazon_product.main_large_image %></td>
-      </tr>
-      <tr>
-        <td>Main Medium Image</td>
-        <td><%= @amazon_product.main_medium_image %></td>
-      </tr>
-      <tr>
-        <td>Main Small Image</td>
-        <td><%= @amazon_product.main_small_image %></td>
-      </tr>
-      <tr>
-        <td>Large variants</td>
-        <td><%= @amazon_product.variant_large_images %></td>
-      </tr>
-      <tr>
-        <td>Medium variants</td>
-        <td><%= @amazon_product.variant_medium_images %></td>
-      </tr>
-      <tr>
-        <td>Small variants</td>
-        <td><%= @amazon_product.variant_small_images %></td>
-      </tr>
-      <tr>
-        <td>Similar Products</td>
-        <td><%= @amazon_product.similar_products %></td>
-      </tr>
-      <tr>
-        <td>Tags</td>
-        <td><%= @amazon_product.tags %></td>
-      </tr>
-      <tr>
-        <td>Scanned at</td>
-        <td><%= @amazon_product.scanned_at %></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table class="ui definition table">
+  <tbody>
+    <tr>
+      <td>Manufacturer</td>
+      <td><%= @amazon_product.manufacturer %></td>
+    </tr>
+    <tr>
+      <td>Brand</td>
+      <td><%= @amazon_product.brand %></td>
+    </tr>
+    <tr>
+      <td>Features</td>
+      <td><%= @amazon_product.features.to_sentence %></td>
+    </tr>
+    <tr>
+      <td>product_type_name CONST?</td>
+      <td><%= @amazon_product.product_type_name %></td>
+    </tr>
+    <tr>
+      <td>Adult</td>
+      <td><%= @amazon_product.adult_product ? 'Yes' : 'No' %></td>
+    </tr>
+    <tr>
+      <td>Model</td>
+      <td><%= @amazon_product.model %></td>
+    </tr>
+    <tr>
+      <td>EAN</td>
+      <td><%= @amazon_product.ean %></td>
+    </tr>
+    <tr>
+      <td>UPC</td>
+      <td><%= @amazon_product.upc %></td>
+    </tr>
+    <tr>
+      <td>ASIN</td>
+      <td><%= @amazon_product.asin %></td>
+    </tr>
+    <tr>
+      <td>Parent ASIN</td>
+      <td><%= @amazon_product.parent_asin %></td>
+    </tr>
+    <tr>
+      <td>Detail URL</td>
+      <td><%= @amazon_product.detail_page_url %></td>
+    </tr>
+    <tr>
+      <td>Wishlist URL</td>
+      <td><%= @amazon_product.add_to_wishlist_url %></td>
+    </tr>
+    <tr>
+      <td>Tell a Friend URL</td>
+      <td><%= @amazon_product.tell_a_friend_url %></td>
+    </tr>
+    <tr>
+      <td>Customer Reviews URL</td>
+      <td><%= @amazon_product.customer_reviews_url %></td>
+    </tr>
+    <tr>
+      <td>All Offers URL</td>
+      <td><%= @amazon_product.all_offers_url %></td>
+    </tr>
+    <tr>
+      <td>Current Price</td>
+      <td><%= @amazon_product.current_price %></td>
+    </tr>
+    <tr>
+      <td>Current sales rank</td>
+      <td><%= @amazon_product.current_sales_rank %></td>
+    </tr>
+    <tr>
+      <td>Total New</td>
+      <td><%= @amazon_product.total_new %></td>
+    </tr>
+    <tr>
+      <td>Total Used</td>
+      <td><%= @amazon_product.total_used %></td>
+    </tr>
+    <tr>
+      <td>Total Collectible</td>
+      <td><%= @amazon_product.total_collectible %></td>
+    </tr>
+    <tr>
+      <td>Total Refurbished</td>
+      <td><%= @amazon_product.total_refurbished %></td>
+    </tr>
+    <tr>
+      <td>Package Quantity</td>
+      <td><%= @amazon_product.package_quantity %></td>
+    </tr>
+    <tr>
+      <td>Part Number</td>
+      <td><%= @amazon_product.part_number %></td>
+    </tr>
+    <tr>
+      <td>Size of Item</td>
+      <td><%= @amazon_product.size_of_item %></td>
+    </tr>
+    <tr>
+      <td>Studio</td>
+      <td><%= @amazon_product.studio %></td>
+    </tr>
+    <tr>
+      <td>Main Large Image</td>
+      <td><%= @amazon_product.main_large_image %></td>
+    </tr>
+    <tr>
+      <td>Main Medium Image</td>
+      <td><%= @amazon_product.main_medium_image %></td>
+    </tr>
+    <tr>
+      <td>Main Small Image</td>
+      <td><%= @amazon_product.main_small_image %></td>
+    </tr>
+    <tr>
+      <td>Large variants</td>
+      <td><%= @amazon_product.variant_large_images %></td>
+    </tr>
+    <tr>
+      <td>Medium variants</td>
+      <td><%= @amazon_product.variant_medium_images %></td>
+    </tr>
+    <tr>
+      <td>Small variants</td>
+      <td><%= @amazon_product.variant_small_images %></td>
+    </tr>
+    <tr>
+      <td>Similar Products</td>
+      <td><%= @amazon_product.similar_products %></td>
+    </tr>
+    <tr>
+      <td>Tags</td>
+      <td><%= @amazon_product.tags %></td>
+    </tr>
+    <tr>
+      <td>Scanned at</td>
+      <td><%= @amazon_product.scanned_at %></td>
+    </tr>
+  </tbody>
+</table>

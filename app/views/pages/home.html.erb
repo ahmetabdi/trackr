@@ -1,16 +1,15 @@
-<div class="ui main text container">
-  <div class="ui grid">
+<div class="ui grid">
+  <div>
     <h2>Groups</h2>
-    <div>
-      <% @amazon_product_groups.each do |p| %>
-        <%= link_to p.name, amazon_product_group_path(p) %>
-      <% end %>
-    </div>
+    <% @amazon_product_groups.each do |p| %>
+      <%= link_to p.name, amazon_product_group_path(p) %>
+    <% end %>
+  </div>
 
+  <div>
     <h2>Categories</h2>
-    <div>
-      <% @amazon_product_categories.each do |p| %>
-        <%= link_to p.name, amazon_product_category_path(p) %>
-      <% end %>
-    </div>
+    <% @amazon_product_categories.each do |p| %>
+      <%= link_to p.name, amazon_product_category_path(p) %>
+    <% end %>
+  </div>
 </div>

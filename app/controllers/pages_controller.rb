@@ -9,7 +9,6 @@ class PagesController < ApplicationController
     query = params[:query]
     asin = fetch_asin(query)
 
-    # Check if entered string is a URL
     if asin
       amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
       redirect_to amazon_product_path(amazon_product)

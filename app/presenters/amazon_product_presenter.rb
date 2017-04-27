@@ -7,6 +7,6 @@ class AmazonProductPresenter < ApplicationPresenter
   end
 
   def main_image
-    amazon_product.main_large_image || ActionController::Base.helpers.image_path('image')
+    amazon_product.main_medium_image || ActionController::Base.helpers.image_path('image')
   end
 end
