@@ -1,7 +1,61 @@
 <h1><%= @amazon_product.title %></h1>
 
-<%= data = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
-<canvas id="myChart" width="400" height="200"></canvas>
+<div class="ui vertically grid">
+  <div class="column row">
+    <div class="column">
+      <div class="ui label">
+        <i class="money icon"></i>Price
+        <div class="detail"><%= number_to_currency(@amazon_product.current_price / 100.to_f) %></div>
+      </div>
+
+      <div class="ui label">
+        <i class="fire icon"></i>Heat
+        <div class="detail"><%= 0 %></div>
+      </div>
+
+      <div class="ui label">
+        <i class="star icon"></i>Sales Rank
+        <div class="detail"><%= @amazon_product.current_sales_rank %></div>
+      </div>
+    </div>
+  </div>
+  <div class="column row">
+    <div class="column">
+      <div class="ui big breadcrumb">
+        <a class="section"><%= @amazon_product.amazon_product_group.name %></a>
+        <i class="right chevron icon divider"></i>
+        <a class="section"><%= @amazon_product.manufacturer %></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% data = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
+
+<div class="ui two column divided grid">
+  <div class="row">
+    <div class="column">
+      <canvas id="myChart" width="400" height="200"></canvas>
+    </div>
+    <div class="column">
+      <h3>Latest recorded prices</h3>
+      <table class="ui celled table">
+        <thead>
+          <tr><th>Date</th>
+          <th>Price</th>
+        </tr></thead>
+        <tbody>
+          <% data.each do |date, price| %>
+          <tr>
+            <td><%= date %></td>
+            <td><%= number_to_currency(price / 100.to_f) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 <script>
   var ctx = document.getElementById("myChart");
@@ -55,6 +109,20 @@
     }
   });
 </script>
+
+<div class="ui tiny images container">
+  <div id="lightgallery">
+  <% @amazon_product.variant_large_images[0..6].each do |image| %>
+    <a href="<%= image %>">
+      <img class="ui image" src="<%= image %>" />
+    </a>
+  <% end %>
+  </div>
+</div>
+
+<div class="ui segment">
+  <p><%= @amazon_product.features.to_sentence %></p>
+</div>
 
 <table class="ui definition table">
   <tbody>
