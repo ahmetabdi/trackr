@@ -21,7 +21,7 @@ gem 'puma', '~> 3.0'
 gem 'rails', '~> 5.1'
 gem 'searchkick'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
-gem 'sidekiq', '~> 4.2', '>= 4.2.10'
+gem 'sidekiq'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'autoprefixer-rails'
