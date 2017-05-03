@@ -31,6 +31,7 @@ services:
       - "6379:6379"
     volumes:
       - ./docker/redis:/data
+    command: redis-server --appendonly yes # appendonly adds pesistent storage
 
   maildev:
     image: djfarrelly/maildev
