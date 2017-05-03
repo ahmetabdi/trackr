@@ -19,3 +19,5 @@
 .vscode
 /coverage
 .DS_Store
+/docker/database/*
+/docker/redis/*

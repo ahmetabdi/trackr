@@ -1,5 +1,4 @@
-
-version: '2.1'
+version: '3'
 services:
   web:
     build:
@@ -21,6 +20,8 @@ services:
     image: postgres:9.6.2
     ports:
       - "5432:5432"
+    volumes:
+      - ./docker/database:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: trackr_development
 
@@ -28,6 +29,8 @@ services:
     image: redis:3.0-alpine
     ports:
       - "6379:6379"
+    volumes:
+      - ./docker/redis:/data
 
   maildev:
     image: djfarrelly/maildev
