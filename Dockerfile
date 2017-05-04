@@ -13,8 +13,4 @@ WORKDIR /app
 ADD Gemfile /app/Gemfile
 ADD Gemfile.lock /app/Gemfile.lock
 
-# Copy in the application code from your work station at the current directory
-# over to the working directory. (PRODUCTION ONLY)
-# COPY . /app
-
 RUN bundle install --jobs 8
