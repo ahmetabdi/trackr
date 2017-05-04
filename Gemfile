@@ -7,7 +7,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'activejob-traffic_control'
-gem 'dotenv-rails', '~> 2.2.0'
 gem 'fast_blank', '~> 1.0'
 gem 'friendly_id', '~> 5.2', '>= 5.2.1'
 gem 'groupdate', '~> 3.2'

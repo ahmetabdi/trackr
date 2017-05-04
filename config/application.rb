@@ -5,8 +5,6 @@ require 'rails/all'
 
 Bundler.require(*Rails.groups)
 
-Dotenv::Railtie.load
-
 module Trackr
   class Application < Rails::Application
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts')

@@ -1,0 +1,16 @@
+version: '3'
+services:
+  web:
+    environment:
+      RACK_ENV: production
+      RAILS_ENV: production
+      LANG: en_US.UTF-8
+
+  database:
+    volumes:
+      - ./docker/database:/var/lib/postgresql/data
+
+  redis:
+    volumes:
+      - ./docker/redis:/data
+    command: redis-server --appendonly yes # https://redis.io/topics/persistence
