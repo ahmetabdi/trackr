@@ -18,9 +18,7 @@ services:
     depends_on:
       - database
       - redis
-      - maildev
       - sidekiq
-      - elasticsearch
 
   database:
     image: postgres:9.6.2
