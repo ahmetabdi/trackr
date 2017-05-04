@@ -1,6 +1,11 @@
 version: '3'
 services:
   web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
     ports:
       - "80:80"
     command: ./bin/rails s -p 80 -b '0.0.0.0'
@@ -9,20 +14,40 @@ services:
       RAILS_ENV: production
       LANG: en_US.UTF-8
     restart: always
+    env_file: .env
+    depends_on:
+      - database
+      - redis
+      - maildev
+      - sidekiq
+      - elasticsearch
 
   database:
+    image: postgres:9.6.2
+    ports:
+      - "5432:5432"
     volumes:
       - ./docker/database:/var/lib/postgresql/data
     restart: always
+    environment:
+      POSTGRES_DB: trackr_development
 
   redis:
+    image: redis:3.0-alpine
     volumes:
       - ./docker/redis:/data
     command: redis-server --appendonly yes # https://redis.io/topics/persistence
     restart: always
+    ports:
+      - "6379:6379"
 
   sidekiq:
+    build:
+      context: .
+    volumes:
+      - .:/app
+    env_file: .env
     restart: always
-
-  elasticsearch:
-    restart: always
+    command: sidekiq -c $RAILS_MAX_THREADS -q default -q mailers -q low_priority,1 -q high_priority,2
+    depends_on:
+      - redis
