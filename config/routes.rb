@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq' if Rails.env.development?
+  mount Sidekiq::Web => '/sidekiq' if ENV.fetch('ENABLE_SIDEKIQ_WEB_INTERFACE')
 
   resources :amazon_products, only: [:index, :show], path: 'products'
   resources :amazon_product_categories, only: [:index, :show], path: 'categories' do
