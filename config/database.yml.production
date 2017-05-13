@@ -1,0 +1,9 @@
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>
+  username: <%= ENV.fetch('RAILS_DB_USERNAME') %>
+  password: <%= ENV.fetch('RAILS_DB_PASSWORD') %>
+  host: <%= ENV.fetch('RAILS_DB_HOST') %>
+  port: <%= ENV.fetch('RAILS_DB_PORT') %>
+  database: <%= ENV.fetch('RAILS_DB_NAME') %>
