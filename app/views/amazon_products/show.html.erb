@@ -5,7 +5,7 @@
     <div class="column">
       <div class="ui label">
         <i class="money icon"></i>Price
-        <div class="detail"><%= number_to_currency(@amazon_product.current_price / 100.to_f) %></div>
+        <div class="detail"><%= number_to_currency(@amazon_product.current_price / 100.0) %></div>
       </div>
 
       <div class="ui label">
@@ -60,7 +60,7 @@
           <% data.first(4).each do |date, price| %>
           <tr>
             <td><%= date %></td>
-            <td><%= number_to_currency(price / 100.to_f) %></td>
+            <td><%= number_to_currency(price / 100.0) %></td>
           </tr>
           <% end %>
         </tbody>
