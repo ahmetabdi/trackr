@@ -8,9 +8,13 @@ class PagesController < ApplicationController
   def search
     query = params[:query]
     asin = fetch_asin(query)
+    match = %r{[A-Za-z0-9]{10}}.match(query)
 
     if asin
       amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
+      redirect_to amazon_product_path(amazon_product)
+    elsif !match.nil? # Found ASIN code
+      amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(match.to_s)
       redirect_to amazon_product_path(amazon_product)
     else
       redirect_to results_path(query: query)
