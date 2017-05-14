@@ -90,6 +90,8 @@ GEM
       faraday
       multi_json
     erubi (1.6.0)
+    et-orbi (1.0.4)
+      tzinfo
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -226,6 +228,8 @@ GEM
       ansi
       ast
     ruby-progressbar (1.8.1)
+    rufus-scheduler (3.4.0)
+      et-orbi (~> 1.0)
     safe_yaml (1.0.4)
     sass (3.4.23)
     sass-rails (5.0.6)
@@ -243,6 +247,9 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.3, >= 3.3.3)
+    sidekiq-cron (0.6.0)
+      rufus-scheduler (>= 3.3.0)
+      sidekiq (>= 4.2.1)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -328,6 +335,7 @@ DEPENDENCIES
   searchkick
   semantic-ui-sass!
   sidekiq
+  sidekiq-cron (~> 0.6.0)
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
