@@ -18,6 +18,10 @@
   width: 100%;
 }
 
+.text-center {
+  text-align: center;
+}
+
 body {
   background-color: #FFFFFF;
   font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;

@@ -28,7 +28,7 @@
                 </div>
               </div>
               <% if product.current_price%>
-                <div class="extra content">
+                <div class="extra content text-center">
                   <span>
                     <span class="current_price_small">Price:</span>
                     <span class="current_price"><%= number_to_currency(product.current_price / 100.0) %></span>
@@ -36,14 +36,23 @@
                       <i class="a-icon a-icon-prime"></i>
                     <% end %>
                   </span>
+                  <div>(Save: <%= 1 - (product.current_price / product.amazon_product_histories.maximum(:price)).round %>%)</div>
                 </div>
               <% else %>
-                <div class="extra content">
+                <div class="extra content text-center">
                   <p>No prices yet</p>
                 </div>
               <% end %>
               <div class="extra content">
-                <button class="ui orange button">Buy</button>
+                <% unless product.amazon_product_histories.average(:price).nil? %>
+                  <div>Average: <%= number_to_currency(product.amazon_product_histories.average(:price) / 100.0) %></div>
+                <% end %>
+                <div>Last scanned: <%= time_ago_in_words(product.scanned_at) %></div>
+              </div>
+              <div class="ui attached buttons">
+                <a class="ui green button" href="<%= product.detail_page_url %>" target="_blank">
+                  <i class="shop icon"></i>Buy
+                </a>
               </div>
             </div>
           </div>
