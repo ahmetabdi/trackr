@@ -12,7 +12,7 @@
       <div class="item">
         <div class="ui icon input">
           <%= form_tag search_path do %>
-            <% text_field_tag :query, nil, placeholder: 'Search...' %>
+            <%= text_field_tag :query, params[:query], placeholder: 'Search...' %>
           <% end %>
           <i class="search link icon"></i>
         </div>

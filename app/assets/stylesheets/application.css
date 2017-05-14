@@ -14,8 +14,13 @@
  *= require_self
  */
 
+.full-width {
+  width: 100%;
+}
+
 body {
   background-color: #FFFFFF;
+  font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .main.container {
@@ -25,4 +30,47 @@ body {
 .ui.footer.segment {
   margin: 3em 0em 0em;
   padding: 3em 0em;
+}
+
+.image.center {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.header {
+  font-size: 1em !important;
+}
+
+.current_price {
+  font-size: 17px!important;
+  line-height: 1.255!important;
+  text-rendering: optimizeLegibility;
+  color: #b12704 !important;
+}
+
+.current_price_small {
+  font-size: 13px!important;
+  line-height: 19px!important;
+}
+
+.a-icon-prime, .a-prime-logo {
+    height: 16px;
+    width: 52px;
+    background-position: -5px -489px;
+    vertical-align: baseline;
+}
+
+.a-icon, .a-link-emphasis:after {
+    background-image: url(AmazonUIBaseCSS-sprite_1x.png);
+    -webkit-background-size: 400px 670px;
+    background-size: 400px 670px;
+    background-repeat: no-repeat;
+    display: inline-block;
+    vertical-align: top;
 }

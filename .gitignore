@@ -21,3 +21,5 @@
 .DS_Store
 /docker/database/*
 /docker/redis/*
+/shared/log/*
+/shared/pids/*

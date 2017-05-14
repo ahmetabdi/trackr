@@ -1,15 +1,68 @@
-<div class="ui grid">
-  <div>
-    <h2>Groups</h2>
-    <% @amazon_product_groups.each do |p| %>
-      <%= link_to p.name, amazon_product_group_path(p) %>
-    <% end %>
+<div class="ui one column grid">
+  <div class="row">
+    <div class="column">
+      <%= form_tag search_path do %>
+        <div class="ui inverted segment">
+          <div class="ui inverted left icon input full-width big">
+            <%= text_field_tag :query, nil, placeholder: 'Enter Amazon URL, ASIN or search by keywords...' %>
+            <i class="search icon"></i>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div>
-    <h2>Categories</h2>
-    <% @amazon_product_categories.each do |p| %>
-      <%= link_to p.name, amazon_product_category_path(p) %>
-    <% end %>
+  <div class="row">
+    <div class="column">
+      <div class="ui four column grid">
+        <% AmazonProduct.all.each do |product| %>
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="image" style="background: #fff; min-height: 150px;">
+                <img class="ui fluid image center" src="<%= image_path(product.presenter.main_image) %>" style="max-height: 150px;width: auto;">
+              </div>
+              <div class="content">
+                <div class="header"><%= product.title.truncate(35) %></div>
+                <div class="meta">
+                  <a><%= friendly_name(product.amazon_product_group.name) %></a>
+                </div>
+              </div>
+              <% if product.current_price%>
+                <div class="extra content">
+                  <span>
+                    <span class="current_price_small">Price:</span>
+                    <span class="current_price"><%= number_to_currency(product.current_price / 100.0) %></span>
+                    <% if product.current_prime %>
+                      <i class="a-icon a-icon-prime"></i>
+                    <% end %>
+                  </span>
+                </div>
+              <% else %>
+                <div class="extra content">
+                  <p>No prices yet</p>
+                </div>
+              <% end %>
+              <div class="extra content">
+                <button class="ui orange button">Buy</button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div>
+      <h2>Groups</h2>
+      <% @amazon_product_groups.each do |p| %>
+        <%= link_to p.name, amazon_product_group_path(p) %>
+      <% end %>
+    </div>
+
+    <div>
+      <h2>Categories</h2>
+      <% @amazon_product_categories.each do |p| %>
+        <%= link_to p.name, amazon_product_category_path(p) %>
+      <% end %>
+    </div>
   </div>
 </div>

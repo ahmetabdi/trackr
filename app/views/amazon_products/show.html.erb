@@ -22,7 +22,7 @@
   <div class="column row">
     <div class="column">
       <div class="ui big breadcrumb">
-        <a class="section"><%= link_to @amazon_product.amazon_product_group.name, amazon_product_group_path(@amazon_product.amazon_product_group) %></a>
+        <a class="section"><%= link_to friendly_name(@amazon_product.amazon_product_group.name), amazon_product_group_path(@amazon_product.amazon_product_group) %></a>
         <i class="right chevron icon divider"></i>
         <a class="section"><%= @amazon_product.manufacturer %></a>
       </div>

@@ -78,7 +78,9 @@ module Amazon
                     total_new: item.total_new,
                     total_used: item.total_used,
                     total_collectible: item.total_collectible,
-                    total_refurbished: item.total_refurbished)
+                    total_refurbished: item.total_refurbished,
+                    current_prime: item.list_price[:prime],
+                    current_super_saver: item.list_price[:super_saver])
           ap.touch(:scanned_at)
           create_amazon_product_history(ap, item)
           ap
