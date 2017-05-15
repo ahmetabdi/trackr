@@ -17,9 +17,19 @@
           <i class="search link icon"></i>
         </div>
       </div>
-      <a class="ui item">
-        Logout
-      </a>
+
+      <% if user_signed_in? %>
+        <%= link_to '/logout', method: 'delete', class: 'ui item' do %>
+          Logout
+        <% end %>
+      <% else %>
+        <a href="/login" class="ui item">
+          Login
+        </a>
+        <a href="/register" class="ui item">
+          Register
+        </a>
+      <% end %>
     </div>
   </div>
 </div>
