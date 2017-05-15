@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     delete '/logout', to: 'devise/sessions#destroy'
   end
 
-  mount Sidekiq::Web => '/sidekiq' if ENV.fetch('ENABLE_SIDEKIQ_WEB_INTERFACE')
+  authenticate :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   resources :amazon_products, only: [:index, :show], path: 'products'
   resources :amazon_product_categories, only: [:index, :show], path: 'categories' do
