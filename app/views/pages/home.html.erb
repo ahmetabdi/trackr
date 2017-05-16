@@ -43,15 +43,12 @@
                   <p>No prices yet</p>
                 </div>
               <% end %>
-              <div class="extra content">
-                <% unless product.amazon_product_histories.average(:price).nil? %>
-                  <div><p>Average: <%= number_to_currency(product.amazon_product_histories.average(:price) / 100.0) %></p></div>
-                <% end %>
-                <div><p>Last scanned: <%= time_ago_in_words(product.scanned_at) %></p></div>
-              </div>
-              <div class="ui attached buttons">
+              <div class="ui two column attached buttons">
                 <a class="ui green button" href="<%= product.detail_page_url %>" target="_blank">
                   <i class="shop icon"></i>Buy
+                </a>
+                <a class="ui yellow button" href="<%= amazon_product_path(product) %>">
+                  <i class="unhide icon"></i>View
                 </a>
               </div>
             </div>

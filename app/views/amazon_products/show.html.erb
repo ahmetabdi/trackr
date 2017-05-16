@@ -1,4 +1,10 @@
 <h1><%= @amazon_product.title %></h1>
+<div><p>Last scanned: <%= time_ago_in_words(@amazon_product.scanned_at) %></p></div>
+<div class="extra content">
+  <% unless @amazon_product.amazon_product_histories.average(:price).nil? %>
+    <div><p>Average: <%= number_to_currency(@amazon_product.amazon_product_histories.average(:price) / 100.0) %></p></div>
+  <% end %>
+</div>
 
 <div class="ui vertically grid">
   <div class="column row">
