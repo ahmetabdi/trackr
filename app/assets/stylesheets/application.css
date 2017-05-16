@@ -27,10 +27,6 @@ body {
   font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
-.main.container {
-  margin-top: 3em;
-}
-
 .ui.footer.segment {
   margin: 3em 0em 0em;
   padding: 3em 0em;

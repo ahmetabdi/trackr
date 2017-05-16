@@ -22,13 +22,13 @@
                 <img class="ui fluid image center" src="<%= image_path(product.presenter.main_image) %>" style="max-height: 150px;width: auto;">
               </div>
               <div class="content">
-                <div class="header"><%= product.title.truncate(35) %></div>
+                <div class="header dotdotdot"><%= product.title %></div>
                 <div class="meta">
                   <a><%= friendly_name(product.amazon_product_group.name) %></a>
                 </div>
               </div>
               <% if product.current_price%>
-                <div class="extra content text-center">
+                <div class="extra content">
                   <span>
                     <span class="current_price_small">Price:</span>
                     <span class="current_price"><%= number_to_currency(product.current_price / 100.0) %></span>
@@ -39,15 +39,15 @@
                   <div>(Save: <%= 1 - (product.current_price / product.amazon_product_histories.maximum(:price)).round %>%)</div>
                 </div>
               <% else %>
-                <div class="extra content text-center">
+                <div class="extra content">
                   <p>No prices yet</p>
                 </div>
               <% end %>
               <div class="extra content">
                 <% unless product.amazon_product_histories.average(:price).nil? %>
-                  <div>Average: <%= number_to_currency(product.amazon_product_histories.average(:price) / 100.0) %></div>
+                  <div><p>Average: <%= number_to_currency(product.amazon_product_histories.average(:price) / 100.0) %></p></div>
                 <% end %>
-                <div>Last scanned: <%= time_ago_in_words(product.scanned_at) %></div>
+                <div><p>Last scanned: <%= time_ago_in_words(product.scanned_at) %></p></div>
               </div>
               <div class="ui attached buttons">
                 <a class="ui green button" href="<%= product.detail_page_url %>" target="_blank">
