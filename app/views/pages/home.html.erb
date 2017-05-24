@@ -15,16 +15,16 @@
   <div class="row">
     <div class="column">
       <div class="ui four column grid">
-        <% AmazonProduct.all.each do |product| %>
+        <% AmazonProduct.random.limit(10).each do |product| %>
           <div class="column">
-            <div class="ui fluid card">
-              <div class="image" style="background: #fff; min-height: 150px;">
+            <div class="ui fluid card link">
+              <a class="image" href="<%= amazon_product_path(product) %>" style="background: #fff; min-height: 150px;">
                 <img class="ui fluid image center" src="<%= image_path(product.presenter.main_image) %>" style="max-height: 150px;width: auto;">
-              </div>
+              </a>
               <div class="content">
-                <div class="header dotdotdot"><%= product.title %></div>
+                <a class="header dotdotdot" href="<%= amazon_product_path(product) %>"><%= product.title %></a>
                 <div class="meta">
-                  <a><%= friendly_name(product.amazon_product_group.name) %></a>
+                  <a href="<%= amazon_product_group_path(product.amazon_product_group) %>"><%= friendly_name(product.amazon_product_group.name) %></a>
                 </div>
               </div>
               <% if product.current_price%>

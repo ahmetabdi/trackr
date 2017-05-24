@@ -5,6 +5,8 @@ class AmazonProduct < ApplicationRecord
 
   searchkick word: [:title], callbacks: false
 
+  scope :random, -> { order("RANDOM()") }
+
   has_many :amazon_product_histories
   belongs_to :amazon_product_group
   belongs_to :amazon_product_category
