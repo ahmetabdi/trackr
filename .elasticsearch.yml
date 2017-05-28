@@ -7,3 +7,4 @@ transport.host: 127.0.0.1
 # set to 1 to allow single node clusters
 # Details: https://github.com/elastic/elasticsearch/pull/17288
 discovery.zen.minimum_master_nodes: 1
+xpack.security.enabled: 0
