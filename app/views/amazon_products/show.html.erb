@@ -9,8 +9,8 @@
         <i class="shop icon"></i>Buy
       </a>
 
-      <a class="ui yellow button" href="<%= @amazon_product.detail_page_url %>" target="_blank">
-        <i class="shop icon"></i>Add to watchlist
+      <a class="ui blue button" href="<%= @amazon_product.add_to_wishlist_url %>" target="_blank">
+        <i class="shop icon"></i>Watch
       </a>
     </div>
   </div>
@@ -19,17 +19,17 @@
     <div class="nine wide column">
       <div class="ui vertically grid">
         <div class="column">
-          <div class="ui label image green">
+          <div class="ui label image white">
             <i class="money icon"></i>Price
             <div class="detail"><b><%= number_to_currency(@amazon_product.presenter.price) %></b></div>
           </div>
 
-          <div class="ui label image red">
+          <div class="ui label image white">
             <i class="fire icon"></i>Heat
             <div class="detail"><b><%= 0 %></b></div>
           </div>
 
-          <div class="ui label image yellow">
+          <div class="ui label image white">
             <i class="star icon"></i>Sales Rank
             <div class="detail"><b><%= @amazon_product.current_sales_rank %></b></div>
           </div>
@@ -106,6 +106,21 @@
   <p><%= @amazon_product.features.to_sentence %></p>
 </div>
 <% end %>
+
+<div class="ui segment">
+  <h2>Information</h2>
+  <table class="ui definition table">
+  <tbody>
+    <tr>
+      <td>ASIN</td>
+      <td><%= @amazon_product.asin %></td>
+    </tr>
+    <tr>
+      <td>Manufacturer</td>
+      <td>rating (integer)</td>
+    </tr>
+</tbody></table>
+</div>
 
 <script>
   var ctx = document.getElementById("myChart");
