@@ -17,6 +17,33 @@
   <% end %>
 </div>
 
+<div class="ui mini statistics">
+  <div class="statistic">
+    <div class="value">
+      <%= number_to_currency(@amazon_product.presenter.maximum_price) %>
+    </div>
+    <div class="label">
+      HIGH
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <%= number_to_currency(@amazon_product.presenter.minimum_price) %>
+    </div>
+    <div class="label">
+      LOW
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <%= number_to_currency(@amazon_product.presenter.average_price) %>
+    </div>
+    <div class="label">
+      AVERAGE
+    </div>
+  </div>
+</div>
+
 <div class="ui vertically grid">
   <div class="column row">
     <div class="column">

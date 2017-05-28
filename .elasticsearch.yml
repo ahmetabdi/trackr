@@ -8,3 +8,4 @@ transport.host: 127.0.0.1
 # Details: https://github.com/elastic/elasticsearch/pull/17288
 discovery.zen.minimum_master_nodes: 1
 xpack.security.enabled: 0
+vm.max_map_count: 262144

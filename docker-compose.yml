@@ -25,6 +25,7 @@ services:
       - "5432:5432"
     volumes:
       - ./docker/database:/var/lib/postgresql/data
+      - .:/app
     environment:
       POSTGRES_DB: trackr_development
 
@@ -48,6 +49,8 @@ services:
     volumes:
       - .:/app
     env_file: .env
+    environment:
+      ELASTICSEARCH_URL: "http://elastic:changeme@elasticsearch:9200"
     command: sidekiq -c $RAILS_MAX_THREADS -q default -q mailers -q low_priority,1 -q high_priority,2
     depends_on:
       - redis

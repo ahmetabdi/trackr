@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170515081414) do
+ActiveRecord::Schema.define(version: 20170528164619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 20170515081414) do
     t.integer "amazon_product_category_id"
     t.boolean "current_prime", default: false
     t.boolean "current_super_saver", default: false
+    t.integer "percentage_to_save", default: 0
     t.index ["amazon_product_category_id"], name: "index_amazon_products_on_amazon_product_category_id"
     t.index ["amazon_product_group_id"], name: "index_amazon_products_on_amazon_product_group_id"
     t.index ["slug"], name: "index_amazon_products_on_slug", unique: true

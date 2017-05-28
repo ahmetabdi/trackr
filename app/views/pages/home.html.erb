@@ -15,7 +15,7 @@
   <div class="row">
     <div class="column">
       <div class="ui four column grid">
-        <% AmazonProduct.random.limit(10).each do |product| %>
+        <% AmazonProduct.random.includes(:amazon_product_group).where('percentage_to_save > 0').limit(10).each do |product| %>
           <div class="column">
             <div class="ui fluid card link">
               <a class="image" href="<%= amazon_product_path(product) %>" style="background: #fff; min-height: 150px;">
@@ -31,12 +31,12 @@
                 <div class="extra content">
                   <span>
                     <span class="current_price_small">Price:</span>
-                    <span class="current_price"><%= number_to_currency(product.current_price / 100.0) %></span>
+                    <span class="current_price"><%= number_to_currency(product.presenter.price) %></span>
                     <% if product.current_prime %>
                       <i class="a-icon a-icon-prime"></i>
                     <% end %>
                   </span>
-                  <div>(Save: <%= 1 - (product.current_price / product.amazon_product_histories.maximum(:price)).round %>%)</div>
+                  <div>(Save: <%= product.percentage_to_save %>%)</div>
                 </div>
               <% else %>
                 <div class="extra content">

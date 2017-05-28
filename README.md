@@ -18,3 +18,9 @@ By default the EOF for windows is set to CRLF but we need to use LF as the files
 `git config --global core.autocrlf false`
 
 `git config --global core.eol lf`
+
+## Load database dump into docker database
+
+`docker-compose exec database sh`
+
+`pg_restore --verbose --clean --no-acl --no-owner -h database -U postgres -d trackr_development latest.dump`

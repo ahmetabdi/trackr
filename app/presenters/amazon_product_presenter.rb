@@ -7,6 +7,22 @@ class AmazonProductPresenter < ApplicationPresenter
   end
 
   def main_image
-    amazon_product.main_medium_image || ActionController::Base.helpers.image_path('image')
+    amazon_product.main_medium_image || ActionController::Base.helpers.asset_path('image.png')
+  end
+
+  def price
+    amazon_product.current_price / 100.0
+  end
+
+  def maximum_price
+    (amazon_product.amazon_product_histories.maximum(:price) / 100.0).round(2)
+  end
+
+  def average_price
+    (amazon_product.amazon_product_histories.average(:price) / 100.0).round(2)
+  end
+
+  def minimum_price
+    (amazon_product.amazon_product_histories.minimum(:price) / 100.0).round(2)
   end
 end
