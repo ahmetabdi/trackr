@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AmazonProductPresenter < ApplicationPresenter
   attr_accessor :amazon_product
 

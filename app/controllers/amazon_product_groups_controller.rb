@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AmazonProductGroupsController < ApplicationController
   before_action :set_amazon_product_group, only: [:show]
 

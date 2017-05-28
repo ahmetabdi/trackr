@@ -15,7 +15,7 @@
   <div class="row">
     <div class="column">
       <div class="ui four column grid">
-        <% AmazonProduct.random.includes(:amazon_product_group).where('percentage_to_save > 0').limit(10).each do |product| %>
+        <% AmazonProduct.random.includes(:amazon_product_group).where('percentage_to_save > 15').limit(10).each do |product| %>
           <div class="column">
             <div class="ui fluid card link">
               <a class="image" href="<%= amazon_product_path(product) %>" style="background: #fff; min-height: 150px;">

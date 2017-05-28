@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AmazonProductGroup < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged

@@ -3,6 +3,6 @@
 <div>
   <h2>Products</h2>
   <% @amazon_product_group.amazon_products.each do |p| %>
-    <%= link_to p.title, amazon_product_group_amazon_product_path(amazon_product_group_id: @amazon_product_group, id: p) %>
+    <%= link_to p.title, amazon_product_group_amazon_product_path(amazon_product_group_id: @amazon_product_group, id: p) %><br>
   <% end %>
 </div>

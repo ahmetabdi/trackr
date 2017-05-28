@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Amazon
   module ProductAdvertisingApi
     class Operator
@@ -23,7 +24,7 @@ module Amazon
 
         # rubocop:disable Metrics/MethodLength
         def default_response_groups
-          %w(
+          %w[
             Accessories
             AlternateVersions
             BrowseNodes
@@ -48,7 +49,7 @@ module Amazon
             VariationMatrix
             VariationOffers
             VariationSummary
-          ).join(',')
+          ].join(',')
         end
 
         def default_options

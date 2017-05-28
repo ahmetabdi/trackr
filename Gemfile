@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -7,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'activejob-traffic_control'
+gem 'devise', '~> 4.3'
 gem 'fast_blank', '~> 1.0'
 gem 'friendly_id', '~> 5.2', '>= 5.2.1'
 gem 'groupdate', '~> 3.2'
@@ -21,9 +23,9 @@ gem 'rails', '~> 5.1.1'
 gem 'searchkick'
 gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'sidekiq'
-gem 'uglifier', '>= 1.3.0'
 gem 'sidekiq-cron', '~> 0.6.0'
-gem 'devise', '~> 4.3'
+gem 'uglifier', '>= 1.3.0'
+gem 'kaminari'
 
 gem 'autoprefixer-rails'
 gem 'coffee-rails', '~> 4.2'

@@ -1,6 +1,6 @@
 <div>
   <h1>Categories</h1>
   <% @amazon_product_categories.each do |p| %>
-    <%= link_to p.name, amazon_product_category_path(p) %>
+    <%= link_to friendly_name(p.name), amazon_product_category_path(p) %><br>
   <% end %>
 </div>

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Amazon
   module ProductAdvertisingApi
     class ItemLookup

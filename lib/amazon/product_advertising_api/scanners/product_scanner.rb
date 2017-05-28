@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Given an ASIN this class scans for a product
 # Skips if the product was already scanned today
 module Amazon

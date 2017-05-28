@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Amazon::ProductAdvertisingApi::ItemLookup, :vcr do
@@ -175,13 +176,13 @@ RSpec.describe Amazon::ProductAdvertisingApi::ItemLookup, :vcr do
 
   describe '.similar_products' do
     it 'returns the similar_products' do
-      expect(item_lookup.similar_products).to eq(%w(
+      expect(item_lookup.similar_products).to eq(%w[
                                                    B01M0OOHQO B016O9LR4I
                                                    B01AB1QIB2 B01B8JX7DI
                                                    B01B8K14GO B00U4621CA
                                                    B00T7L20EC B01ARRW2UG
                                                    B01M323RW7 B00QYZ6MLG
-                                                 ))
+                                                 ])
     end
   end
 

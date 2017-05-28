@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 class AmazonProduct < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
 
   searchkick word: [:title], callbacks: false
 
-  scope :random, -> { order("RANDOM()") }
+  scope :random, -> { order('RANDOM()') }
 
   has_many :amazon_product_histories
   belongs_to :amazon_product_group

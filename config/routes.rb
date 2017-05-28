@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
 
@@ -8,15 +9,15 @@ Rails.application.routes.draw do
     delete '/logout', to: 'devise/sessions#destroy'
   end
 
-  authenticate :user, lambda { |u| u.admin? } do
+  authenticate :user, ->(u) { u.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  resources :amazon_products, only: [:index, :show], path: 'products'
-  resources :amazon_product_categories, only: [:index, :show], path: 'categories' do
+  resources :amazon_products, only: %i[index show], path: 'products'
+  resources :amazon_product_categories, only: %i[index show], path: 'categories' do
     resources :amazon_products, only: [:show], path: 'products'
   end
-  resources :amazon_product_groups, only: [:index, :show], path: 'groups' do
+  resources :amazon_product_groups, only: %i[index show], path: 'groups' do
     resources :amazon_products, only: [:show], path: 'products'
   end
 

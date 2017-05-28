@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PagesController < ApplicationController
   def home
     @amazon_product_categories = AmazonProductCategory.alphabetical
@@ -8,7 +9,7 @@ class PagesController < ApplicationController
   def search
     query = params[:query]
     asin = fetch_asin(query)
-    match = %r{[A-Za-z0-9]{10}}.match(query)
+    match = /[A-Za-z0-9]{10}/.match(query)
 
     if asin
       amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)

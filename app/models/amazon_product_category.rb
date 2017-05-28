@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class AmazonProductCategory < ApplicationRecord
   extend FriendlyId
   friendly_id :name, use: :slugged

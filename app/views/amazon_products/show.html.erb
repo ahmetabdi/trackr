@@ -1,99 +1,85 @@
-<h1><%= @amazon_product.title %></h1>
-
-<div class="column row">
-  <div class="column">
-    <div class="ui big breadcrumb">
-      <a class="section"><%= link_to friendly_name(@amazon_product.amazon_product_group.name), amazon_product_group_path(@amazon_product.amazon_product_group) %></a>
-      <i class="right chevron icon divider"></i>
-      <a class="section"><%= @amazon_product.manufacturer %></a>
-    </div>
+<div class="ui grid stackable">
+  <div class="sixteen wide column">
+    <h1><%= @amazon_product.title %>></h1>
   </div>
-</div>
 
-<div><p>Last scanned: <%= time_ago_in_words(@amazon_product.scanned_at) %></p></div>
-<div class="extra content">
-  <% unless @amazon_product.amazon_product_histories.average(:price).nil? %>
-    <div><p>Average: <%= number_to_currency(@amazon_product.amazon_product_histories.average(:price) / 100.0) %></p></div>
-  <% end %>
-</div>
-
-<div class="ui mini statistics">
-  <div class="statistic">
-    <div class="value">
-      <%= number_to_currency(@amazon_product.presenter.maximum_price) %>
-    </div>
-    <div class="label">
-      HIGH
-    </div>
-  </div>
-  <div class="statistic">
-    <div class="value">
-      <%= number_to_currency(@amazon_product.presenter.minimum_price) %>
-    </div>
-    <div class="label">
-      LOW
-    </div>
-  </div>
-  <div class="statistic">
-    <div class="value">
-      <%= number_to_currency(@amazon_product.presenter.average_price) %>
-    </div>
-    <div class="label">
-      AVERAGE
-    </div>
-  </div>
-</div>
-
-<div class="ui vertically grid">
-  <div class="column row">
+  <div class="sixteen wide column">
     <div class="column">
-      <div class="ui label">
-        <i class="money icon"></i>Price
-        <div class="detail"><%= number_to_currency(@amazon_product.current_price / 100.0) %></div>
-      </div>
+      <a class="ui green button" href="<%= @amazon_product.detail_page_url %>" target="_blank">
+        <i class="shop icon"></i>Buy
+      </a>
 
-      <div class="ui label">
-        <i class="fire icon"></i>Heat
-        <div class="detail"><%= 0 %></div>
-      </div>
-
-      <div class="ui label">
-        <i class="star icon"></i>Sales Rank
-        <div class="detail"><%= @amazon_product.current_sales_rank %></div>
-      </div>
+      <a class="ui yellow button" href="<%= @amazon_product.detail_page_url %>" target="_blank">
+        <i class="shop icon"></i>Add to watchlist
+      </a>
     </div>
   </div>
 
-</div>
+  <div class="two column wide row">
+    <div class="nine wide column">
+      <div class="ui vertically grid">
+        <div class="column">
+          <div class="ui label image green">
+            <i class="money icon"></i>Price
+            <div class="detail"><b><%= number_to_currency(@amazon_product.presenter.price) %></b></div>
+          </div>
 
-<div class="ui tiny images container">
-  <div id="lightgallery">
-  <% @amazon_product.variant_large_images.reverse.each do |image| %>
-    <a href="<%= image %>">
-      <img class="ui image" src="<%= image %>" />
-    </a>
-  <% end %>
+          <div class="ui label image red">
+            <i class="fire icon"></i>Heat
+            <div class="detail"><b><%= 0 %></b></div>
+          </div>
+
+          <div class="ui label image yellow">
+            <i class="star icon"></i>Sales Rank
+            <div class="detail"><b><%= @amazon_product.current_sales_rank %></b></div>
+          </div>
+          <p>Last scanned: <%= time_ago_in_words(@amazon_product.scanned_at) %></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="seven wide column right aligned">
+      <div class="ui vertically grid">
+        <div class="column row">
+          <div class="column">
+            <div class="ui label image white">
+              High
+              <div class="detail"><b><%= number_to_currency(@amazon_product.presenter.maximum_price) %></b></div>
+            </div>
+
+            <div class="ui label image white">
+              Low
+              <div class="detail"><b><%= number_to_currency(@amazon_product.presenter.minimum_price) %></b></div>
+            </div>
+
+            <div class="ui label image white">
+              Average
+              <div class="detail"><b><%= number_to_currency(@amazon_product.presenter.average_price) %></b></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
-
-<button class="ui orange button">Buy</button>
 
 <% data = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
 
-<div class="ui two column divided grid">
+<h3>Latest recorded prices</h3>
+
+<div class="ui two column divided stackable grid">
   <div class="row">
     <div class="column">
       <canvas id="myChart" width="400" height="200"></canvas>
     </div>
     <div class="column">
-      <h3>Latest recorded prices</h3>
       <table class="ui celled table">
         <thead>
           <tr><th>Date</th>
           <th>Price</th>
         </tr></thead>
         <tbody>
-          <% data.first(4).each do |date, price| %>
+          <% data.first(5).each do |date, price| %>
           <tr>
             <td><%= date %></td>
             <td><%= number_to_currency(price / 100.0) %></td>
@@ -104,6 +90,22 @@
     </div>
   </div>
 </div>
+
+<div class="ui tiny images container grid">
+  <div id="lightgallery">
+  <% @amazon_product.variant_large_images.reverse.each do |image| %>
+    <a href="<%= image %>">
+      <img class="ui image" src="<%= image %>" />
+    </a>
+  <% end %>
+  </div>
+</div>
+
+<% if @amazon_product.features %>
+<div class="ui segment">
+  <p><%= @amazon_product.features.to_sentence %></p>
+</div>
+<% end %>
 
 <script>
   var ctx = document.getElementById("myChart");
@@ -157,8 +159,3 @@
     }
   });
 </script>
-
-<div class="ui segment">
-  <p><%= @amazon_product.features.to_sentence %></p>
-</div>
-
