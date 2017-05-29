@@ -24,6 +24,7 @@
 
 .ribbon {
   padding-left: 10px !important;
+  z-index: 99;
 }
 
 body {
