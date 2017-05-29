@@ -15,10 +15,10 @@
   <div class="row">
     <div class="column">
       <div class="ui compact menu">
-        <a class="item active" href="/">
+        <a class="item" href="/">
           Largest savings
         </a>
-        <a class="link item" href="/popular">
+        <a class="item active" href="/popular">
           Popular
         </a>
       </div>
@@ -32,6 +32,9 @@
           <div class="column">
             <div class="ui fluid card link">
               <a class="image" href="<%= amazon_product_path(product) %>" style="background: #fff; min-height: 150px;">
+                <div class="ui black ribbon label">
+                  <i class="trophy icon"></i> <%= product.current_sales_rank %>
+                </div>
                 <img class="ui fluid image center" src="<%= image_path(product.presenter.main_image) %>" style="max-height: 150px;width: auto;">
               </a>
               <div class="content">

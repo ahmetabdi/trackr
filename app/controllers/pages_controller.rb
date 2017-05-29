@@ -4,6 +4,13 @@ class PagesController < ApplicationController
   def home
     @amazon_product_categories = AmazonProductCategory.alphabetical
     @amazon_product_groups = AmazonProductGroup.alphabetical
+    @amazon_products = AmazonProduct.includes(:amazon_product_group).order('percentage_to_save DESC').limit(12)
+  end
+
+  def popular
+    @amazon_product_categories = AmazonProductCategory.alphabetical
+    @amazon_product_groups = AmazonProductGroup.alphabetical
+    @amazon_products = AmazonProduct.where('current_sales_rank <= 1000').includes(:amazon_product_group).order('percentage_to_save DESC').limit(12)
   end
 
   def search

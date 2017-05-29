@@ -9,9 +9,9 @@
         <i class="shop icon"></i>Buy
       </a>
 
-      <a class="ui blue button" href="<%= @amazon_product.add_to_wishlist_url %>" target="_blank">
-        <i class="shop icon"></i>Watch
-      </a>
+      <div class="ui blue button modal-launcher">
+        <i class="star icon"></i>Watch
+      </div>
     </div>
   </div>
 
@@ -63,14 +63,22 @@
   </div>
 </div>
 
-<% data = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price) %>
+<div class="ui tiny images grid">
+  <div id="lightgallery">
+  <% @amazon_product.variant_large_images.reverse.each do |image| %>
+    <a href="<%= image %>">
+      <img class="ui image" src="<%= image %>" />
+    </a>
+  <% end %>
+  </div>
+</div>
 
 <h3>Latest recorded prices</h3>
 
 <div class="ui two column divided stackable grid">
   <div class="row">
     <div class="column">
-      <canvas id="myChart" width="400" height="200"></canvas>
+      <canvas id="pricesChart" width="400" height="200"></canvas>
     </div>
     <div class="column">
       <table class="ui celled table">
@@ -79,7 +87,7 @@
           <th>Price</th>
         </tr></thead>
         <tbody>
-          <% data.first(5).each do |date, price| %>
+          <% @recorded_prices.first(5).each do |date, price| %>
           <tr>
             <td><%= date %></td>
             <td><%= number_to_currency(price / 100.0) %></td>
@@ -91,13 +99,29 @@
   </div>
 </div>
 
-<div class="ui tiny images container grid">
-  <div id="lightgallery">
-  <% @amazon_product.variant_large_images.reverse.each do |image| %>
-    <a href="<%= image %>">
-      <img class="ui image" src="<%= image %>" />
-    </a>
-  <% end %>
+<h3>Latest sales ranks</h3> (<em>Lower is better</em>)
+
+<div class="ui two column divided stackable grid">
+  <div class="row">
+    <div class="column">
+      <canvas id="salesRankChart" width="400" height="200"></canvas>
+    </div>
+    <div class="column">
+      <table class="ui celled table">
+        <thead>
+          <tr><th>Date</th>
+          <th>Rank</th>
+        </tr></thead>
+        <tbody>
+          <% @recorded_sales_ranks.first(5).each do |date, sales_rank| %>
+          <tr>
+            <td><%= date %></td>
+            <td><%= sales_rank %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
@@ -107,30 +131,15 @@
 </div>
 <% end %>
 
-<div class="ui segment">
-  <h2>Information</h2>
-  <table class="ui definition table">
-  <tbody>
-    <tr>
-      <td>ASIN</td>
-      <td><%= @amazon_product.asin %></td>
-    </tr>
-    <tr>
-      <td>Manufacturer</td>
-      <td>rating (integer)</td>
-    </tr>
-</tbody></table>
-</div>
-
 <script>
-  var ctx = document.getElementById("myChart");
+  var ctx = document.getElementById("pricesChart");
   var scatterChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: <%= raw [''] + data.keys %>,
+      labels: <%= raw @recorded_prices.keys %>,
       datasets: [{
           label: "Amazon",
-          data: <%= raw [0] + data.values %>,
+          data: <%= raw @recorded_prices.values %>,
           fill: true,
           lineTension: 0,
           backgroundColor: "rgba(75,192,192,0.4)",
@@ -174,3 +183,81 @@
     }
   });
 </script>
+
+<script>
+  var ctx = document.getElementById("salesRankChart");
+  var scatterChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: <%= raw @recorded_sales_ranks.keys %>,
+      datasets: [{
+          label: "Amazon",
+          data: <%= raw @recorded_sales_ranks.values %>,
+          fill: true,
+          lineTension: 0,
+          backgroundColor: "rgba(75,192,192,0.4)",
+          borderColor: "rgba(75,192,192,1)",
+          borderCapStyle: 'butt',
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "rgba(75,192,192,1)",
+          pointBackgroundColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 5,
+          pointRadius: 5,
+          pointHitRadius: 10,
+        }
+      ]
+    },
+    options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              callback: function(label, index, labels) {
+                return Number(label);
+              }
+            }
+          }
+        ]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            return ' ' + Number(tooltipItem.yLabel);
+          }
+        }
+      }
+    }
+  });
+</script>
+
+<div class="ui modal">
+  <i class="close icon"></i>
+  <div class="header">
+    Add to watchlist
+  </div>
+  <div class="content">
+    <%= form_tag('', class: 'ui large form add_to_watchlist') do %>
+      <div class="field">
+        <label>Email Address* (Or <%= link_to 'create an account', register_path %> so you can manage your watchlists)</label>
+        <div class="ui left icon input">
+          <i class="user icon"></i>
+          <%= email_field_tag :email, nil, autofocus: true, placeholder: 'E-mail address', required: true %>
+        </div>
+      </div>
+      <div class="field">
+        <label>Desired Price*</label>
+        <div class="ui left labeled input">
+          <div class="ui label">£</div>
+          <%= number_field_tag :desired_price, nil, placeholder: '7.99', required: true %>
+        </div>
+      </div>
+
+      <%= submit_tag 'Add', class: 'ui positive primary submit button' %>
+    <% end %>
+  </div>
+</div>

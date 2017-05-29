@@ -22,6 +22,10 @@
   text-align: center;
 }
 
+.ribbon {
+  padding-left: 10px !important;
+}
+
 body {
   background-color: #FFFFFF;
   font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;

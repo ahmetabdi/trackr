@@ -13,11 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require semantic-ui
 //= require_tree .
 
 $( document ).on('turbolinks:load', function() {
   $("#lightgallery").lightGallery();
   $(".dotdotdot").dotdotdot({
     height: 65
+  });
+
+  $(".modal-launcher").click(function() {
+    $('.ui.modal').modal('show');
   });
 })
