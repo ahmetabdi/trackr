@@ -15,4 +15,8 @@ class AmazonProduct < ApplicationRecord
   def presenter
     AmazonProductPresenter.new(self)
   end
+
+  def self.total_savings
+    AmazonProduct.select(:id, :current_price).map { |p| p.amazon_product_histories.maximum(:price).to_f - p.current_price.to_f}.sum
+  end
 end

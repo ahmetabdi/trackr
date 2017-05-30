@@ -1,0 +1,34 @@
+<div class="ui statistics">
+  <div class="statistic">
+    <div class="value">
+      <%= number_to_currency(AmazonProduct.total_savings, precision: 0) %>
+    </div>
+    <div class="label">
+      Savings
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <%= AmazonProduct.count %>
+    </div>
+    <div class="label">
+      Products
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <%= AmazonProductHistory.count %>
+    </div>
+    <div class="label">
+      Prices tracked
+    </div>
+  </div>
+  <div class="statistic">
+    <div class="value">
+      <%= User.count %>
+    </div>
+    <div class="label">
+      Members
+    </div>
+  </div>
+</div>
