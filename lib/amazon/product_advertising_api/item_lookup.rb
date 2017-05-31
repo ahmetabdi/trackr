@@ -155,12 +155,12 @@ module Amazon
       end
 
       def customer_reviews_url
-        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[2].at_xpath('URL')
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[2].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[2].at_xpath('URL').text
       end
 
       def all_offers_url
-        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[3].at_xpath('URL')
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[3].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[3].at_xpath('URL').text
       end
 
