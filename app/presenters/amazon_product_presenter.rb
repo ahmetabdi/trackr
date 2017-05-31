@@ -12,18 +12,22 @@ class AmazonProductPresenter < ApplicationPresenter
   end
 
   def price
+    return 0 if amazon_product.current_price.nil?
     amazon_product.current_price / 100.0
   end
 
   def maximum_price
+    return 0 if amazon_product.amazon_product_histories.empty?
     (amazon_product.amazon_product_histories.maximum(:price) / 100.0).round(2)
   end
 
   def average_price
+    return 0 if amazon_product.amazon_product_histories.empty?
     (amazon_product.amazon_product_histories.average(:price) / 100.0).round(2)
   end
 
   def minimum_price
+    return 0 if amazon_product.amazon_product_histories.empty?
     (amazon_product.amazon_product_histories.minimum(:price) / 100.0).round(2)
   end
 end
