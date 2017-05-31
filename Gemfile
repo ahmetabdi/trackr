@@ -29,6 +29,8 @@ gem 'kaminari', '~> 1.0.1'
 gem 'meta-tags', '~> 2.4.1'
 
 gem 'newrelic_rpm'
+gem 'scout_apm'
+
 gem 'autoprefixer-rails'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
