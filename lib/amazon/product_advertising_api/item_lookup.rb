@@ -145,18 +145,22 @@ module Amazon
       end
 
       def add_to_wishlist_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[0].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[0].at_xpath('URL').text
       end
 
       def tell_a_friend_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[1].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[1].at_xpath('URL').text
       end
 
       def customer_reviews_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[2].at_xpath('URL')
         find_multiple("#{item_path}/ItemLinks/ItemLink")[2].at_xpath('URL').text
       end
 
       def all_offers_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[3].at_xpath('URL')
         find_multiple("#{item_path}/ItemLinks/ItemLink")[3].at_xpath('URL').text
       end
 
