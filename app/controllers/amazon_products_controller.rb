@@ -5,12 +5,14 @@ class AmazonProductsController < ApplicationController
 
   def index
     @amazon_products = AmazonProduct.all.page(params[:page]).per(10)
+    prepare_meta_tags(title: 'Products')
   end
 
   def show
     @recorded_prices = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:price)
     @recorded_sales_ranks = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: "%b %-d", series: false).minimum(:sales_rank)
-  end
+    prepare_meta_tags(title: @amazon_product.title)
+end
 
   private
 

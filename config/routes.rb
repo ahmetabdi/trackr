@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
+  # Overriden controllers with - rails generate devise:controllers users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions',
+    registrations:  'users/registrations',
+    passwords: 'users/passwords'
+  }
 
   devise_scope :user do
-    get '/login', to: 'devise/sessions#new'
-    get '/register', to: 'devise/registrations#new'
-    delete '/logout', to: 'devise/sessions#destroy'
+    get '/login', to: 'users/sessions#new'
+    get '/register', to: 'users/registrations#new'
+    delete '/logout', to: 'users/sessions#destroy'
   end
 
   authenticate :user, ->(u) { u.admin? } do

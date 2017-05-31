@@ -1,6 +1,6 @@
 <div class="ui grid stackable">
   <div class="sixteen wide column">
-    <h1><%= @amazon_product.title %></h1>
+    <h1><%= link_to @amazon_product.title, @amazon_product.detail_page_url, target: '_blank' %></h1>
   </div>
 
   <div class="sixteen wide column">
@@ -22,11 +22,6 @@
           <div class="ui label image white">
             <i class="money icon"></i>Price
             <div class="detail"><b><%= number_to_currency(@amazon_product.presenter.price) %></b></div>
-          </div>
-
-          <div class="ui label image white">
-            <i class="fire icon"></i>Heat
-            <div class="detail"><b><%= 0 %></b></div>
           </div>
 
           <div class="ui label image white">
