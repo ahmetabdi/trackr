@@ -13,14 +13,15 @@ module Amazon
       def errors?
         xml_body.at_xpath("#{item_error}/Error")&.text&.present? ||
           xml_body.at_xpath('Errors/Error/Code')&.text&.present? ||
+          xml_body.at_xpath('ItemLookupResponse/Items/Request/Errors/Error/Message')&.text&.present? ||
           false
       end
 
       def error_messages
         return nil unless errors?
         {
-          code: xml_body.at_xpath("#{item_error}/Error/Code").text,
-          message: xml_body.at_xpath("#{item_error}/Error/Message").text
+          code: xml_body.at_xpath("#{item_error}/Error/Code")&.text,
+          message: xml_body.at_xpath("#{item_error}/Error/Message")&.text
         }
       end
 

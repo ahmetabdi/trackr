@@ -22,10 +22,20 @@ class PagesController < ApplicationController
 
     if asin
       amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
-      redirect_to amazon_product_path(amazon_product)
+
+      if amazon_product.nil?
+        redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
+      else
+        redirect_to amazon_product_path(amazon_product)
+      end
     elsif !match.nil? # Found ASIN code
       amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(match.to_s)
-      redirect_to amazon_product_path(amazon_product)
+
+      if amazon_product.nil?
+        redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
+      else
+        redirect_to amazon_product_path(amazon_product)
+      end
     else
       redirect_to results_path(query: query)
     end

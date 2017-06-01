@@ -14,6 +14,8 @@ gem 'friendly_id', '~> 5.2', '>= 5.2.1'
 gem 'groupdate', '~> 3.2'
 gem 'http', '~> 2.2', '>= 2.2.1'
 gem 'jbuilder', '~> 2.5'
+gem 'kaminari', '~> 1.0.1'
+gem 'meta-tags', '~> 2.4.1'
 gem 'nokogiri', '~> 1.7', '>= 1.7.1'
 gem 'oga', '~> 2.9'
 gem 'oj', '~> 3.0.10'
@@ -25,8 +27,6 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'sidekiq', '~> 5.0.0'
 gem 'sidekiq-cron', '~> 0.6.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'kaminari', '~> 1.0.1'
-gem 'meta-tags', '~> 2.4.1'
 
 gem 'newrelic_rpm'
 gem 'scout_apm'
@@ -43,7 +43,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_girl_rails'
   gem 'rspec-rails'
-  gem 'rubocop', require: false
+  gem 'rubocop', require: false, github: 'bbatsov/rubocop'
   gem 'simplecov', require: false
 end
 

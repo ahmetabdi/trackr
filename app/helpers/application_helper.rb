@@ -6,4 +6,14 @@ module ApplicationHelper
     return 'Other' if product_name.nil?
     product_name
   end
+
+  def flash_class(level)
+    case level
+    when 'success' then 'ui positive message'
+    when 'error' then 'ui negative message'
+    when 'notice' then 'ui info message'
+    else
+      'ui warning message'
+    end
+  end
 end
