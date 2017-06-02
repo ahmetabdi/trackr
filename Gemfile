@@ -8,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'activejob-traffic_control', '~> 0.1.3'
+gem 'airbrake', '~> 6.1'
 gem 'devise', '~> 4.3'
 gem 'fast_blank', '~> 1.0'
 gem 'friendly_id', '~> 5.2', '>= 5.2.1'
