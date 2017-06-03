@@ -4,14 +4,14 @@ class PagesController < ApplicationController
   def home
     @amazon_product_categories = AmazonProductCategory.alphabetical
     @amazon_product_groups = AmazonProductGroup.alphabetical
-    @amazon_products = AmazonProduct.includes(:amazon_product_group).order('percentage_to_save DESC').limit(12)
+    @amazon_products = AmazonProduct.includes(:amazon_product_group).order('percentage_to_save DESC').page(params[:page]).per(12)
     prepare_meta_tags(title: 'Home')
   end
 
   def popular
     @amazon_product_categories = AmazonProductCategory.alphabetical
     @amazon_product_groups = AmazonProductGroup.alphabetical
-    @amazon_products = AmazonProduct.where('current_sales_rank <= 1000').includes(:amazon_product_group).order('percentage_to_save DESC').limit(12)
+    @amazon_products = AmazonProduct.where('current_sales_rank <= 500').includes(:amazon_product_group).order('percentage_to_save DESC').page(params[:page]).per(12)
     prepare_meta_tags(title: 'Popular')
   end
 
@@ -22,10 +22,20 @@ class PagesController < ApplicationController
 
     if asin
       amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
-      redirect_to amazon_product_path(amazon_product)
+
+      if amazon_product.nil?
+        redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
+      else
+        redirect_to amazon_product_path(amazon_product)
+      end
     elsif !match.nil? # Found ASIN code
       amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(match.to_s)
-      redirect_to amazon_product_path(amazon_product)
+
+      if amazon_product.nil?
+        redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
+      else
+        redirect_to amazon_product_path(amazon_product)
+      end
     else
       redirect_to results_path(query: query)
     end

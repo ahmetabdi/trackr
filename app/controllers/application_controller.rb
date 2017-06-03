@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
 
   before_action :prepare_meta_tags
 
-  def prepare_meta_tags(options={})
+  def prepare_meta_tags(options = {})
     return unless request.get?
-    site_name   = "Trackr"
-    title       = [controller_name, action_name].join(" ")
-    description = "The Trackr team creates web software for humans"
-    image       = options[:image] || "your-default-image-url"
+    site_name   = 'Trackr'
+    title       = [controller_name, action_name].join(' ')
+    description = 'The Trackr team creates web software for humans'
+    image       = options[:image] || 'your-default-image-url'
     current_url = request.url
 
     # TODO: Use proper values

@@ -13,14 +13,15 @@ module Amazon
       def errors?
         xml_body.at_xpath("#{item_error}/Error")&.text&.present? ||
           xml_body.at_xpath('Errors/Error/Code')&.text&.present? ||
+          xml_body.at_xpath('ItemLookupResponse/Items/Request/Errors/Error/Message')&.text&.present? ||
           false
       end
 
       def error_messages
         return nil unless errors?
         {
-          code: xml_body.at_xpath("#{item_error}/Error/Code").text,
-          message: xml_body.at_xpath("#{item_error}/Error/Message").text
+          code: xml_body.at_xpath("#{item_error}/Error/Code")&.text,
+          message: xml_body.at_xpath("#{item_error}/Error/Message")&.text
         }
       end
 
@@ -145,18 +146,22 @@ module Amazon
       end
 
       def add_to_wishlist_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[0].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[0].at_xpath('URL').text
       end
 
       def tell_a_friend_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[1].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[1].at_xpath('URL').text
       end
 
       def customer_reviews_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[2].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[2].at_xpath('URL').text
       end
 
       def all_offers_url
+        return '' if find_multiple("#{item_path}/ItemLinks/ItemLink")[3].nil?
         find_multiple("#{item_path}/ItemLinks/ItemLink")[3].at_xpath('URL').text
       end
 

@@ -17,9 +17,10 @@ module Amazon
         end
 
         def scan
-          # return if product_scanned_today?(asin)
+          return if product_scanned_today?(asin)
           item = Amazon::ProductAdvertisingApi::Operator.item_lookup(asin)
           return unless item.valid?
+          return if item.errors?
           if ENV.fetch('ENABLE_AMAZON_PRODUCT_CRAWLER') == 'true'
             item.similar_products.each do |similar_product_asin|
               next if product_scanned_today?(similar_product_asin)

@@ -1,6 +1,7 @@
 <div class="ui one column grid">
   <div class="row">
     <div class="column">
+      <%= render 'shared/flash_messages' %>
       <%= form_tag search_path do %>
         <div class="ui inverted segment">
           <div class="ui inverted left icon input full-width big">
@@ -67,23 +68,8 @@
             </div>
           </div>
         <% end %>
+        <%= paginate @amazon_products %>
       </div>
-    </div>
-
-    <%#= render 'pages/statistics' %>
-
-    <div>
-      <h2>Groups</h2>
-      <% @amazon_product_groups.each do |p| %>
-        <%= link_to p.name, amazon_product_group_path(p) %>
-      <% end %>
-    </div>
-
-    <div>
-      <h2>Categories</h2>
-      <% @amazon_product_categories.each do |p| %>
-        <%= link_to p.name, amazon_product_category_path(p) %>
-      <% end %>
     </div>
   </div>
 </div>
