@@ -21,20 +21,30 @@ class PagesController < ApplicationController
     match = /[A-Za-z0-9]{10}/.match(query)
 
     if asin
-      amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
-
-      if amazon_product.nil?
-        redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
-      else
+      if amazon_product = AmazonProduct.find_or_create_by(asin: asin)
         redirect_to amazon_product_path(amazon_product)
+      else
+        amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
+
+        if amazon_product.nil?
+          redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
+        else
+          redirect_to amazon_product_path(amazon_product)
+        end
       end
     elsif !match.nil? # Found ASIN code
-      amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(match.to_s)
+      asin = match.to_s
 
-      if amazon_product.nil?
-        redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
-      else
+      if amazon_product = AmazonProduct.find_or_create_by(asin: asin)
         redirect_to amazon_product_path(amazon_product)
+      else
+        amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
+
+        if amazon_product.nil?
+          redirect_to root_path, flash: { notice: "We couldn't find an amazon product for the entered query." }
+        else
+          redirect_to amazon_product_path(amazon_product)
+        end
       end
     else
       redirect_to results_path(query: query)
