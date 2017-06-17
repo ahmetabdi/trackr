@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
 
   def prepare_meta_tags(options = {})
     return unless request.get?
-    site_name   = 'Trackr'
-    title       = [controller_name, action_name].join(' ')
-    description = 'The Trackr team creates web software for humans'
+    site_name   = 'Traqker'
+    title       = options[:title] || [controller_name, action_name].join(' ')
+    description = 'Traqker: Amazon price tracker, Amazon price history charts, price watches, and price drop alerts.'
     image       = options[:image] || 'your-default-image-url'
     current_url = request.url
 
@@ -19,7 +19,27 @@ class ApplicationController < ActionController::Base
       title:       title,
       image:       image,
       description: description,
-      keywords:    %w[web software development mobile app],
+      keywords:    [
+        'Amazon',
+        'price watch',
+        'price tracking',
+        'price history charts',
+        'price drop alerts',
+        'product',
+        'tracking',
+        'price',
+        'changes',
+        'alerts',
+        'notifications',
+        'notify',
+        'tracker',
+        'products',
+        'prices',
+        'watch',
+        'watching',
+        'track',
+        'history'
+      ],
       twitter: {
         site_name: site_name,
         site: '@thecookieshq',
