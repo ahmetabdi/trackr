@@ -21,7 +21,7 @@ class PagesController < ApplicationController
     match = /[A-Za-z0-9]{10}/.match(query)
 
     if asin
-      if amazon_product = AmazonProduct.find(asin: asin)
+      if amazon_product = AmazonProduct.find_by_asin(asin)
         redirect_to amazon_product_path(amazon_product)
       else
         amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
@@ -35,7 +35,7 @@ class PagesController < ApplicationController
     elsif !match.nil? # Found ASIN code
       asin = match.to_s
 
-      if amazon_product = AmazonProduct.find(asin: asin)
+      if amazon_product = AmazonProduct.find_by_asin(asin)
         redirect_to amazon_product_path(amazon_product)
       else
         amazon_product = Amazon::ProductAdvertisingApi::Scanners::ProductScanner.run(asin)
