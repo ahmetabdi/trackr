@@ -30,4 +30,8 @@ class AmazonProductPresenter < ApplicationPresenter
     return 0 if amazon_product.amazon_product_histories.minimum(:price).nil?
     (amazon_product.amazon_product_histories.minimum(:price) / 100.0).round(2)
   end
+
+  def amount_saved
+    price - maximum_price
+  end
 end

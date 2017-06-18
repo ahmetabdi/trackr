@@ -30,7 +30,7 @@ services:
       POSTGRES_DB: trackr_development
 
   redis:
-    image: redis:3.0-alpine
+    image: redis:3.2.9-alpine
     volumes:
       - ./docker/redis:/data
     command: redis-server --appendonly yes # https://redis.io/topics/persistence
@@ -56,7 +56,7 @@ services:
       - redis
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:5.3.0
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.4.1
     volumes:
       - ./.elasticsearch.yml:/usr/share/kibana/config/elasticsearch.yml
     ports:

@@ -15,6 +15,13 @@ class PagesController < ApplicationController
     prepare_meta_tags(title: 'Popular')
   end
 
+  def largest_savings
+    @amazon_product_categories = AmazonProductCategory.alphabetical
+    @amazon_product_groups = AmazonProductGroup.alphabetical
+    @amazon_products = AmazonProduct.includes(:amazon_product_group).order('percentage_to_save DESC').page(params[:page]).per(12)
+    prepare_meta_tags(title: 'Largest Savings')
+  end
+
   def search
     query = params[:query]
     asin = fetch_asin(query)

@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Overriden controllers with - rails generate devise:controllers users
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations:  'users/registrations',
@@ -29,6 +28,7 @@ Rails.application.routes.draw do
   post '/search', to: 'pages#search'
   get '/results', to: 'pages#results'
   get '/popular', to: 'pages#popular'
+  get '/largest-savings', to: 'pages#largest_savings'
 
   root to: 'pages#home'
 end

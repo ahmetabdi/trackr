@@ -79,3 +79,11 @@ body {
     display: inline-block;
     vertical-align: top;
 }
+
+.ui.card > .content {
+  min-height: 82px;
+}
+
+.ui.card > .extra {
+  min-height: 63.6667px !important;
+}

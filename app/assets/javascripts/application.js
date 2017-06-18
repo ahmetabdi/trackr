@@ -19,7 +19,7 @@
 $( document ).on('turbolinks:load', function() {
   $("#lightgallery").lightGallery();
   $(".dotdotdot").dotdotdot({
-    height: 65
+    height: 50
   });
 
   $(".modal-launcher").click(function() {
