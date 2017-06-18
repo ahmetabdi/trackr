@@ -11,7 +11,7 @@ class AmazonProductsController < ApplicationController
   def show
     @recorded_prices = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: '%b %-d', series: false).minimum(:price)
     @recorded_sales_ranks = @amazon_product.amazon_product_histories.group_by_day(:created_at, format: '%b %-d', series: false).minimum(:sales_rank)
-    prepare_meta_tags(title: @amazon_product.title, image: @amazon_product.variant_large_images.first)
+    prepare_meta_tags(title: @amazon_product.title, image: @amazon_product.variant_large_images.reverse.first)
 end
 
   private
