@@ -30,7 +30,6 @@ gem 'sidekiq-cron', '~> 0.6.0'
 gem 'uglifier', '>= 1.3.0'
 
 gem 'newrelic_rpm'
-gem 'scout_apm'
 
 gem 'autoprefixer-rails'
 gem 'coffee-rails', '~> 4.2'
