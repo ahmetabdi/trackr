@@ -4,7 +4,7 @@ class PagesController < ApplicationController
   def home
     @amazon_product_categories = AmazonProductCategory.alphabetical
     @amazon_product_groups = AmazonProductGroup.alphabetical
-    @amazon_products = AmazonProduct.includes(:amazon_product_group).order('percentage_to_save DESC').page(params[:page]).per(12)
+    @amazon_products = AmazonProduct.where('current_sales_rank <= 500').includes(:amazon_product_group).order('percentage_to_save DESC').page(params[:page]).per(12)
     prepare_meta_tags(title: 'Home')
   end
 
