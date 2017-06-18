@@ -30,5 +30,8 @@ Rails.application.routes.draw do
   get '/popular', to: 'pages#popular'
   get '/largest-savings', to: 'pages#largest_savings'
 
+  get '/profile', to: 'users#show'
+  get '/watch-list', to: 'users#watch_list'
+
   root to: 'pages#home'
 end

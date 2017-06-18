@@ -28,6 +28,7 @@ gem 'semantic-ui-sass', github: 'doabit/semantic-ui-sass'
 gem 'sidekiq', '~> 5.0.0'
 gem 'sidekiq-cron', '~> 0.6.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'active_link_to'
 
 gem 'newrelic_rpm'
 

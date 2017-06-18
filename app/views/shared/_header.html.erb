@@ -1,32 +1,26 @@
 <div class="ui stackable menu">
   <div class="ui container">
-    <div class="item">
-      <%= image_tag('logo.png') %>
-    </div>
-    <a href="<%= root_path %>" class="item active">Home</a>
-    <a class="item" href="<%= amazon_products_path %>">Products</a>
+      <%= link_to "/", class: "item" do %>
+        <%= image_tag("logo.png") %>
+      <% end %>
+    <%= active_link_to "Products", amazon_products_path, class: "ui item" %>
     <div class="right menu">
       <div class="item">
         <div class="ui icon input">
           <%= form_tag search_path, style: "width: 100%;" do %>
-            <%= text_field_tag :query, params[:query], style: "width: 100%;", placeholder: 'Search...' %>
+            <%= text_field_tag :query, params[:query], style: "width: 100%;", placeholder: "Search..." %>
           <% end %>
           <i class="search link icon"></i>
         </div>
       </div>
-
-      <% if user_signed_in? %>
-        <%= link_to '/logout', method: 'delete', class: 'ui item' do %>
-          Logout
-        <% end %>
-      <% else %>
-        <a href="/login" class="ui item">
-          Login
-        </a>
-        <a href="/register" class="ui item">
-          Register
-        </a>
-      <% end %>
     </div>
+    <% if user_signed_in? %>
+      <%= active_link_to "Profile", "/profile", class: "ui item" %>
+      <%= active_link_to "Watch List", "/watch-list", class: "ui item" %>
+      <%= link_to "Logout", "/logout", method: "delete", class: "ui item" %>
+    <% else %>
+      <%= active_link_to "Login", "/login", class: "ui item" %>
+      <%= active_link_to "Register", "/register", class: "ui item" %>
+    <% end %>
   </div>
 </div>
