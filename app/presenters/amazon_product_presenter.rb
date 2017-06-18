@@ -32,6 +32,6 @@ class AmazonProductPresenter < ApplicationPresenter
   end
 
   def amount_saved
-    price - maximum_price
+    maximum_price - price
   end
 end
