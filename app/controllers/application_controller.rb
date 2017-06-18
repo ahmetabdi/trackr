@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
       ],
       twitter: {
         site_name: site_name,
-        site: '@thecookieshq',
+        site: '@traqker',
         card: 'summary',
         description: description,
         image: image
