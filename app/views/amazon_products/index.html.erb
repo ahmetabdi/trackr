@@ -27,13 +27,21 @@
       </div>
       <div class="content">
         <a class="header"><%= link_to product.title.truncate(60), amazon_product_path(product) %></a>
-        <div class="meta">
-          <i class="red fire icon"></i>
-          121 Heat
-        </div>
         <div class="description">
           <p><%= product.features.first %></p>
         </div>
+        <% if product.current_price%>
+          <div class="extra content">
+            <span>
+              <span class="current_price_small">Price:</span>
+              <span class="current_price"><%= number_to_currency(product.presenter.price) %></span>
+              <% if product.current_prime %>
+                <i class="a-icon a-icon-prime"></i>
+              <% end %>
+            </span>
+            <div><strike><%= number_to_currency(product.presenter.maximum_price) %></strike> Save: <%= number_to_currency(product.presenter.amount_saved) %> (<%= product.percentage_to_save %>%)</div>
+          </div>
+        <% end %>
         <div class="extra">
           <% product.tags.each do |tag| %>
             <div class="ui label"><i class="tag icon"></i> <%= tag %></div>

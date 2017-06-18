@@ -8,8 +8,8 @@
     <div class="right menu">
       <div class="item">
         <div class="ui icon input">
-          <%= form_tag search_path do %>
-            <%= text_field_tag :query, params[:query], placeholder: 'Search...' %>
+          <%= form_tag search_path, style: "width: 100%;" do %>
+            <%= text_field_tag :query, params[:query], style: "width: 100%;", placeholder: 'Search...' %>
           <% end %>
           <i class="search link icon"></i>
         </div>
