@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bbatsov/rubocop.git
-  revision: 6807b376c59364be42dbffee96d3c0ce54a20649
+  revision: a9902a14143093e7ff8c14fd3e5bde72535acbe1
   specs:
     rubocop (0.49.1)
       parallel (~> 1.10)
@@ -286,7 +286,7 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.3, >= 3.3.3)
-    sidekiq-cron (0.6.0)
+    sidekiq-cron (0.6.3)
       rufus-scheduler (>= 3.3.0)
       sidekiq (>= 4.2.1)
     simplecov (0.13.0)
@@ -324,7 +324,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.4)
-    unicode-display_width (1.2.1)
+    unicode-display_width (1.3.0)
     uniform_notifier (1.10.0)
     vcr (3.0.3)
     warden (1.2.7)
@@ -382,7 +382,7 @@ DEPENDENCIES
   searchkick (~> 2.3.0)
   semantic-ui-sass!
   sidekiq (~> 5.0.0)
-  sidekiq-cron (~> 0.6.0)
+  sidekiq-cron
   simplecov
   spring
   spring-watcher-listen (~> 2.0.0)
