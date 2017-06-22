@@ -14,7 +14,7 @@ unless Rails.env.test?
   if Sidekiq::Cron::Job.find('find_and_update_products').nil?
     Sidekiq::Cron::Job.create(
       name: 'find_and_update_products',
-      cron: '*/120 * * * *',
+      cron: '*/60 * * * *',
       class: 'ProductUpdaterJob'
     )
   end
@@ -22,7 +22,7 @@ unless Rails.env.test?
   if Sidekiq::Cron::Job.find('reindex_products').nil?
     Sidekiq::Cron::Job.create(
       name: 'reindex_products',
-      cron: '*/120 * * * *',
+      cron: '*/60 * * * *',
       class: 'ProductIndexerJob'
     )
   end
