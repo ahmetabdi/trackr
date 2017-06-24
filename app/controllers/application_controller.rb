@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def prepare_meta_tags(options = {})
     return unless request.get?
     site_name   = 'Traqker'
-    title       = options[:title] || [controller_name, action_name].join(' ')
+    title       = options[:title]# || [controller_name, action_name].join(' ')
     description = 'Traqker: Amazon price tracker, Amazon price history charts, price watches, and price drop alerts.'
     image       = options[:image] || ActionController::Base.helpers.image_url('logo.png')
     current_url = request.url
