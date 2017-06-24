@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
         description: description,
         type: 'website'
       },
-      reverse: true
+      reverse: false
     }
 
     options.reverse_merge!(defaults)
