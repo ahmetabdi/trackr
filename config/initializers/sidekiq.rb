@@ -1,6 +1,4 @@
 require 'sidekiq/web'
-require 'sidekiq-cron'
-require 'sidekiq/cron/web'
 
 unless Rails.env.test?
   Sidekiq.configure_server do |config|
