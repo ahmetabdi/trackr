@@ -5,11 +5,11 @@ class AmazonProductGroupsController < ApplicationController
 
   def index
     @amazon_product_groups = AmazonProductGroup.alphabetical
-    prepare_meta_tags(title: 'Groups')
+    prepare_meta_tags(title: 'Groups', reverse: true)
   end
 
   def show
-    prepare_meta_tags(title: helpers.friendly_name(@amazon_product_group.name))
+    prepare_meta_tags(title: helpers.friendly_name(@amazon_product_group.name), reverse: true)
   end
 
   private

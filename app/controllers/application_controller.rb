@@ -54,8 +54,7 @@ class ApplicationController < ActionController::Base
         image: image,
         description: description,
         type: 'website'
-      },
-      reverse: false
+      }
     }
 
     options.reverse_merge!(defaults)
