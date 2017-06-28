@@ -91,6 +91,7 @@ module Amazon
         end
 
         def create_amazon_product_history(amazon_product, item)
+          return if item.list_price[:amount].nil?
           AmazonProductHistory.create(amazon_product: amazon_product) do |p|
             p.price = item.list_price[:amount]
             p.availability = item.list_price[:availability]
