@@ -9,7 +9,7 @@ class ProductUpdaterJob < ApplicationJob
     end
 
     # Caches percentage_to_save on the db
-    AmazonProduct.select(:id, :current_price).each do |amazon_product|
+    AmazonProduct.select(:id, :title, :slug, :current_price).each do |amazon_product|
       amazon_product.percentage_to_save = percentage_to_save(amazon_product)
       amazon_product.save
     end
