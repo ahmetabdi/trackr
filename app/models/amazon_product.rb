@@ -12,6 +12,9 @@ class AmazonProduct < ApplicationRecord
   belongs_to :amazon_product_group
   belongs_to :amazon_product_category
 
+  has_many :watch_lists
+  has_many :watched_users, through: :watch_lists, source: :user
+
   def presenter
     AmazonProductPresenter.new(self)
   end
