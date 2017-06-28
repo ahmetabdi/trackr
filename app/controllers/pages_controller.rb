@@ -58,7 +58,7 @@ class PagesController < ApplicationController
   end
 
   def results
-    @amazon_products = AmazonProduct.search(params[:query])
+    @amazon_products = AmazonProduct.search(params[:query], page: params[:page], per_page: 10)
   end
 
   private
